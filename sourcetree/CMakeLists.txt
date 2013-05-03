@@ -8,12 +8,10 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${OpenCV_DIR}/lib ${CMAKE_SOURCE_DIR}
 find_package(OpenCV REQUIRED)
 
 include_directories(${CMAKE_SOURCE_DIR})
-include_directories(${CMAKE_SOURCE_DIR}/include}
+include_directories(${CMAKE_SOURCE_DIR}/ipgm/include)
+include_directories(${CMAKE_SOURCE_DIR}/3rdparty)
 
-set(SRCS 3rdparty/opencv-screen-capture/screenCapture.cpp
-	main.cpp
-)
+add_subdirectory(3rdparty)
+add_subdirectory(ipgm)
 
-add_executable(ipmg WIN32 ${SRCS})
-target_link_libraries(ipmg ${OpenCV_LIBS})
 

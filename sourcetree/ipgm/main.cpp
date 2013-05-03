@@ -5,7 +5,7 @@
 
 #include "opencv2/opencv.hpp"
 
-#include "3rdparty\opencv-screen-capture\screenCapture.h"
+#include "opencv-screen-capture/screenCapture.h"
 
 int WINAPI WinMain(HINSTANCE hInstance,
 				   HINSTANCE hPrevInstance,
