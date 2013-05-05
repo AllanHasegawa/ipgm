@@ -6,10 +6,19 @@ include_directories(${INCLUDE_DIR})
 set(SRCS
 	Log.cpp
 	main.cpp
+	IPGM.cpp
+	IPSystem.cpp
+	MouseSystem.cpp
+	WindowManager.cpp
 )
 
 set(HEADERS
 	Log.hpp
+	IPGM.hpp
+	IPGMCallbacks.hpp
+	IPSystem.hpp
+	MouseSystem.hpp
+	WindowManager.hpp
 )
 
 foreach(V ${HEADERS})

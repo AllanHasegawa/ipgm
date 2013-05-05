@@ -1,13 +1,32 @@
 #include <iostream>
 #include <vector>
 
-#include <windows.h>
-
 #include "opencv2/opencv.hpp"
 
-#include "opencv-screen-capture/screenCapture.h"
+#include "IPGM.hpp";
+#include "IPGMCallbacks.hpp"
 #include "Log.hpp"
 
+class TI : public ipgm::IPGMCallbacks {
+public:
+	TI() {
+	}
+	virtual ~TI() {
+	}
+
+	void sensorON(const uint8_t ID) {
+		ipgm::Log::instance()->printf("SENSOR ON %uc\n", ID);
+	}
+	void sensorOFF(const uint8_t ID) {
+		ipgm::Log::instance()->printf("SENSOR OFF %uc\n", ID);
+	}
+	void actuatorON(const uint8_t ID) {
+		ipgm::Log::instance()->printf("ACT ON %uc\n", ID);
+	}
+	void actuatorOFF(const uint8_t ID) {
+		ipgm::Log::instance()->printf("ACT OFF %uc\n", ID);
+	}
+};
 
 int WINAPI WinMain(HINSTANCE hInstance,
 				   HINSTANCE hPrevInstance,
@@ -15,22 +34,12 @@ int WINAPI WinMain(HINSTANCE hInstance,
 				   int nCmdShow)
 {
 	using namespace ipgm;
+
+	TI ti;
+	IPGM ipgm("", 0, 0, ti);
 	
-	Log::instance();
-
-	std::vector<HWND> hwnd_list;
-
-	getHwndsByProcessName(L"ITS.PLC.PE.exe", hwnd_list, false);
-
-	//std::cout << "HWND: " <<  hwnd_list.size() << std::endl;
-	Log::instance()->printf("HWND: %d\n", hwnd_list.size());
-
-	cv::Mat image;
-	image = cv::imread("lena.jpg", 1);
-
-	cv::namedWindow( "Display Image", CV_WINDOW_AUTOSIZE );
-	cv::imshow( "Display Image", image );
-
+	ipgm.start();
+	/*
 	cv::waitKey(0);
 	INPUT input[4];
 	memset(input, 0, sizeof(input));
@@ -47,22 +56,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	input[1].ki.dwExtraInfo = 0;
 
 	//SendInput(2,input,sizeof(INPUT));
-	POINT p;
-	if (hwnd_list.size() > 0) {
-		WindowCapture cap(hwnd_list.at(0));
-		cv::Mat dst;
-		cap.captureFrame(dst);
-
-		cv::namedWindow( "Display Image Copied", CV_WINDOW_AUTOSIZE );
-		cv::imshow( "Display Image Copied", dst );
-		if (GetCursorPos(&p))
-		{
-			if (ScreenToClient(hwnd_list.at(0), &p))
-			{
-				std::cout << p.x << " / " << p.y << std::endl;
-			}
-		}
-	}
+	POINT p;	
 
 	if (GetCursorPos(&p))
 	{
@@ -97,10 +91,10 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	input[3].mi.time = 0;
 
 	SendInput(4,input,sizeof(INPUT));
-	cv::waitKey(0);
+	cv::waitKey(0);*/
 
 
-	
+
 
 	return 0;
 }
