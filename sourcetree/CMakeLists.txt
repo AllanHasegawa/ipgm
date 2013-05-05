@@ -8,7 +8,6 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${OpenCV_DIR}/lib ${CMAKE_SOURCE_DIR}
 find_package(OpenCV REQUIRED)
 
 include_directories(${CMAKE_SOURCE_DIR})
-include_directories(${CMAKE_SOURCE_DIR}/ipgm/include)
 include_directories(${CMAKE_SOURCE_DIR}/3rdparty)
 
 add_subdirectory(3rdparty)

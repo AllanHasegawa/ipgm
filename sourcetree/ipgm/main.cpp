@@ -6,20 +6,24 @@
 #include "opencv2/opencv.hpp"
 
 #include "opencv-screen-capture/screenCapture.h"
+#include "Log.hpp"
+
 
 int WINAPI WinMain(HINSTANCE hInstance,
 				   HINSTANCE hPrevInstance,
 				   LPSTR lpCmdLine,
 				   int nCmdShow)
 {
-	AllocConsole();
-	freopen( "CONOUT$", "wb", stdout);
+	using namespace ipgm;
+	
+	Log::instance();
 
 	std::vector<HWND> hwnd_list;
 
 	getHwndsByProcessName(L"ITS.PLC.PE.exe", hwnd_list, false);
 
-	std::cout << "HWND: " <<  hwnd_list.size() << std::endl;
+	//std::cout << "HWND: " <<  hwnd_list.size() << std::endl;
+	Log::instance()->printf("HWND: %d\n", hwnd_list.size());
 
 	cv::Mat image;
 	image = cv::imread("lena.jpg", 1);
@@ -96,8 +100,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	cv::waitKey(0);
 
 
-	fclose( stdout );
-	FreeConsole();
+	
 
 	return 0;
 }
