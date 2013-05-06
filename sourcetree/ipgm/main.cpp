@@ -1,11 +1,13 @@
 #include <iostream>
 #include <vector>
+#include <future>
 
 #include "opencv2/opencv.hpp"
 
 #include "IPGM.hpp";
 #include "IPGMCallbacks.hpp"
 #include "Log.hpp"
+#include "WindowManager.hpp"
 
 class TI : public ipgm::IPGMCallbacks {
 public:
@@ -39,6 +41,18 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	IPGM ipgm("", 0, 0, ti);
 	
 	ipgm.start();
+
+	cv::Mat m = cv::Mat::zeros(2, 2, 0);
+	cv::namedWindow( "D01", CV_WINDOW_AUTOSIZE );
+	while (true) {
+		ipgm.getWindowManager()->copyLastFrame(m);
+		//auto r = std::async(std::launch::async, [&]{});
+		//r.get();
+		cv::imshow( "D01", m );
+		cv::waitKey(10);
+	}
+
+	ipgm.stop();
 	/*
 	cv::waitKey(0);
 	INPUT input[4];

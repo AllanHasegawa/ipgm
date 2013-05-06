@@ -17,9 +17,9 @@ namespace ipgm {
 
 	WindowManager::WindowManager(const std::string PROCESS_NAME,
 		const uint16_t POS_X, const uint16_t POS_Y)
-		: PROCESS_NAME_(PROCESS_NAME), POS_X_(POS_X), POS_Y_(POS_Y) {
+		: PROCESS_NAME_(PROCESS_NAME), POS_X_(POS_X), POS_Y_(POS_Y), lastFrame_(10, 10, CV_8U) {
 
-			cv::namedWindow( "D01", CV_WINDOW_AUTOSIZE );
+			//cv::namedWindow( "D01", CV_WINDOW_AUTOSIZE );
 			/*WindowCapture cap(hwnd_list.at(0));
 			cv::Mat dst;
 			cap.captureFrame(dst);
@@ -52,12 +52,16 @@ namespace ipgm {
 			HWND hwnd = hwnd_list.at(0);
 			// TODO: REMOVE HARD_CODE
 			// Window MUST be 800x600
-			MoveWindow(hwnd, POS_X_, POS_Y_, 800, 600, true);
-
+			//MoveWindow(hwnd, POS_X_, POS_Y_, 800, 600, true);
+			
 			WindowCapture cap(hwnd);
-			cv::Mat dst;
-			cap.captureFrame(dst);
-			cv::imshow( "D01", dst );
+			{
+				std::lock_guard<std::mutex> lock(frameCopyMutex_);
+				try {
+					cap.captureFrame(lastFrame_);
+				} catch (std::exception& e) {
+				}
+			}
 		}
 	}
 
@@ -71,5 +75,10 @@ namespace ipgm {
 	}
 
 	void WindowManager::activeActuator(const uint8_t ID) {
+	}
+
+	void WindowManager::copyLastFrame(cv::Mat& dst) {
+		std::lock_guard<std::mutex> lock(frameCopyMutex_);
+		lastFrame_.copyTo(dst);
 	}
 };
