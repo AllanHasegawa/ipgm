@@ -7,12 +7,12 @@
 #include "opencv2\opencv.hpp"
 
 #include "IPSystem.hpp"
+#include "MouseSystem.hpp"
 
 namespace ipgm {
 
-	class WindowManager {
+	struct WindowManager {
 
-	public:
 		WindowManager(const std::string PROCESS_NAME,
 			const uint16_t POS_X, const uint16_t POS_Y);
 		virtual ~WindowManager();
@@ -23,6 +23,7 @@ namespace ipgm {
 
 	private:
 		IPSystem ipsystem_;
+		MouseSystem mousesystem_;
 		const std::string PROCESS_NAME_;
 		const uint16_t POS_X_;
 		const uint16_t POS_Y_;

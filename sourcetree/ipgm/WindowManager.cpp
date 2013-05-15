@@ -17,7 +17,9 @@ namespace ipgm {
 
 	WindowManager::WindowManager(const std::string PROCESS_NAME,
 		const uint16_t POS_X, const uint16_t POS_Y)
-		: ipsystem_(), PROCESS_NAME_(PROCESS_NAME), POS_X_(POS_X), POS_Y_(POS_Y), lastFrame_(10, 10, CV_8U) {
+		: ipsystem_(), mousesystem_(),
+		PROCESS_NAME_(PROCESS_NAME), POS_X_(POS_X), POS_Y_(POS_Y),
+		lastFrame_(0, 0, CV_8U) {
 
 			//cv::namedWindow( "D01", CV_WINDOW_AUTOSIZE );
 			/*WindowCapture cap(hwnd_list.at(0));
@@ -58,7 +60,7 @@ namespace ipgm {
 			{
 				std::lock_guard<std::mutex> lock(frameCopyMutex_);
 				try {
-					// TODO: Capture frame is capturing the ENTIRE window. ROI is a lot smaller
+					// TODO: Capture frame is capturing the ENTIRE window. ROI will be problaby faster
 					cap.captureFrame(lastFrame_);
 					this->ipsystem_.processImage(lastFrame_, sensors_info, actuators_info);
 				} catch (std::exception& e) {
