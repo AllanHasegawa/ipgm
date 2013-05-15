@@ -12,6 +12,8 @@ ipgm::IPGM::IPGM(const std::string PROCESS_NAME,
 				 ipgm::IPGMCallbacks& callbacks)
 				 : callbacks_(callbacks), running_(true)
 {
+	sensors_info_.fill(false);
+	actuators_info_.fill(false);
 	windowManager_ = std::make_shared<WindowManager>(PROCESS_NAME, POS_X, POS_Y);
 }
 

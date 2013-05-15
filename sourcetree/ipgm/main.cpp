@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <future>
+#include <thread>
+#include <chrono>
 
 #include "opencv2/opencv.hpp"
 
@@ -38,16 +40,15 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	using namespace ipgm;
 
 	Log::instance()->log_level_ = LOG_LEVEL::RELEASE;
+
 	TI ti;
 	IPGM ipgm("", 0, 0, ti);
 	
 	ipgm.start();
-
-	cv::Mat m = cv::Mat::zeros(2, 2, 0);
-	cv::namedWindow( "D01", CV_WINDOW_AUTOSIZE );
-	int i = 0;
-	int c = 0;
+	
 	while (true) {
+		std::chrono::milliseconds dura( 2000 );
+		std::this_thread::sleep_for( dura );
 	}
 
 	ipgm.stop();
