@@ -17,16 +17,16 @@ public:
 	}
 
 	void sensorON(const uint8_t ID) {
-		ipgm::Log::instance()->printf("SENSOR ON %uc\n", ID);
+		ipgm::Log::instance()->rprintf("SENSOR ON %u\n", ID);
 	}
 	void sensorOFF(const uint8_t ID) {
-		ipgm::Log::instance()->printf("SENSOR OFF %uc\n", ID);
+		ipgm::Log::instance()->rprintf("SENSOR OFF %u\n", ID);
 	}
 	void actuatorON(const uint8_t ID) {
-		ipgm::Log::instance()->printf("ACT ON %uc\n", ID);
+		ipgm::Log::instance()->rprintf("ACT ON %u\n", ID);
 	}
 	void actuatorOFF(const uint8_t ID) {
-		ipgm::Log::instance()->printf("ACT OFF %uc\n", ID);
+		ipgm::Log::instance()->rprintf("ACT OFF %u\n", ID);
 	}
 };
 
@@ -37,6 +37,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
 {
 	using namespace ipgm;
 
+	Log::instance()->log_level_ = LOG_LEVEL::RELEASE;
 	TI ti;
 	IPGM ipgm("", 0, 0, ti);
 	
@@ -44,12 +45,9 @@ int WINAPI WinMain(HINSTANCE hInstance,
 
 	cv::Mat m = cv::Mat::zeros(2, 2, 0);
 	cv::namedWindow( "D01", CV_WINDOW_AUTOSIZE );
+	int i = 0;
+	int c = 0;
 	while (true) {
-		ipgm.getWindowManager()->copyLastFrame(m);
-		//auto r = std::async(std::launch::async, [&]{});
-		//r.get();
-		cv::imshow( "D01", m );
-		cv::waitKey(10);
 	}
 
 	ipgm.stop();
