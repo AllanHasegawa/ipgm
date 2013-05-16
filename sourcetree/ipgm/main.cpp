@@ -38,16 +38,26 @@ int WINAPI WinMain(HINSTANCE hInstance,
 {
 	using namespace ipgm;
 
-	Log::instance()->log_level_ = LOG_LEVEL::RELEASE;
+	Log::instance()->log_level_ = LOG_LEVEL::DEBUG;
 
 	TI ti;
-	IPGM ipgm("", 0, 0, ti);
+	IPGM ipgm(L"ITS.PLC.PE.exe", 0, 0, ti);
 	
 	ipgm.start();
 	
+	int actuator = 0;
 	while (true) {
-		std::chrono::milliseconds dura( 2000 );
+		std::chrono::milliseconds dura( 1000 );
 		std::this_thread::sleep_for( dura );
+
+		try {
+			ipgm.activeActuator(actuator++);
+		} catch (std::exception& e) {
+			Log::instance()->rprintf("ERROR: %s\n", e.what());
+		}
+		if (actuator > 6) {
+			actuator = 0;
+		}
 	}
 
 	ipgm.stop();
