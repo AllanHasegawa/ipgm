@@ -10,6 +10,7 @@ set(SRCS
 	IPSystem.cpp
 	MouseSystem.cpp
 	WindowManager.cpp
+	KeyboardSystem.cpp
 )
 
 set(HEADERS
@@ -19,6 +20,7 @@ set(HEADERS
 	IPSystem.hpp
 	MouseSystem.hpp
 	WindowManager.hpp
+	KeyboardSystem.hpp
 )
 
 foreach(V ${HEADERS})

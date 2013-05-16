@@ -7,14 +7,13 @@
 #include "opencv2\opencv.hpp"
 
 #include "IPSystem.hpp"
-#include "MouseSystem.hpp"
+#include "KeyboardSystem.hpp"
 
 namespace ipgm {
 
 	struct WindowManager {
 
-		WindowManager(const std::string PROCESS_NAME,
-			const uint16_t POS_X, const uint16_t POS_Y);
+		WindowManager(const std::wstring PROCESS_NAME);
 		virtual ~WindowManager();
 
 		void update(std::array<bool,11>& sensors_info, std::array<bool,8>& actuators_info);
@@ -23,10 +22,8 @@ namespace ipgm {
 
 	private:
 		IPSystem ipsystem_;
-		MouseSystem mousesystem_;
-		const std::string PROCESS_NAME_;
-		const uint16_t POS_X_;
-		const uint16_t POS_Y_;
+		KeyboardSystem keyboardsystem_;
+		const std::wstring PROCESS_NAME_;
 		cv::Mat lastFrame_;
 		mutable std::mutex frameCopyMutex_;
 	};

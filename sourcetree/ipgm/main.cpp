@@ -41,7 +41,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	Log::instance()->log_level_ = LOG_LEVEL::DEBUG;
 
 	TI ti;
-	IPGM ipgm(L"ITS.PLC.PE.exe", 0, 0, ti);
+	IPGM ipgm(L"ITS.PLC.PE.exe", ti);
 	
 	ipgm.start();
 	

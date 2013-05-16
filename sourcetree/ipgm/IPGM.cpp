@@ -7,14 +7,12 @@
 #include "IPGMCallbacks.hpp"
 #include "WindowManager.hpp"
 
-ipgm::IPGM::IPGM(const std::wstring PROCESS_NAME,
-				 const uint16_t POS_X, const uint16_t POS_Y,
-				 ipgm::IPGMCallbacks& callbacks)
+ipgm::IPGM::IPGM(const std::wstring PROCESS_NAME, ipgm::IPGMCallbacks& callbacks)
 				 : callbacks_(callbacks), running_(true)
 {
 	sensors_info_.fill(false);
 	actuators_info_.fill(false);
-	windowManager_ = std::make_shared<WindowManager>(PROCESS_NAME, POS_X, POS_Y);
+	windowManager_ = std::make_shared<WindowManager>(PROCESS_NAME);
 }
 
 ipgm::IPGM::~IPGM() {

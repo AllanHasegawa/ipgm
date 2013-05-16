@@ -11,9 +11,7 @@ namespace ipgm {
 
 	class IPGM {
 	public:
-		IPGM(const std::wstring PROCESS_NAME,
-			const uint16_t POS_X, const uint16_t POS_Y,
-			IPGMCallbacks& callbacks);
+		IPGM(const std::wstring PROCESS_NAME, IPGMCallbacks& callbacks);
 		virtual ~IPGM();
 
 		void start();

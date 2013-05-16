@@ -4,6 +4,8 @@
 #include <vector>
 #include <iostream>
 #include <array>
+#include <thread>
+
 #include <windows.h>
 
 #include "WindowManager.hpp"
@@ -15,27 +17,10 @@
 
 namespace ipgm {
 
-	WindowManager::WindowManager(const std::string PROCESS_NAME,
-		const uint16_t POS_X, const uint16_t POS_Y)
-		: ipsystem_(), mousesystem_(),
-		PROCESS_NAME_(PROCESS_NAME), POS_X_(POS_X), POS_Y_(POS_Y),
+	WindowManager::WindowManager(const std::wstring PROCESS_NAME)
+		: ipsystem_(), keyboardsystem_(),
+		PROCESS_NAME_(PROCESS_NAME),
 		lastFrame_(0, 0, CV_8U) {
-
-			//cv::namedWindow( "D01", CV_WINDOW_AUTOSIZE );
-			/*WindowCapture cap(hwnd_list.at(0));
-			cv::Mat dst;
-			cap.captureFrame(dst);
-
-			//cv::namedWindow( "Display Image Copied", CV_WINDOW_AUTOSIZE );
-			//cv::imshow( "Display Image Copied", dst );
-			if (GetCursorPos(&p))
-			{
-			if (ScreenToClient(hwnd_list.at(0), &p))
-			{
-			std::cout << p.x << " / " << p.y << std::endl;
-			}
-			}
-			}*/
 	}
 
 	WindowManager::~WindowManager() {
@@ -43,25 +28,15 @@ namespace ipgm {
 
 	void WindowManager::update(std::array<bool,11>& sensors_info, std::array<bool,8>& actuators_info) {
 		std::vector<HWND> hwnd_list;
-
-		// TODO: REMOVE HARD_CODE
-		// Process name is hard-coded ;)
-		getHwndsByProcessName(L"ITS.PLC.PE.exe", hwnd_list, false);
-
-		Log::instance()->dprintf("HWNDs found: %d\n", hwnd_list.size());
+		getHwndsByProcessName(this->PROCESS_NAME_.c_str(), hwnd_list, false);
 
 		if (hwnd_list.size() > 0) {
 			HWND hwnd = hwnd_list.at(0);
-			// TODO: REMOVE HARD_CODE
-			// Window MUST be 800x600
-			//MoveWindow(hwnd, POS_X_, POS_Y_, 800, 600, true);
-			
-			WindowCapture cap(hwnd);
 			{
 				std::lock_guard<std::mutex> lock(frameCopyMutex_);
 				try {
 					// TODO: Capture frame is capturing the ENTIRE window. ROI will be problaby faster
-					cap.captureFrame(lastFrame_);
+					captureWindow(hwnd, lastFrame_, false);
 					this->ipsystem_.processImage(lastFrame_, sensors_info, actuators_info);
 				} catch (std::exception& e) {
 				}
@@ -70,6 +45,17 @@ namespace ipgm {
 	}
 
 	void WindowManager::activeActuator(const uint8_t ID) {
+		std::vector<HWND> hwnd_list;
+		getHwndsByProcessName(this->PROCESS_NAME_.c_str(), hwnd_list, false);
+		if (hwnd_list.empty()) {
+			throw std::exception("Window not found");
+		}
+		HWND window = hwnd_list[0];
+
+		revealWindow(window);
+		std::this_thread::sleep_for(std::chrono::milliseconds(20));
+
+		this->keyboardsystem_.pressNumber(ID);
 	}
 
 	void WindowManager::copyLastFrame(cv::Mat& dst) {
