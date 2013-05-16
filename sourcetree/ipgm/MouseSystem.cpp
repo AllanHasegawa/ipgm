@@ -1,6 +1,8 @@
 #include <utility>
 #include <cstdint>
 #include <exception>
+#include <thread>
+#include <chrono>
 
 #include "MouseSystem.hpp"
 
@@ -13,7 +15,8 @@ namespace ipgm {
 	}
 
 	void MouseSystem::click() {
-		memset(input_list_.data(), 0, sizeof(INPUT)*2);
+		
+		memset(input_list_.data(), 0, sizeof(INPUT));
 		input_list_[0].type = INPUT_MOUSE;
 		input_list_[0].mi.dwFlags = MOUSEEVENTF_LEFTDOWN;
 		input_list_[0].mi.dx = 0;
@@ -21,13 +24,21 @@ namespace ipgm {
 		input_list_[0].mi.mouseData = 0;
 		input_list_[0].mi.time = 0;
 
-		input_list_[1].type = INPUT_MOUSE;
-		input_list_[1].mi.dwFlags = MOUSEEVENTF_LEFTUP;
-		input_list_[1].mi.dx = 0;
-		input_list_[1].mi.dy = 0;
-		input_list_[1].mi.mouseData = 0;
-		input_list_[1].mi.time = 0;
-		SendInput(2, input_list_.data(), sizeof(INPUT));
+		// TODO: WAY TOO INEFICIENT. Maybe inject input msgs direct into the process?
+		SendInput(1, input_list_.data(), sizeof(INPUT));
+		std::chrono::milliseconds dura( 20 );
+		std::this_thread::sleep_for( dura );
+
+		memset(input_list_.data(), 0, sizeof(INPUT));
+		input_list_[0].type = INPUT_MOUSE;
+		input_list_[0].mi.dwFlags = MOUSEEVENTF_LEFTUP;
+		input_list_[0].mi.dx = 0;
+		input_list_[0].mi.dy = 0;
+		input_list_[0].mi.mouseData = 0;
+		input_list_[0].mi.time = 0;
+		
+		SendInput(1, input_list_.data(), sizeof(INPUT));
+		std::this_thread::sleep_for( dura );
 	}
 
 	void MouseSystem::moveTo(const std::pair<long, long> POS) {

@@ -17,7 +17,7 @@ namespace ipgm {
 		void clickAndBack(const std::pair<long, long> POS);
 
 	private:
-		std::array<INPUT,4> input_list_;
+		std::array<INPUT,20> input_list_;
 		POINT point_;
 	};
 
