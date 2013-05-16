@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model version="3" type="SupEventSet" id="Events">
+<data>
+	<event id="1">
+		<properties>
+			<controllable />
+			<observable />
+		</properties>
+		<name>I1</name>
+	</event>
+	<event id="2">
+		<properties>
+			<observable />
+		</properties>
+		<name>FI1</name>
+	</event>
+</data>
+</model>

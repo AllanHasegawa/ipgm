@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workspace version="3">
+	<model file="INPUT_BOX.xmd" position="0"/>
+	<model file="INPUT_PALLET.xmd" position="1"/>
+	<model file="ELEVATOR.xmd" position="2" selected="true"/>
+</workspace>
