@@ -7,7 +7,7 @@
 #include "IPGMCallbacks.hpp"
 #include "WindowManager.hpp"
 
-ipgm::IPGM::IPGM(const std::string PROCESS_NAME,
+ipgm::IPGM::IPGM(const std::wstring PROCESS_NAME,
 				 const uint16_t POS_X, const uint16_t POS_Y,
 				 ipgm::IPGMCallbacks& callbacks)
 				 : callbacks_(callbacks), running_(true)
@@ -58,6 +58,7 @@ void ipgm::IPGM::stop() {
 }
 
 void ipgm::IPGM::activeActuator(const uint8_t ID) {
+	this->windowManager_->activeActuator(ID);
 }
 
 std::array<bool,11>& ipgm::IPGM::getSensorsInfo() {
