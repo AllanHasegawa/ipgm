@@ -1,4 +1,10 @@
 ipgm
-====
+----
 
 ...
+
+
+TODO:
+- Create InputSystem interface;
+- Prototype new input system (send msgs to IO Manager process)
+- Block mouse access sensor/actuators area (it makes image processing behavior undefined :( )
