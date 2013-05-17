@@ -2,7 +2,10 @@
 <model version="2.1" type="FSA" id="INPUT_PALLET">
 <data>
 	<state id="1">
-		<properties/>
+		<properties>
+			<initial />
+			<marked />
+		</properties>
 		<name>1</name>
 	</state>
 	<state id="2">
@@ -32,7 +35,7 @@
 	<layout uniformnodes="false"/>
 	<state id="1">
 		<circle r="18.0" x="223.0" y="185.0" />
-		<arrow x="1.0" y="0.0" />
+		<arrow x="36.0" y="0.0" />
 	</state>
 	<state id="2">
 		<circle r="18.0" x="463.0" y="183.0" />

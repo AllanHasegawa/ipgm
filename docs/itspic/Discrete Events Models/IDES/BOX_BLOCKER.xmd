@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model version="2.1" type="FSA" id="BOX_BLOCKER">
+<data>
+	<state id="1">
+		<properties>
+			<initial />
+			<marked />
+		</properties>
+		<name>1</name>
+	</state>
+	<state id="2">
+		<properties/>
+		<name>2</name>
+	</state>
+	<event id="1">
+		<properties>
+			<controllable />
+			<observable />
+		</properties>
+		<name>block_box</name>
+	</event>
+	<event id="2">
+		<properties>
+			<controllable />
+			<observable />
+		</properties>
+		<name>non_block_box</name>
+	</event>
+	<transition id="7" source="1" target="2" event="2">
+	</transition>
+	<transition id="8" source="2" target="1" event="1">
+	</transition>
+</data>
+<meta tag="layout" version="2.1">
+	<font size="12.0"/>
+	<layout uniformnodes="false"/>
+	<state id="1">
+		<circle r="18.0" x="176.0" y="203.0" />
+		<arrow x="36.0" y="0.0" />
+	</state>
+	<state id="2">
+		<circle r="18.0" x="408.0" y="201.0" />
+		<arrow x="1.0" y="0.0" />
+	</state>
+	<transition id="7">
+		<bezier x1="176.0" y1="203.0" x2="408.0" y2="201.0" ctrlx1="242.63929748535156" ctrly1="163.7559814453125" ctrlx2="340.69403076171875" ctrly2="162.91067504882812" />
+		<label x="5.0" y="5.0" />
+	</transition>
+	<transition id="8">
+		<bezier x1="408.0" y1="201.0" x2="176.0" y2="203.0" ctrlx1="341.3607177734375" ctrly1="240.2440185546875" ctrlx2="243.30596923828125" ctrly2="241.08932495117188" />
+		<label x="5.0" y="5.0" />
+	</transition>
+</meta>
+</model>
