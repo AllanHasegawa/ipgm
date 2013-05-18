@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model version="2.1" type="FSA" id="E_BLOCK_FLOOR">
+<data>
+	<state id="1">
+		<properties>
+			<initial />
+			<marked />
+		</properties>
+		<name>1</name>
+	</state>
+	<state id="2">
+		<properties/>
+		<name>2</name>
+	</state>
+	<event id="1">
+		<properties>
+			<observable />
+		</properties>
+		<name>end_close_floor</name>
+	</event>
+	<event id="2">
+		<properties>
+			<observable />
+		</properties>
+		<name>end_block_box</name>
+	</event>
+	<transition id="5" source="1" target="2" event="1">
+	</transition>
+	<transition id="6" source="2" target="1" event="2">
+	</transition>
+</data>
+<meta tag="annotation" version="3">Evitar bloquear uma caixa sem que a porta esteja fechada;</meta>
+<meta tag="layout" version="2.1">
+	<font size="12.0"/>
+	<layout uniformnodes="false"/>
+	<state id="1">
+		<circle r="18.0" x="57.0" y="73.0" />
+		<arrow x="36.0" y="0.0" />
+	</state>
+	<state id="2">
+		<circle r="18.0" x="291.0" y="75.0" />
+		<arrow x="1.0" y="0.0" />
+	</state>
+	<transition id="5">
+		<bezier x1="57.0" y1="73.0" x2="291.0" y2="75.0" ctrlx1="124.88331604003906" ctrly1="34.57735061645508" ctrlx2="223.78335571289062" ctrly2="35.42264938354492" />
+		<label x="-1.0" y="-19.0" />
+	</transition>
+	<transition id="6">
+		<bezier x1="291.0" y1="75.0" x2="57.0" y2="73.0" ctrlx1="223.11668395996094" ctrly1="113.42265319824219" ctrlx2="124.21664428710938" ctrly2="112.57734680175781" />
+		<label x="5.0" y="5.0" />
+	</transition>
+</meta>
+</model>

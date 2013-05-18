@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <workspace version="3">
-	<model file="INPUT_BOX.xmd" position="0"/>
-	<model file="INPUT_PALLET.xmd" position="1"/>
-	<model file="ELEVATOR.xmd" position="2"/>
-	<model file="RETRACTABLE_FLOOR.xmd" position="3"/>
-	<model file="BOX_FITTER.xmd" position="4" selected="true"/>
+	<model file="P_INPUT_BOX.xmd" position="0"/>
+	<model file="P_INPUT_PALLET.xmd" position="1"/>
+	<model file="P_ELEVATOR.xmd" position="2"/>
+	<model file="P_RETRACTABLE_FLOOR.xmd" position="3"/>
+	<model file="P_BOX_FITTER.xmd" position="4"/>
+	<model file="P_BOX_BLOCKER.xmd" position="5"/>
+	<model file="E_IPALLET_ELEVATOR.xmd" position="6"/>
+	<model file="E_IBOX_BLOCKER.xmd" position="7"/>
+	<model file="E_FITTER_FLOOR.xmd" position="8"/>
+	<model file="E_ELEVATOR_FITTER.xmd" position="9"/>
+	<model file="E_BLOCKER_FLOOR_TIMING.xmd" position="10"/>
+	<model file="E_BLOCK_FLOOR.xmd" position="11"/>
+	<model file="Plant.xmd" position="12"/>
+	<model file="Specs.xmd" position="13"/>
+	<model file="K.xmd" position="14"/>
+	<model file="Supcon.xmd" position="15" selected="true"/>
 </workspace>

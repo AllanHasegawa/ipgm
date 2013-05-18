@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model version="2.1" type="FSA" id="E_FITTER_FLOOR">
+<data>
+	<state id="3">
+		<properties>
+			<marked />
+		</properties>
+		<name>3</name>
+	</state>
+	<state id="4">
+		<properties>
+			<initial />
+			<marked />
+		</properties>
+		<name>1</name>
+	</state>
+	<state id="5">
+		<properties>
+			<marked />
+		</properties>
+		<name>2</name>
+	</state>
+	<state id="6">
+		<properties>
+			<marked />
+		</properties>
+		<name>4</name>
+	</state>
+	<event id="1">
+		<properties>
+			<observable />
+		</properties>
+		<name>end_fit_box</name>
+	</event>
+	<event id="3">
+		<properties>
+			<observable />
+		</properties>
+		<name>end_close_floor</name>
+	</event>
+	<event id="4">
+		<properties>
+			<observable />
+		</properties>
+		<name>end_release_box</name>
+	</event>
+	<event id="5">
+		<properties>
+			<observable />
+		</properties>
+		<name>end_open_floor</name>
+	</event>
+	<transition id="6" source="4" target="5" event="3">
+	</transition>
+	<transition id="8" source="6" target="4" event="4">
+	</transition>
+	<transition id="10" source="5" target="3" event="1">
+	</transition>
+	<transition id="13" source="3" target="6" event="5">
+	</transition>
+</data>
+<meta tag="annotation" version="3">Evitar abrir a porta retrátil sem fixar a caixa;
+
+Evitar fechar a porta com o fixador ativado;
+
+Evitar fixar uma caixa sem uma caixa;</meta>
+<meta tag="layout" version="2.1">
+	<font size="12.0"/>
+	<layout uniformnodes="false"/>
+	<state id="3">
+		<circle r="18.0" x="346.0" y="226.0" />
+		<arrow x="1.0" y="0.0" />
+	</state>
+	<state id="4">
+		<circle r="18.0" x="46.0" y="46.0" />
+		<arrow x="1.1796936" y="35.980667" />
+	</state>
+	<state id="5">
+		<circle r="18.0" x="46.0" y="226.0" />
+		<arrow x="1.0" y="0.0" />
+	</state>
+	<state id="6">
+		<circle r="18.0" x="346.0" y="46.0" />
+		<arrow x="36.0" y="0.0" />
+	</state>
+	<transition id="6">
+		<bezier x1="46.0" y1="46.0" x2="46.0" y2="226.0" ctrlx1="46.0" ctrly1="106.0" ctrlx2="46.0" ctrly2="166.0" />
+		<label x="53.0" y="1.0" />
+	</transition>
+	<transition id="8">
+		<bezier x1="346.0" y1="46.0" x2="46.0" y2="46.0" ctrlx1="246.0" ctrly1="46.0" ctrlx2="146.0" ctrly2="46.0" />
+		<label x="5.0" y="5.0" />
+	</transition>
+	<transition id="10">
+		<bezier x1="46.0" y1="226.0" x2="346.0" y2="226.0" ctrlx1="146.0" ctrly1="226.0" ctrlx2="246.0" ctrly2="226.0" />
+		<label x="5.0" y="5.0" />
+	</transition>
+	<transition id="13">
+		<bezier x1="346.0" y1="226.0" x2="346.0" y2="46.0" ctrlx1="346.0" ctrly1="166.0" ctrlx2="346.0" ctrly2="106.0" />
+		<label x="-53.0" y="-1.0" />
+	</transition>
+</meta>
+</model>

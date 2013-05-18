@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model version="2.1" type="FSA" id="E_IPALLET_ELEVATOR">
+<data>
+	<state id="1">
+		<properties>
+			<initial />
+			<marked />
+		</properties>
+		<name>1</name>
+	</state>
+	<state id="2">
+		<properties>
+			<marked />
+		</properties>
+		<name>2</name>
+	</state>
+	<state id="3">
+		<properties>
+			<marked />
+		</properties>
+		<name>3</name>
+	</state>
+	<event id="1">
+		<properties>
+			<observable />
+		</properties>
+		<name>end_move_0</name>
+	</event>
+	<event id="3">
+		<properties>
+			<observable />
+		</properties>
+		<name>end_move_1</name>
+	</event>
+	<event id="4">
+		<properties>
+			<observable />
+		</properties>
+		<name>end_move_2</name>
+	</event>
+	<event id="5">
+		<properties>
+			<observable />
+		</properties>
+		<name>end_move_3</name>
+	</event>
+	<event id="6">
+		<properties>
+			<observable />
+		</properties>
+		<name>end_input_pallet</name>
+	</event>
+	<transition id="3" source="1" target="2" event="1">
+	</transition>
+	<transition id="7" source="2" target="2" event="1">
+	</transition>
+	<transition id="18" source="1" target="1" event="4">
+	</transition>
+	<transition id="19" source="1" target="1" event="3">
+	</transition>
+	<transition id="23" source="2" target="3" event="6">
+	</transition>
+	<transition id="24" source="3" target="1" event="5">
+	</transition>
+</data>
+<meta tag="annotation" version="3">Evitar a entrada de um palete com o elevador fora da posição 0;
+
+Evitar movementos do elevador sem um palete;</meta>
+<meta tag="layout" version="2.1">
+	<font size="12.0"/>
+	<layout uniformnodes="false"/>
+	<state id="1">
+		<circle r="18.0" x="68.0" y="82.0" />
+		<arrow x="36.0" y="0.0" />
+	</state>
+	<state id="2">
+		<circle r="18.0" x="348.0" y="82.0" />
+		<arrow x="1.0" y="0.0" />
+	</state>
+	<state id="3">
+		<circle r="18.0" x="188.0" y="262.0" />
+		<arrow x="1.0" y="0.0" />
+	</state>
+	<transition id="3">
+		<bezier x1="68.0" y1="82.0" x2="348.0" y2="82.0" ctrlx1="161.33334350585938" ctrly1="82.0" ctrlx2="254.66665649414062" ctrly2="82.0" />
+		<label x="-11.0" y="13.0" />
+	</transition>
+	<transition id="7">
+		<bezier x1="348.0" y1="82.0" x2="348.0" y2="82.0" ctrlx1="297.08831787109375" ctrly1="31.08831787109375" ctrlx2="398.91168212890625" ctrly2="31.08831787109375" />
+		<label x="7.0" y="-19.0" />
+	</transition>
+	<transition id="18" group="2">
+		<bezier x1="68.0" y1="82.0" x2="68.0" y2="82.0" ctrlx1="17.08831787109375" ctrly1="31.08831787109375" ctrlx2="118.91168212890625" ctrly2="31.08831787109375" />
+		<label x="37.0" y="-21.0" />
+	</transition>
+	<transition id="19" group="2">
+		<bezier x1="68.0" y1="82.0" x2="68.0" y2="82.0" ctrlx1="17.08831787109375" ctrly1="31.08831787109375" ctrlx2="118.91168212890625" ctrly2="31.08831787109375" />
+		<label x="37.0" y="-21.0" />
+	</transition>
+	<transition id="23">
+		<bezier x1="348.0" y1="82.0" x2="188.0" y2="262.0" ctrlx1="294.6666564941406" ctrly1="142.0" ctrlx2="241.33334350585938" ctrly2="202.0" />
+		<label x="45.0" y="13.0" />
+	</transition>
+	<transition id="24">
+		<bezier x1="188.0" y1="262.0" x2="68.0" y2="82.0" ctrlx1="148.0" ctrly1="202.0" ctrlx2="108.0" ctrly2="142.0" />
+		<label x="-33.0" y="25.0" />
+	</transition>
+</meta>
+</model>
