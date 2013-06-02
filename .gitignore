@@ -1,0 +1,5 @@
+/samples/itspic/pic_control/*.asm
+/samples/itspic/pic_control/*.cod
+/samples/itspic/pic_control/*.hex
+/samples/itspic/pic_control/*.lst
+/samples/itspic/pic_control/*.o

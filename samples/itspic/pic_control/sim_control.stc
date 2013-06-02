@@ -1,0 +1,3 @@
+#set verbose 3
+
+load itspic_control.cod

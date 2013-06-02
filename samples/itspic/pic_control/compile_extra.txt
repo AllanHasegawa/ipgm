@@ -1,0 +1,1 @@
+--pstack-model=small --obanksel=1 --optimize-cmp --optimize-df
