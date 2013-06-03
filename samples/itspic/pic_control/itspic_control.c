@@ -4,6 +4,16 @@
 
 #define SetBit(v,bit) v |= (1 << bit);
 #define ClearBit(v,bit) v &= ~(1 << bit);
+#define IsSetBit(v,bit) ((v & (1 << bit)) > 0)
+
+#define IS_S0 IsSetBit(PORTD, 0)
+#define IS_S1 IsSetBit(PORTD, 1)
+#define IS_S2 IsSetBit(PORTD, 2)
+#define IS_S3 IsSetBit(PORTD, 3)
+#define IS_S4 IsSetBit(PORTD, 4)
+
+//#pragma udata bigarray supervisor
+void* nodes_functions_cache[62];
 
 void main(void) {
 	// PORTD pin 0-7 are INPUT
@@ -14,6 +24,7 @@ void main(void) {
 	TRISB = 0b00000000;
 
 	// Compatibility with gpsim
+	//   (only output ports are updated)
 	// It can now shows digitial on Breadboard
 	TRISD = 0;
 	TRISE = 0;
@@ -23,12 +34,12 @@ void main(void) {
 	PORTD = 0;
 	PORTE = 0;
 	while(1) {
-		if (PORTE & (1 << 2)) {
-			SetBit(PORTB,0);
+		if (IsSetBit(PORTE,2)) {
+			SetBit(PORTB,2);
 		} else {
-			ClearBit(PORTB,0);
+			ClearBit(PORTB,2);
 		}
-		if (PORTD & (1 << 1)) {
+		if (IS_S0) {
 			SetBit(PORTB,1);
 		} else {
 			ClearBit(PORTB,1);
