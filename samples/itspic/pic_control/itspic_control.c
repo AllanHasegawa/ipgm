@@ -1,8 +1,9 @@
 #include <pic18fregs.h>
 
-#pragma config WDT=OFF,CP0=OFF,OSCS=ON,OSC=LP,BOR=ON,BORV=25,WDTPS=128,CCP2MUX=ON
+#pragma config WDT=OFF,CP0=ON,OSCS=ON,OSC=LP,BOR=ON,BORV=25,WDTPS=128,CCP2MUX=ON
 //#pragma config OSCS=ON
 //#pragma config OSC=LP
+
 
 #define SetBit(v,bit) v |= (1 << bit);
 #define ClearBit(v,bit) v &= ~(1 << bit);
@@ -327,6 +328,18 @@ void update_close_floor(void) {
 //#pragma udata bigarray supervisor
 void* nodes_functions_cache[62];
 
+unsigned char seconds;
+unsigned int tick;
+void isr(void) __interrupt 1 {
+	tick += 8;
+	if (tick >= 62500) {
+		seconds++;
+		tick -= 62500;
+	}
+	INTCON = 0b10100000;
+	TMR0 = 0;
+}
+
 void main(void) {
 	// PORTD pin 0-7 are INPUT
 	TRISD = 0b11111111;
@@ -351,6 +364,12 @@ void main(void) {
 	membank2.byte = 0;
 	tmembank.byte = 0;
 
+	INTCON = 0b10100000;
+	T0CON = 0b11000000;
+	TMR0 = 0;
+	tick = 0;
+	seconds = 0;
+
 	while(1) {
 		if (IS_S8) {
 			membank2.bits.b2 = 1;
@@ -368,7 +387,7 @@ void main(void) {
 				membank2.bits.b3 = 0;
 			}
 		}
-		
+
 		update_input_pallet();
 		update_move_0();
 		update_move_1();
