@@ -1,4 +1,6 @@
 #include <pic18fregs.h>
+#include <stdio.h>
+#include <usart.h>
 
 #pragma config WDT=OFF,CP0=ON,OSCS=ON,OSC=LP,BOR=ON,BORV=25,WDTPS=128,CCP2MUX=ON
 //#pragma config OSCS=ON
@@ -331,6 +333,7 @@ void* nodes_functions_cache[62];
 unsigned char seconds;
 unsigned int tick;
 void isr(void) __interrupt 1 {
+	PORTB = 255;
 	tick += 8;
 	if (tick >= 62500) {
 		seconds++;
@@ -339,6 +342,13 @@ void isr(void) __interrupt 1 {
 	INTCON = 0b10100000;
 	TMR0 = 0;
 }
+
+PUTCHAR( c ) {
+	PORTC = c; /* dump character c to PORTC */
+}
+
+
+unsigned char chh;
 
 void main(void) {
 	// PORTD pin 0-7 are INPUT
@@ -364,13 +374,31 @@ void main(void) {
 	membank2.byte = 0;
 	tmembank.byte = 0;
 
-	INTCON = 0b10100000;
-	T0CON = 0b11000000;
-	TMR0 = 0;
+	//INTCON = 0b10100000;
+	//T0CON = 0b11000000;
+	//TMR0 = 0;
 	tick = 0;
 	seconds = 0;
 
+	// config USART in PORTC
+	//SetBit(RCSTA1,7);
+	//SetBit(TRISC,7);
+	//ClearBit(TRISC,6);
+
+
+usart_open(USART_TX_INT_OFF & //
+                       USART_RX_INT_ON & //
+                       USART_BRGH_HIGH & //
+                       USART_ASYNCH_MODE & //
+                       USART_EIGHT_BIT, //
+                       129 // = SPBRG, 9600 baud @ 48 MHz CPU clock
+       );
+	stdout = STREAM_USART;
+	
 	while(1) {
+		printf("Testing\n");
+		//scanf("%c");
+		/*
 		if (IS_S8) {
 			membank2.bits.b2 = 1;
 		} else {
@@ -397,6 +425,7 @@ void main(void) {
 		update_release_box();
 		update_open_floor();
 		update_close_floor();
+		*/
 	}
 }
 

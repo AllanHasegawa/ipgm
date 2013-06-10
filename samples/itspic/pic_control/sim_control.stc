@@ -1,3 +1,24 @@
 #set verbose 3
 
 load itspic_control.cod
+
+# Load module library
+module library libgpsim_modules.dll
+
+
+# load the usart module from the module library and give it a name - U1
+module load usart U1
+
+U1.console=false
+
+# Create Node
+node PIC_tx
+node PIC_rx
+
+# Attach node to pin. Like wiring
+attach PIC_rx portc7 U1.TXPIN
+attach PIC_tx portc6 U1.RXPIN
+
+# set the usart module's baud rate
+U1.txbaud=9600
+U1.rxbaud=9600
