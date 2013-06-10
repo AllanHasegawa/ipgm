@@ -3,3 +3,7 @@
 /samples/itspic/pic_control/*.hex
 /samples/itspic/pic_control/*.lst
 /samples/itspic/pic_control/*.o
+/samples/itspic/pic_control/mplab_project/build
+/samples/itspic/pic_control/mplab_project/dist
+/samples/itspic/pic_control/mplab_project/nbproject
+/samples/itspic/pic_control/mplab_project/funclist
