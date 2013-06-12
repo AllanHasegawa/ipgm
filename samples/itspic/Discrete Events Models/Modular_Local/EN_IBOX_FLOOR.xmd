@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model version="2.1" type="FSA" id="EN_IBOX_FLOOR">
+<data>
+	<state id="1">
+		<properties>
+			<initial />
+			<marked />
+		</properties>
+		<name>1</name>
+	</state>
+	<state id="2">
+		<properties/>
+		<name>2</name>
+	</state>
+	<event id="1">
+		<properties>
+			<observable />
+		</properties>
+		<name>end_close_floor</name>
+	</event>
+	<event id="2">
+		<properties>
+			<observable />
+		</properties>
+		<name>end_input_box</name>
+	</event>
+	<transition id="2" source="2" target="1" event="1">
+	</transition>
+	<transition id="4" source="1" target="2" event="2">
+	</transition>
+</data>
+<meta tag="layout" version="2.1">
+	<font size="12.0"/>
+	<layout uniformnodes="false"/>
+	<state id="1">
+		<circle r="18.0" x="80.0" y="80.0" />
+		<arrow x="36.0" y="0.0" />
+	</state>
+	<state id="2">
+		<circle r="18.0" x="360.0" y="80.0" />
+		<arrow x="1.0" y="0.0" />
+	</state>
+	<transition id="2">
+		<bezier x1="360.0" y1="80.0" x2="80.0" y2="80.0" ctrlx1="279.17095947265625" ctrly1="126.66667175292969" ctrlx2="160.82904052734375" ctrly2="126.66667175292969" />
+		<label x="5.0" y="5.0" />
+	</transition>
+	<transition id="4">
+		<bezier x1="80.0" y1="80.0" x2="360.0" y2="80.0" ctrlx1="160.82904052734375" ctrly1="33.33333206176758" ctrlx2="279.17095947265625" ctrly2="33.33333206176758" />
+		<label x="5.0" y="5.0" />
+	</transition>
+</meta>
+</model>

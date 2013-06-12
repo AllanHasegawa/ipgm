@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model version="2.1" type="FSA" id="EN_FITTER_FLOOR">
+<data>
+	<state id="1">
+		<properties/>
+		<name>4</name>
+	</state>
+	<state id="2">
+		<properties/>
+		<name>2</name>
+	</state>
+	<state id="3">
+		<properties>
+			<marked />
+		</properties>
+		<name>3</name>
+	</state>
+	<state id="4">
+		<properties>
+			<initial />
+			<marked />
+		</properties>
+		<name>1</name>
+	</state>
+	<event id="1">
+		<properties>
+			<observable />
+		</properties>
+		<name>end_close_floor</name>
+	</event>
+	<event id="2">
+		<properties>
+			<observable />
+		</properties>
+		<name>end_open_floor</name>
+	</event>
+	<event id="3">
+		<properties>
+			<observable />
+		</properties>
+		<name>end_fit_box</name>
+	</event>
+	<event id="4">
+		<properties>
+			<observable />
+		</properties>
+		<name>end_release_box</name>
+	</event>
+	<transition id="2" source="4" target="2" event="1">
+	</transition>
+	<transition id="4" source="3" target="1" event="2">
+	</transition>
+	<transition id="6" source="2" target="3" event="3">
+	</transition>
+	<transition id="8" source="1" target="4" event="4">
+	</transition>
+</data>
+<meta tag="layout" version="2.1">
+	<font size="12.0"/>
+	<layout uniformnodes="false"/>
+	<state id="1">
+		<circle r="18.0" x="366.0" y="66.0" />
+		<arrow x="1.0" y="0.0" />
+	</state>
+	<state id="2">
+		<circle r="18.0" x="66.0" y="246.0" />
+		<arrow x="1.0" y="0.0" />
+	</state>
+	<state id="3">
+		<circle r="18.0" x="366.0" y="246.0" />
+		<arrow x="1.0" y="0.0" />
+	</state>
+	<state id="4">
+		<circle r="18.0" x="66.0" y="66.0" />
+		<arrow x="1.1796936" y="35.980667" />
+	</state>
+	<transition id="2">
+		<bezier x1="66.0" y1="66.0" x2="66.0" y2="246.0" ctrlx1="66.0" ctrly1="126.0" ctrlx2="66.0" ctrly2="186.0" />
+		<label x="53.0" y="1.0" />
+	</transition>
+	<transition id="4">
+		<bezier x1="366.0" y1="246.0" x2="366.0" y2="66.0" ctrlx1="366.0" ctrly1="186.0" ctrlx2="366.0" ctrly2="126.0" />
+		<label x="-53.0" y="-1.0" />
+	</transition>
+	<transition id="6">
+		<bezier x1="66.0" y1="246.0" x2="366.0" y2="246.0" ctrlx1="166.0" ctrly1="246.0" ctrlx2="266.0" ctrly2="246.0" />
+		<label x="5.0" y="5.0" />
+	</transition>
+	<transition id="8">
+		<bezier x1="366.0" y1="66.0" x2="66.0" y2="66.0" ctrlx1="266.0" ctrly1="66.0" ctrlx2="166.0" ctrly2="66.0" />
+		<label x="5.0" y="5.0" />
+	</transition>
+</meta>
+</model>

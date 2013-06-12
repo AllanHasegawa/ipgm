@@ -6,497 +6,497 @@
 			<initial />
 			<marked />
 		</properties>
-		<name>(1,1)</name>
+		<name>(1,(1,1))</name>
 	</state>
 	<state id="1">
 		<properties/>
-		<name>(1,4)</name>
+		<name>(1,(2,1))</name>
 	</state>
 	<state id="2">
 		<properties/>
-		<name>(1,2)</name>
+		<name>(1,(1,2))</name>
 	</state>
 	<state id="3">
 		<properties/>
-		<name>(1,5)</name>
+		<name>(1,(1,4))</name>
 	</state>
 	<state id="4">
 		<properties/>
-		<name>(1,6)</name>
+		<name>(1,(1,6))</name>
 	</state>
 	<state id="5">
 		<properties/>
-		<name>(1,3)</name>
+		<name>(1,(1,8))</name>
 	</state>
 	<state id="6">
 		<properties/>
-		<name>(1,12)</name>
+		<name>(1,(3,1))</name>
 	</state>
 	<state id="7">
 		<properties/>
-		<name>(1,8)</name>
+		<name>(1,(2,2))</name>
 	</state>
 	<state id="8">
 		<properties/>
-		<name>(1,13)</name>
+		<name>(1,(2,4))</name>
 	</state>
 	<state id="9">
 		<properties/>
-		<name>(1,11)</name>
+		<name>(1,(2,6))</name>
 	</state>
 	<state id="10">
 		<properties/>
-		<name>(1,9)</name>
+		<name>(1,(2,8))</name>
 	</state>
 	<state id="11">
 		<properties>
 			<marked />
 		</properties>
-		<name>(1,7)</name>
+		<name>(1,(1,3))</name>
 	</state>
 	<state id="12">
 		<properties>
 			<marked />
 		</properties>
-		<name>(2,10)</name>
+		<name>(2,(1,9))</name>
 	</state>
 	<state id="13">
 		<properties/>
-		<name>(1,22)</name>
+		<name>(1,(4,1))</name>
 	</state>
 	<state id="14">
 		<properties/>
-		<name>(1,17)</name>
+		<name>(1,(3,2))</name>
 	</state>
 	<state id="15">
 		<properties/>
-		<name>(1,23)</name>
+		<name>(1,(3,4))</name>
 	</state>
 	<state id="16">
 		<properties/>
-		<name>(1,21)</name>
+		<name>(1,(3,6))</name>
 	</state>
 	<state id="17">
 		<properties/>
-		<name>(1,19)</name>
+		<name>(1,(3,8))</name>
 	</state>
 	<state id="18">
 		<properties/>
-		<name>(1,16)</name>
+		<name>(1,(2,3))</name>
 	</state>
 	<state id="19">
 		<properties/>
-		<name>(2,18)</name>
+		<name>(2,(2,9))</name>
 	</state>
 	<state id="20">
 		<properties/>
-		<name>(2,6)</name>
+		<name>(2,(1,6))</name>
 	</state>
 	<state id="21">
 		<properties/>
-		<name>(2,5)</name>
+		<name>(2,(1,4))</name>
 	</state>
 	<state id="22">
 		<properties/>
-		<name>(2,2)</name>
+		<name>(2,(1,2))</name>
 	</state>
 	<state id="23">
 		<properties/>
-		<name>(1,26)</name>
+		<name>(1,(4,2))</name>
 	</state>
 	<state id="24">
 		<properties/>
-		<name>(1,31)</name>
+		<name>(1,(4,4))</name>
 	</state>
 	<state id="25">
 		<properties/>
-		<name>(1,30)</name>
+		<name>(1,(4,6))</name>
 	</state>
 	<state id="26">
 		<properties/>
-		<name>(1,28)</name>
+		<name>(1,(4,8))</name>
 	</state>
 	<state id="27">
 		<properties/>
-		<name>(1,25)</name>
+		<name>(1,(3,3))</name>
 	</state>
 	<state id="28">
 		<properties/>
-		<name>(2,27)</name>
+		<name>(2,(3,9))</name>
 	</state>
 	<state id="29">
 		<properties/>
-		<name>(2,11)</name>
+		<name>(2,(2,6))</name>
 	</state>
 	<state id="30">
 		<properties/>
-		<name>(2,13)</name>
+		<name>(2,(2,4))</name>
 	</state>
 	<state id="31">
 		<properties/>
-		<name>(2,8)</name>
+		<name>(2,(2,2))</name>
 	</state>
 	<state id="32">
 		<properties/>
-		<name>(1,33)</name>
+		<name>(1,(4,3))</name>
 	</state>
 	<state id="33">
 		<properties/>
-		<name>(2,34)</name>
+		<name>(2,(4,9))</name>
 	</state>
 	<state id="34">
 		<properties/>
-		<name>(2,21)</name>
+		<name>(2,(3,6))</name>
 	</state>
 	<state id="35">
 		<properties/>
-		<name>(2,23)</name>
+		<name>(2,(3,4))</name>
 	</state>
 	<state id="36">
 		<properties/>
-		<name>(2,17)</name>
+		<name>(2,(3,2))</name>
 	</state>
 	<state id="37">
 		<properties/>
-		<name>(2,30)</name>
+		<name>(2,(4,6))</name>
 	</state>
 	<state id="38">
 		<properties/>
-		<name>(2,31)</name>
+		<name>(2,(4,4))</name>
 	</state>
 	<state id="39">
 		<properties/>
-		<name>(2,26)</name>
+		<name>(2,(4,2))</name>
 	</state>
 	<state id="40">
 		<properties>
 			<marked />
 		</properties>
-		<name>(3,10)</name>
+		<name>(3,(1,9))</name>
 	</state>
 	<state id="41">
 		<properties/>
-		<name>(3,6)</name>
+		<name>(3,(1,6))</name>
 	</state>
 	<state id="42">
 		<properties/>
-		<name>(3,5)</name>
+		<name>(3,(1,4))</name>
 	</state>
 	<state id="43">
 		<properties/>
-		<name>(3,2)</name>
+		<name>(3,(1,2))</name>
 	</state>
 	<state id="44">
 		<properties/>
-		<name>(3,18)</name>
+		<name>(3,(2,9))</name>
 	</state>
 	<state id="45">
 		<properties/>
-		<name>(3,11)</name>
+		<name>(3,(2,6))</name>
 	</state>
 	<state id="46">
 		<properties>
 			<marked />
 		</properties>
-		<name>(4,15)</name>
+		<name>(4,(1,7))</name>
 	</state>
 	<state id="47">
 		<properties/>
-		<name>(3,13)</name>
+		<name>(3,(2,4))</name>
 	</state>
 	<state id="48">
 		<properties/>
-		<name>(3,8)</name>
+		<name>(3,(2,2))</name>
 	</state>
 	<state id="49">
 		<properties/>
-		<name>(3,27)</name>
+		<name>(3,(3,9))</name>
 	</state>
 	<state id="50">
 		<properties/>
-		<name>(3,21)</name>
+		<name>(3,(3,6))</name>
 	</state>
 	<state id="51">
 		<properties/>
-		<name>(4,20)</name>
+		<name>(4,(2,7))</name>
 	</state>
 	<state id="52">
 		<properties/>
-		<name>(4,2)</name>
+		<name>(4,(1,2))</name>
 	</state>
 	<state id="53">
 		<properties/>
-		<name>(4,3)</name>
+		<name>(4,(1,8))</name>
 	</state>
 	<state id="54">
 		<properties/>
-		<name>(4,5)</name>
+		<name>(4,(1,4))</name>
 	</state>
 	<state id="55">
 		<properties/>
-		<name>(3,23)</name>
+		<name>(3,(3,4))</name>
 	</state>
 	<state id="56">
 		<properties/>
-		<name>(3,17)</name>
+		<name>(3,(3,2))</name>
 	</state>
 	<state id="57">
 		<properties/>
-		<name>(3,34)</name>
+		<name>(3,(4,9))</name>
 	</state>
 	<state id="58">
 		<properties/>
-		<name>(3,30)</name>
+		<name>(3,(4,6))</name>
 	</state>
 	<state id="59">
 		<properties/>
-		<name>(4,29)</name>
+		<name>(4,(3,7))</name>
 	</state>
 	<state id="60">
 		<properties/>
-		<name>(4,8)</name>
+		<name>(4,(2,2))</name>
 	</state>
 	<state id="61">
 		<properties/>
-		<name>(4,9)</name>
+		<name>(4,(2,8))</name>
 	</state>
 	<state id="62">
 		<properties/>
-		<name>(4,13)</name>
+		<name>(4,(2,4))</name>
 	</state>
 	<state id="63">
 		<properties/>
-		<name>(3,31)</name>
+		<name>(3,(4,4))</name>
 	</state>
 	<state id="64">
 		<properties/>
-		<name>(3,26)</name>
+		<name>(3,(4,2))</name>
 	</state>
 	<state id="65">
 		<properties/>
-		<name>(4,35)</name>
+		<name>(4,(4,7))</name>
 	</state>
 	<state id="66">
 		<properties/>
-		<name>(4,17)</name>
+		<name>(4,(3,2))</name>
 	</state>
 	<state id="67">
 		<properties/>
-		<name>(4,19)</name>
+		<name>(4,(3,8))</name>
 	</state>
 	<state id="68">
 		<properties/>
-		<name>(4,23)</name>
+		<name>(4,(3,4))</name>
 	</state>
 	<state id="69">
 		<properties/>
-		<name>(4,26)</name>
+		<name>(4,(4,2))</name>
 	</state>
 	<state id="70">
 		<properties/>
-		<name>(4,28)</name>
+		<name>(4,(4,8))</name>
 	</state>
 	<state id="71">
 		<properties/>
-		<name>(4,31)</name>
+		<name>(4,(4,4))</name>
 	</state>
 	<state id="72">
 		<properties>
 			<marked />
 		</properties>
-		<name>(5,15)</name>
+		<name>(5,(1,7))</name>
 	</state>
 	<state id="73">
 		<properties/>
-		<name>(5,2)</name>
+		<name>(5,(1,2))</name>
 	</state>
 	<state id="74">
 		<properties/>
-		<name>(5,3)</name>
+		<name>(5,(1,8))</name>
 	</state>
 	<state id="75">
 		<properties/>
-		<name>(5,5)</name>
+		<name>(5,(1,4))</name>
 	</state>
 	<state id="76">
 		<properties/>
-		<name>(5,20)</name>
+		<name>(5,(2,7))</name>
 	</state>
 	<state id="77">
 		<properties/>
-		<name>(5,8)</name>
+		<name>(5,(2,2))</name>
 	</state>
 	<state id="78">
 		<properties/>
-		<name>(5,9)</name>
+		<name>(5,(2,8))</name>
 	</state>
 	<state id="79">
 		<properties/>
-		<name>(5,13)</name>
+		<name>(5,(2,4))</name>
 	</state>
 	<state id="80">
 		<properties>
 			<marked />
 		</properties>
-		<name>(6,14)</name>
+		<name>(6,(1,5))</name>
 	</state>
 	<state id="81">
 		<properties/>
-		<name>(5,29)</name>
+		<name>(5,(3,7))</name>
 	</state>
 	<state id="82">
 		<properties/>
-		<name>(5,17)</name>
+		<name>(5,(3,2))</name>
 	</state>
 	<state id="83">
 		<properties/>
-		<name>(5,19)</name>
+		<name>(5,(3,8))</name>
 	</state>
 	<state id="84">
 		<properties/>
-		<name>(5,23)</name>
+		<name>(5,(3,4))</name>
 	</state>
 	<state id="85">
 		<properties/>
-		<name>(6,24)</name>
+		<name>(6,(2,5))</name>
 	</state>
 	<state id="86">
 		<properties/>
-		<name>(6,3)</name>
+		<name>(6,(1,8))</name>
 	</state>
 	<state id="87">
 		<properties/>
-		<name>(6,6)</name>
+		<name>(6,(1,6))</name>
 	</state>
 	<state id="88">
 		<properties/>
-		<name>(6,2)</name>
+		<name>(6,(1,2))</name>
 	</state>
 	<state id="89">
 		<properties/>
-		<name>(5,35)</name>
+		<name>(5,(4,7))</name>
 	</state>
 	<state id="90">
 		<properties/>
-		<name>(5,26)</name>
+		<name>(5,(4,2))</name>
 	</state>
 	<state id="91">
 		<properties/>
-		<name>(5,28)</name>
+		<name>(5,(4,8))</name>
 	</state>
 	<state id="92">
 		<properties/>
-		<name>(5,31)</name>
+		<name>(5,(4,4))</name>
 	</state>
 	<state id="93">
 		<properties/>
-		<name>(6,32)</name>
+		<name>(6,(3,5))</name>
 	</state>
 	<state id="94">
 		<properties/>
-		<name>(6,9)</name>
+		<name>(6,(2,8))</name>
 	</state>
 	<state id="95">
 		<properties/>
-		<name>(6,11)</name>
+		<name>(6,(2,6))</name>
 	</state>
 	<state id="96">
 		<properties/>
-		<name>(6,8)</name>
+		<name>(6,(2,2))</name>
 	</state>
 	<state id="97">
 		<properties/>
-		<name>(6,36)</name>
+		<name>(6,(4,5))</name>
 	</state>
 	<state id="98">
 		<properties/>
-		<name>(6,19)</name>
+		<name>(6,(3,8))</name>
 	</state>
 	<state id="99">
 		<properties/>
-		<name>(6,21)</name>
+		<name>(6,(3,6))</name>
 	</state>
 	<state id="100">
 		<properties/>
-		<name>(6,17)</name>
+		<name>(6,(3,2))</name>
 	</state>
 	<state id="101">
 		<properties/>
-		<name>(6,28)</name>
+		<name>(6,(4,8))</name>
 	</state>
 	<state id="102">
 		<properties/>
-		<name>(6,30)</name>
+		<name>(6,(4,6))</name>
 	</state>
 	<state id="103">
 		<properties/>
-		<name>(6,26)</name>
+		<name>(6,(4,2))</name>
 	</state>
 	<state id="104">
 		<properties>
 			<marked />
 		</properties>
-		<name>(7,14)</name>
+		<name>(7,(1,5))</name>
 	</state>
 	<state id="105">
 		<properties/>
-		<name>(7,3)</name>
+		<name>(7,(1,8))</name>
 	</state>
 	<state id="106">
 		<properties/>
-		<name>(7,6)</name>
+		<name>(7,(1,6))</name>
 	</state>
 	<state id="107">
 		<properties/>
-		<name>(7,2)</name>
+		<name>(7,(1,2))</name>
 	</state>
 	<state id="108">
 		<properties/>
-		<name>(7,24)</name>
+		<name>(7,(2,5))</name>
 	</state>
 	<state id="109">
 		<properties/>
-		<name>(7,9)</name>
+		<name>(7,(2,8))</name>
 	</state>
 	<state id="110">
 		<properties/>
-		<name>(7,11)</name>
+		<name>(7,(2,6))</name>
 	</state>
 	<state id="111">
 		<properties/>
-		<name>(7,8)</name>
+		<name>(7,(2,2))</name>
 	</state>
 	<state id="112">
 		<properties/>
-		<name>(7,32)</name>
+		<name>(7,(3,5))</name>
 	</state>
 	<state id="113">
 		<properties/>
-		<name>(7,19)</name>
+		<name>(7,(3,8))</name>
 	</state>
 	<state id="114">
 		<properties/>
-		<name>(7,21)</name>
+		<name>(7,(3,6))</name>
 	</state>
 	<state id="115">
 		<properties/>
-		<name>(7,17)</name>
+		<name>(7,(3,2))</name>
 	</state>
 	<state id="116">
 		<properties/>
-		<name>(7,36)</name>
+		<name>(7,(4,5))</name>
 	</state>
 	<state id="117">
 		<properties/>
-		<name>(7,28)</name>
+		<name>(7,(4,8))</name>
 	</state>
 	<state id="118">
 		<properties/>
-		<name>(7,30)</name>
+		<name>(7,(4,6))</name>
 	</state>
 	<state id="119">
 		<properties/>
-		<name>(7,26)</name>
+		<name>(7,(4,2))</name>
 	</state>
 	<event id="1">
 		<properties>
@@ -1027,9 +1027,9 @@
 	<transition id="222" source="119" target="32" event="12">
 	</transition>
 </data>
-<meta tag="annotation" version="3">sync(E_ELEVATOR_FITTER,S_ELEVATOR_FITTER): Composed automaton</meta>
 <meta tag="layout" version="2.1">
 	<font size="12.0"/>
 	<layout uniformnodes="false"/>
 </meta>
+<meta tag="annotation" version="3">sync(E_ELEVATOR_FITTER,S_ELEVATOR_FITTER): Composed automaton</meta>
 </model>

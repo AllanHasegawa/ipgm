@@ -1,0 +1,17 @@
+(START) |- 0
+0 -| (FINAL)
+0 input_box 1
+1 end_input_box 3
+3 -| (FINAL)
+3 close_floor 6
+6 end_close_floor 8
+8 input_box 9
+8 open_floor 10
+9 end_input_box 11
+9 open_floor 12
+10 input_box 12
+10 end_open_floor 0
+11 open_floor 14
+12 end_input_box 14
+12 end_open_floor 1
+14 end_open_floor 3

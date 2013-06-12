@@ -2629,9 +2629,9 @@
 	<transition id="16556" source="4640" target="1247" event="16">
 	</transition>
 </data>
-<meta tag="annotation" version="3">supcon(PlantTotal,K): Supervisor</meta>
 <meta tag="layout" version="2.1">
 	<font size="12.0"/>
 	<layout uniformnodes="false"/>
 </meta>
+<meta tag="annotation" version="3">supcon(PlantTotal,K): Supervisor</meta>
 </model>

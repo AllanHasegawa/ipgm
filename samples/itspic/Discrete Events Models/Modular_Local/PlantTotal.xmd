@@ -9615,9 +9615,9 @@
 	<transition id="3584" source="575" target="443" event="19">
 	</transition>
 </data>
-<meta tag="annotation" version="3">sync(P_BOX_FITTER,P_ELEVATOR,P_INPUT_BOX,P_INPUT_PALLET,P_RETRACTABLE_FLOOR): Composed automaton</meta>
 <meta tag="layout" version="2.1">
 	<font size="12.0"/>
 	<layout uniformnodes="false"/>
 </meta>
+<meta tag="annotation" version="3">sync(P_BOX_FITTER,P_ELEVATOR,P_INPUT_BOX,P_INPUT_PALLET,P_RETRACTABLE_FLOOR): Composed automaton</meta>
 </model>

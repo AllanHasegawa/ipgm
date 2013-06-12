@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model version="2.1" type="FSA" id="SUP_IBOX_FLOOR">
+<data>
+	<state id="0">
+		<properties>
+			<initial />
+			<marked />
+		</properties>
+		<name>((1,1),(1,(1,1)))</name>
+	</state>
+	<state id="1">
+		<properties/>
+		<name>((2,1),(1,(2,1)))</name>
+	</state>
+	<state id="3">
+		<properties>
+			<marked />
+		</properties>
+		<name>((1,1),(2,(1,1)))</name>
+	</state>
+	<state id="6">
+		<properties/>
+		<name>((1,2),(2,(1,2)))</name>
+	</state>
+	<state id="8">
+		<properties/>
+		<name>((1,3),(1,(1,3)))</name>
+	</state>
+	<state id="9">
+		<properties/>
+		<name>((2,3),(1,(2,3)))</name>
+	</state>
+	<state id="10">
+		<properties/>
+		<name>((1,4),(1,(1,4)))</name>
+	</state>
+	<state id="11">
+		<properties/>
+		<name>((1,3),(2,(1,3)))</name>
+	</state>
+	<state id="12">
+		<properties/>
+		<name>((2,4),(1,(2,4)))</name>
+	</state>
+	<state id="14">
+		<properties/>
+		<name>((1,4),(2,(1,4)))</name>
+	</state>
+	<event id="1">
+		<properties>
+			<controllable />
+			<observable />
+		</properties>
+		<name>open_floor</name>
+	</event>
+	<event id="2">
+		<properties>
+			<observable />
+		</properties>
+		<name>end_close_floor</name>
+	</event>
+	<event id="3">
+		<properties>
+			<controllable />
+			<observable />
+		</properties>
+		<name>input_box</name>
+	</event>
+	<event id="4">
+		<properties>
+			<controllable />
+			<observable />
+		</properties>
+		<name>close_floor</name>
+	</event>
+	<event id="5">
+		<properties>
+			<observable />
+		</properties>
+		<name>end_open_floor</name>
+	</event>
+	<event id="6">
+		<properties>
+			<observable />
+		</properties>
+		<name>end_input_box</name>
+	</event>
+	<transition id="1" source="0" target="1" event="3">
+	</transition>
+	<transition id="3" source="1" target="3" event="6">
+	</transition>
+	<transition id="7" source="3" target="6" event="4">
+	</transition>
+	<transition id="11" source="6" target="8" event="2">
+	</transition>
+	<transition id="13" source="8" target="9" event="3">
+	</transition>
+	<transition id="14" source="8" target="10" event="1">
+	</transition>
+	<transition id="15" source="9" target="11" event="6">
+	</transition>
+	<transition id="16" source="9" target="12" event="1">
+	</transition>
+	<transition id="17" source="10" target="12" event="3">
+	</transition>
+	<transition id="18" source="10" target="0" event="5">
+	</transition>
+	<transition id="20" source="11" target="14" event="1">
+	</transition>
+	<transition id="21" source="12" target="14" event="6">
+	</transition>
+	<transition id="22" source="12" target="1" event="5">
+	</transition>
+	<transition id="25" source="14" target="3" event="5">
+	</transition>
+</data>
+<meta tag="layout" version="2.1">
+	<font size="12.0"/>
+	<layout uniformnodes="false"/>
+	<state id="0">
+		<circle r="56.0" x="84.0" y="116.0" />
+		<arrow x="74.0" y="0.0" />
+	</state>
+	<state id="1">
+		<circle r="56.0" x="234.0" y="116.0" />
+		<arrow x="1.0" y="0.0" />
+	</state>
+	<state id="3">
+		<circle r="56.0" x="384.0" y="116.0" />
+		<arrow x="1.0" y="0.0" />
+	</state>
+	<state id="6">
+		<circle r="56.0" x="534.0" y="116.0" />
+		<arrow x="1.0" y="0.0" />
+	</state>
+	<state id="8">
+		<circle r="56.0" x="684.0" y="116.0" />
+		<arrow x="1.0" y="0.0" />
+	</state>
+	<state id="9">
+		<circle r="56.0" x="834.0" y="66.0" />
+		<arrow x="1.0" y="0.0" />
+	</state>
+	<state id="10">
+		<circle r="56.0" x="834.0" y="166.0" />
+		<arrow x="1.0" y="0.0" />
+	</state>
+	<state id="11">
+		<circle r="56.0" x="984.0" y="66.0" />
+		<arrow x="1.0" y="0.0" />
+	</state>
+	<state id="12">
+		<circle r="56.0" x="984.0" y="166.0" />
+		<arrow x="1.0" y="0.0" />
+	</state>
+	<state id="14">
+		<circle r="56.0" x="1134.0" y="116.0" />
+		<arrow x="1.0" y="0.0" />
+	</state>
+	<transition id="1">
+		<bezier x1="84.0" y1="116.0" x2="234.0" y2="116.0" ctrlx1="134.0" ctrly1="116.0" ctrlx2="184.0" ctrly2="116.0" />
+		<label x="5.0" y="5.0" />
+	</transition>
+	<transition id="3">
+		<bezier x1="234.0" y1="116.0" x2="384.0" y2="116.0" ctrlx1="284.0" ctrly1="116.0" ctrlx2="334.0" ctrly2="116.0" />
+		<label x="5.0" y="5.0" />
+	</transition>
+	<transition id="7">
+		<bezier x1="384.0" y1="116.0" x2="534.0" y2="116.0" ctrlx1="434.0" ctrly1="116.0" ctrlx2="484.0" ctrly2="116.0" />
+		<label x="5.0" y="5.0" />
+	</transition>
+	<transition id="11">
+		<bezier x1="534.0" y1="116.0" x2="684.0" y2="116.0" ctrlx1="584.0" ctrly1="116.0" ctrlx2="634.0" ctrly2="116.0" />
+		<label x="5.0" y="5.0" />
+	</transition>
+	<transition id="13">
+		<bezier x1="684.0" y1="116.0" x2="834.0" y2="66.0" ctrlx1="734.0" ctrly1="99.33333587646484" ctrlx2="784.0" ctrly2="82.66666412353516" />
+		<label x="5.0" y="5.0" />
+	</transition>
+	<transition id="14">
+		<bezier x1="684.0" y1="116.0" x2="834.0" y2="166.0" ctrlx1="734.0" ctrly1="132.6666717529297" ctrlx2="784.0" ctrly2="149.3333282470703" />
+		<label x="5.0" y="5.0" />
+	</transition>
+	<transition id="15">
+		<bezier x1="834.0" y1="66.0" x2="984.0" y2="66.0" ctrlx1="884.0" ctrly1="66.0" ctrlx2="934.0" ctrly2="66.0" />
+		<label x="5.0" y="5.0" />
+	</transition>
+	<transition id="16">
+		<bezier x1="834.0" y1="66.0" x2="984.0" y2="166.0" ctrlx1="884.0" ctrly1="99.33332824707031" ctrlx2="934.0" ctrly2="132.6666717529297" />
+		<label x="5.0" y="5.0" />
+	</transition>
+	<transition id="17">
+		<bezier x1="834.0" y1="166.0" x2="984.0" y2="166.0" ctrlx1="884.0" ctrly1="166.0" ctrlx2="934.0" ctrly2="166.0" />
+		<label x="5.0" y="5.0" />
+	</transition>
+	<transition id="18">
+		<bezier x1="834.0" y1="166.0" x2="84.0" y2="116.0" ctrlx1="584.0" ctrly1="149.3333282470703" ctrlx2="334.0" ctrly2="132.6666717529297" />
+		<label x="5.0" y="5.0" />
+	</transition>
+	<transition id="20">
+		<bezier x1="984.0" y1="66.0" x2="1134.0" y2="116.0" ctrlx1="1034.0" ctrly1="82.66666412353516" ctrlx2="1084.0" ctrly2="99.33333587646484" />
+		<label x="5.0" y="5.0" />
+	</transition>
+	<transition id="21">
+		<bezier x1="984.0" y1="166.0" x2="1134.0" y2="116.0" ctrlx1="1034.0" ctrly1="149.3333282470703" ctrlx2="1084.0" ctrly2="132.6666717529297" />
+		<label x="5.0" y="5.0" />
+	</transition>
+	<transition id="22">
+		<bezier x1="984.0" y1="166.0" x2="234.0" y2="116.0" ctrlx1="734.0" ctrly1="149.3333282470703" ctrlx2="484.0" ctrly2="132.6666717529297" />
+		<label x="5.0" y="5.0" />
+	</transition>
+	<transition id="25">
+		<bezier x1="1134.0" y1="116.0" x2="384.0" y2="116.0" ctrlx1="884.0" ctrly1="116.0" ctrlx2="634.0" ctrly2="116.0" />
+		<label x="5.0" y="5.0" />
+	</transition>
+</meta>
+<meta tag="annotation" version="3">supcon(S_IBOX_FLOOR,K_IBOX_FLOOR): Supervisor</meta>
+</model>
