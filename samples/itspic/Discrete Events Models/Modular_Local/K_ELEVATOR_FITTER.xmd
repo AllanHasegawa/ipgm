@@ -1,0 +1,1035 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model version="2.1" type="FSA" id="K_ELEVATOR_FITTER">
+<data>
+	<state id="0">
+		<properties>
+			<initial />
+			<marked />
+		</properties>
+		<name>(1,1)</name>
+	</state>
+	<state id="1">
+		<properties/>
+		<name>(1,4)</name>
+	</state>
+	<state id="2">
+		<properties/>
+		<name>(1,2)</name>
+	</state>
+	<state id="3">
+		<properties/>
+		<name>(1,5)</name>
+	</state>
+	<state id="4">
+		<properties/>
+		<name>(1,6)</name>
+	</state>
+	<state id="5">
+		<properties/>
+		<name>(1,3)</name>
+	</state>
+	<state id="6">
+		<properties/>
+		<name>(1,12)</name>
+	</state>
+	<state id="7">
+		<properties/>
+		<name>(1,8)</name>
+	</state>
+	<state id="8">
+		<properties/>
+		<name>(1,13)</name>
+	</state>
+	<state id="9">
+		<properties/>
+		<name>(1,11)</name>
+	</state>
+	<state id="10">
+		<properties/>
+		<name>(1,9)</name>
+	</state>
+	<state id="11">
+		<properties>
+			<marked />
+		</properties>
+		<name>(1,7)</name>
+	</state>
+	<state id="12">
+		<properties>
+			<marked />
+		</properties>
+		<name>(2,10)</name>
+	</state>
+	<state id="13">
+		<properties/>
+		<name>(1,22)</name>
+	</state>
+	<state id="14">
+		<properties/>
+		<name>(1,17)</name>
+	</state>
+	<state id="15">
+		<properties/>
+		<name>(1,23)</name>
+	</state>
+	<state id="16">
+		<properties/>
+		<name>(1,21)</name>
+	</state>
+	<state id="17">
+		<properties/>
+		<name>(1,19)</name>
+	</state>
+	<state id="18">
+		<properties/>
+		<name>(1,16)</name>
+	</state>
+	<state id="19">
+		<properties/>
+		<name>(2,18)</name>
+	</state>
+	<state id="20">
+		<properties/>
+		<name>(2,6)</name>
+	</state>
+	<state id="21">
+		<properties/>
+		<name>(2,5)</name>
+	</state>
+	<state id="22">
+		<properties/>
+		<name>(2,2)</name>
+	</state>
+	<state id="23">
+		<properties/>
+		<name>(1,26)</name>
+	</state>
+	<state id="24">
+		<properties/>
+		<name>(1,31)</name>
+	</state>
+	<state id="25">
+		<properties/>
+		<name>(1,30)</name>
+	</state>
+	<state id="26">
+		<properties/>
+		<name>(1,28)</name>
+	</state>
+	<state id="27">
+		<properties/>
+		<name>(1,25)</name>
+	</state>
+	<state id="28">
+		<properties/>
+		<name>(2,27)</name>
+	</state>
+	<state id="29">
+		<properties/>
+		<name>(2,11)</name>
+	</state>
+	<state id="30">
+		<properties/>
+		<name>(2,13)</name>
+	</state>
+	<state id="31">
+		<properties/>
+		<name>(2,8)</name>
+	</state>
+	<state id="32">
+		<properties/>
+		<name>(1,33)</name>
+	</state>
+	<state id="33">
+		<properties/>
+		<name>(2,34)</name>
+	</state>
+	<state id="34">
+		<properties/>
+		<name>(2,21)</name>
+	</state>
+	<state id="35">
+		<properties/>
+		<name>(2,23)</name>
+	</state>
+	<state id="36">
+		<properties/>
+		<name>(2,17)</name>
+	</state>
+	<state id="37">
+		<properties/>
+		<name>(2,30)</name>
+	</state>
+	<state id="38">
+		<properties/>
+		<name>(2,31)</name>
+	</state>
+	<state id="39">
+		<properties/>
+		<name>(2,26)</name>
+	</state>
+	<state id="40">
+		<properties>
+			<marked />
+		</properties>
+		<name>(3,10)</name>
+	</state>
+	<state id="41">
+		<properties/>
+		<name>(3,6)</name>
+	</state>
+	<state id="42">
+		<properties/>
+		<name>(3,5)</name>
+	</state>
+	<state id="43">
+		<properties/>
+		<name>(3,2)</name>
+	</state>
+	<state id="44">
+		<properties/>
+		<name>(3,18)</name>
+	</state>
+	<state id="45">
+		<properties/>
+		<name>(3,11)</name>
+	</state>
+	<state id="46">
+		<properties>
+			<marked />
+		</properties>
+		<name>(4,15)</name>
+	</state>
+	<state id="47">
+		<properties/>
+		<name>(3,13)</name>
+	</state>
+	<state id="48">
+		<properties/>
+		<name>(3,8)</name>
+	</state>
+	<state id="49">
+		<properties/>
+		<name>(3,27)</name>
+	</state>
+	<state id="50">
+		<properties/>
+		<name>(3,21)</name>
+	</state>
+	<state id="51">
+		<properties/>
+		<name>(4,20)</name>
+	</state>
+	<state id="52">
+		<properties/>
+		<name>(4,2)</name>
+	</state>
+	<state id="53">
+		<properties/>
+		<name>(4,3)</name>
+	</state>
+	<state id="54">
+		<properties/>
+		<name>(4,5)</name>
+	</state>
+	<state id="55">
+		<properties/>
+		<name>(3,23)</name>
+	</state>
+	<state id="56">
+		<properties/>
+		<name>(3,17)</name>
+	</state>
+	<state id="57">
+		<properties/>
+		<name>(3,34)</name>
+	</state>
+	<state id="58">
+		<properties/>
+		<name>(3,30)</name>
+	</state>
+	<state id="59">
+		<properties/>
+		<name>(4,29)</name>
+	</state>
+	<state id="60">
+		<properties/>
+		<name>(4,8)</name>
+	</state>
+	<state id="61">
+		<properties/>
+		<name>(4,9)</name>
+	</state>
+	<state id="62">
+		<properties/>
+		<name>(4,13)</name>
+	</state>
+	<state id="63">
+		<properties/>
+		<name>(3,31)</name>
+	</state>
+	<state id="64">
+		<properties/>
+		<name>(3,26)</name>
+	</state>
+	<state id="65">
+		<properties/>
+		<name>(4,35)</name>
+	</state>
+	<state id="66">
+		<properties/>
+		<name>(4,17)</name>
+	</state>
+	<state id="67">
+		<properties/>
+		<name>(4,19)</name>
+	</state>
+	<state id="68">
+		<properties/>
+		<name>(4,23)</name>
+	</state>
+	<state id="69">
+		<properties/>
+		<name>(4,26)</name>
+	</state>
+	<state id="70">
+		<properties/>
+		<name>(4,28)</name>
+	</state>
+	<state id="71">
+		<properties/>
+		<name>(4,31)</name>
+	</state>
+	<state id="72">
+		<properties>
+			<marked />
+		</properties>
+		<name>(5,15)</name>
+	</state>
+	<state id="73">
+		<properties/>
+		<name>(5,2)</name>
+	</state>
+	<state id="74">
+		<properties/>
+		<name>(5,3)</name>
+	</state>
+	<state id="75">
+		<properties/>
+		<name>(5,5)</name>
+	</state>
+	<state id="76">
+		<properties/>
+		<name>(5,20)</name>
+	</state>
+	<state id="77">
+		<properties/>
+		<name>(5,8)</name>
+	</state>
+	<state id="78">
+		<properties/>
+		<name>(5,9)</name>
+	</state>
+	<state id="79">
+		<properties/>
+		<name>(5,13)</name>
+	</state>
+	<state id="80">
+		<properties>
+			<marked />
+		</properties>
+		<name>(6,14)</name>
+	</state>
+	<state id="81">
+		<properties/>
+		<name>(5,29)</name>
+	</state>
+	<state id="82">
+		<properties/>
+		<name>(5,17)</name>
+	</state>
+	<state id="83">
+		<properties/>
+		<name>(5,19)</name>
+	</state>
+	<state id="84">
+		<properties/>
+		<name>(5,23)</name>
+	</state>
+	<state id="85">
+		<properties/>
+		<name>(6,24)</name>
+	</state>
+	<state id="86">
+		<properties/>
+		<name>(6,3)</name>
+	</state>
+	<state id="87">
+		<properties/>
+		<name>(6,6)</name>
+	</state>
+	<state id="88">
+		<properties/>
+		<name>(6,2)</name>
+	</state>
+	<state id="89">
+		<properties/>
+		<name>(5,35)</name>
+	</state>
+	<state id="90">
+		<properties/>
+		<name>(5,26)</name>
+	</state>
+	<state id="91">
+		<properties/>
+		<name>(5,28)</name>
+	</state>
+	<state id="92">
+		<properties/>
+		<name>(5,31)</name>
+	</state>
+	<state id="93">
+		<properties/>
+		<name>(6,32)</name>
+	</state>
+	<state id="94">
+		<properties/>
+		<name>(6,9)</name>
+	</state>
+	<state id="95">
+		<properties/>
+		<name>(6,11)</name>
+	</state>
+	<state id="96">
+		<properties/>
+		<name>(6,8)</name>
+	</state>
+	<state id="97">
+		<properties/>
+		<name>(6,36)</name>
+	</state>
+	<state id="98">
+		<properties/>
+		<name>(6,19)</name>
+	</state>
+	<state id="99">
+		<properties/>
+		<name>(6,21)</name>
+	</state>
+	<state id="100">
+		<properties/>
+		<name>(6,17)</name>
+	</state>
+	<state id="101">
+		<properties/>
+		<name>(6,28)</name>
+	</state>
+	<state id="102">
+		<properties/>
+		<name>(6,30)</name>
+	</state>
+	<state id="103">
+		<properties/>
+		<name>(6,26)</name>
+	</state>
+	<state id="104">
+		<properties>
+			<marked />
+		</properties>
+		<name>(7,14)</name>
+	</state>
+	<state id="105">
+		<properties/>
+		<name>(7,3)</name>
+	</state>
+	<state id="106">
+		<properties/>
+		<name>(7,6)</name>
+	</state>
+	<state id="107">
+		<properties/>
+		<name>(7,2)</name>
+	</state>
+	<state id="108">
+		<properties/>
+		<name>(7,24)</name>
+	</state>
+	<state id="109">
+		<properties/>
+		<name>(7,9)</name>
+	</state>
+	<state id="110">
+		<properties/>
+		<name>(7,11)</name>
+	</state>
+	<state id="111">
+		<properties/>
+		<name>(7,8)</name>
+	</state>
+	<state id="112">
+		<properties/>
+		<name>(7,32)</name>
+	</state>
+	<state id="113">
+		<properties/>
+		<name>(7,19)</name>
+	</state>
+	<state id="114">
+		<properties/>
+		<name>(7,21)</name>
+	</state>
+	<state id="115">
+		<properties/>
+		<name>(7,17)</name>
+	</state>
+	<state id="116">
+		<properties/>
+		<name>(7,36)</name>
+	</state>
+	<state id="117">
+		<properties/>
+		<name>(7,28)</name>
+	</state>
+	<state id="118">
+		<properties/>
+		<name>(7,30)</name>
+	</state>
+	<state id="119">
+		<properties/>
+		<name>(7,26)</name>
+	</state>
+	<event id="1">
+		<properties>
+			<controllable />
+			<observable />
+		</properties>
+		<name>move_3</name>
+	</event>
+	<event id="2">
+		<properties>
+			<controllable />
+			<observable />
+		</properties>
+		<name>fit_box</name>
+	</event>
+	<event id="3">
+		<properties>
+			<controllable />
+			<observable />
+		</properties>
+		<name>move_2</name>
+	</event>
+	<event id="4">
+		<properties>
+			<controllable />
+			<observable />
+		</properties>
+		<name>move_1</name>
+	</event>
+	<event id="5">
+		<properties>
+			<controllable />
+			<observable />
+		</properties>
+		<name>move_0</name>
+	</event>
+	<event id="6">
+		<properties>
+			<controllable />
+			<observable />
+		</properties>
+		<name>release_box</name>
+	</event>
+	<event id="7">
+		<properties>
+			<observable />
+		</properties>
+		<name>end_move_3</name>
+	</event>
+	<event id="8">
+		<properties>
+			<observable />
+		</properties>
+		<name>end_move_2</name>
+	</event>
+	<event id="9">
+		<properties>
+			<observable />
+		</properties>
+		<name>end_move_m</name>
+	</event>
+	<event id="10">
+		<properties>
+			<observable />
+		</properties>
+		<name>end_move_1</name>
+	</event>
+	<event id="11">
+		<properties>
+			<observable />
+		</properties>
+		<name>end_fit_box</name>
+	</event>
+	<event id="12">
+		<properties>
+			<observable />
+		</properties>
+		<name>end_move_0</name>
+	</event>
+	<event id="13">
+		<properties>
+			<observable />
+		</properties>
+		<name>end_release_box</name>
+	</event>
+	<transition id="1" source="0" target="1" event="2">
+	</transition>
+	<transition id="2" source="0" target="2" event="5">
+	</transition>
+	<transition id="3" source="0" target="3" event="4">
+	</transition>
+	<transition id="4" source="0" target="4" event="3">
+	</transition>
+	<transition id="5" source="0" target="5" event="1">
+	</transition>
+	<transition id="6" source="1" target="6" event="11">
+	</transition>
+	<transition id="7" source="1" target="7" event="5">
+	</transition>
+	<transition id="8" source="1" target="8" event="4">
+	</transition>
+	<transition id="9" source="1" target="9" event="3">
+	</transition>
+	<transition id="10" source="1" target="10" event="1">
+	</transition>
+	<transition id="11" source="2" target="7" event="2">
+	</transition>
+	<transition id="12" source="2" target="11" event="12">
+	</transition>
+	<transition id="13" source="3" target="8" event="2">
+	</transition>
+	<transition id="14" source="4" target="9" event="2">
+	</transition>
+	<transition id="15" source="5" target="10" event="2">
+	</transition>
+	<transition id="16" source="5" target="12" event="7">
+	</transition>
+	<transition id="17" source="6" target="13" event="6">
+	</transition>
+	<transition id="18" source="6" target="14" event="5">
+	</transition>
+	<transition id="19" source="6" target="15" event="4">
+	</transition>
+	<transition id="20" source="6" target="16" event="3">
+	</transition>
+	<transition id="21" source="6" target="17" event="1">
+	</transition>
+	<transition id="22" source="7" target="14" event="11">
+	</transition>
+	<transition id="23" source="7" target="18" event="12">
+	</transition>
+	<transition id="24" source="8" target="15" event="11">
+	</transition>
+	<transition id="25" source="9" target="16" event="11">
+	</transition>
+	<transition id="26" source="10" target="17" event="11">
+	</transition>
+	<transition id="27" source="10" target="19" event="7">
+	</transition>
+	<transition id="28" source="11" target="18" event="2">
+	</transition>
+	<transition id="29" source="11" target="5" event="1">
+	</transition>
+	<transition id="30" source="11" target="4" event="3">
+	</transition>
+	<transition id="31" source="11" target="3" event="4">
+	</transition>
+	<transition id="32" source="12" target="19" event="2">
+	</transition>
+	<transition id="33" source="12" target="20" event="3">
+	</transition>
+	<transition id="34" source="12" target="21" event="4">
+	</transition>
+	<transition id="35" source="12" target="22" event="5">
+	</transition>
+	<transition id="36" source="13" target="23" event="5">
+	</transition>
+	<transition id="37" source="13" target="24" event="4">
+	</transition>
+	<transition id="38" source="13" target="25" event="3">
+	</transition>
+	<transition id="39" source="13" target="26" event="1">
+	</transition>
+	<transition id="40" source="14" target="23" event="6">
+	</transition>
+	<transition id="41" source="14" target="27" event="12">
+	</transition>
+	<transition id="42" source="15" target="24" event="6">
+	</transition>
+	<transition id="43" source="16" target="25" event="6">
+	</transition>
+	<transition id="44" source="17" target="26" event="6">
+	</transition>
+	<transition id="45" source="17" target="28" event="7">
+	</transition>
+	<transition id="46" source="18" target="27" event="11">
+	</transition>
+	<transition id="47" source="18" target="10" event="1">
+	</transition>
+	<transition id="48" source="18" target="9" event="3">
+	</transition>
+	<transition id="49" source="18" target="8" event="4">
+	</transition>
+	<transition id="50" source="19" target="28" event="11">
+	</transition>
+	<transition id="51" source="19" target="29" event="3">
+	</transition>
+	<transition id="52" source="19" target="30" event="4">
+	</transition>
+	<transition id="53" source="19" target="31" event="5">
+	</transition>
+	<transition id="54" source="20" target="29" event="2">
+	</transition>
+	<transition id="55" source="21" target="30" event="2">
+	</transition>
+	<transition id="56" source="22" target="31" event="2">
+	</transition>
+	<transition id="57" source="23" target="32" event="12">
+	</transition>
+	<transition id="58" source="26" target="33" event="7">
+	</transition>
+	<transition id="59" source="27" target="32" event="6">
+	</transition>
+	<transition id="60" source="27" target="17" event="1">
+	</transition>
+	<transition id="61" source="27" target="16" event="3">
+	</transition>
+	<transition id="62" source="27" target="15" event="4">
+	</transition>
+	<transition id="63" source="28" target="33" event="6">
+	</transition>
+	<transition id="64" source="28" target="34" event="3">
+	</transition>
+	<transition id="65" source="28" target="35" event="4">
+	</transition>
+	<transition id="66" source="28" target="36" event="5">
+	</transition>
+	<transition id="67" source="29" target="34" event="11">
+	</transition>
+	<transition id="68" source="30" target="35" event="11">
+	</transition>
+	<transition id="69" source="31" target="36" event="11">
+	</transition>
+	<transition id="70" source="32" target="26" event="1">
+	</transition>
+	<transition id="71" source="32" target="25" event="3">
+	</transition>
+	<transition id="72" source="32" target="24" event="4">
+	</transition>
+	<transition id="73" source="33" target="37" event="3">
+	</transition>
+	<transition id="74" source="33" target="38" event="4">
+	</transition>
+	<transition id="75" source="33" target="39" event="5">
+	</transition>
+	<transition id="76" source="33" target="40" event="13">
+	</transition>
+	<transition id="77" source="34" target="37" event="6">
+	</transition>
+	<transition id="78" source="35" target="38" event="6">
+	</transition>
+	<transition id="79" source="36" target="39" event="6">
+	</transition>
+	<transition id="80" source="37" target="41" event="13">
+	</transition>
+	<transition id="81" source="38" target="42" event="13">
+	</transition>
+	<transition id="82" source="39" target="43" event="13">
+	</transition>
+	<transition id="83" source="40" target="44" event="2">
+	</transition>
+	<transition id="84" source="40" target="41" event="3">
+	</transition>
+	<transition id="85" source="40" target="42" event="4">
+	</transition>
+	<transition id="86" source="40" target="43" event="5">
+	</transition>
+	<transition id="87" source="41" target="45" event="2">
+	</transition>
+	<transition id="88" source="41" target="46" event="8">
+	</transition>
+	<transition id="89" source="42" target="47" event="2">
+	</transition>
+	<transition id="90" source="43" target="48" event="2">
+	</transition>
+	<transition id="91" source="44" target="49" event="11">
+	</transition>
+	<transition id="92" source="44" target="45" event="3">
+	</transition>
+	<transition id="93" source="44" target="47" event="4">
+	</transition>
+	<transition id="94" source="44" target="48" event="5">
+	</transition>
+	<transition id="95" source="45" target="50" event="11">
+	</transition>
+	<transition id="96" source="45" target="51" event="8">
+	</transition>
+	<transition id="97" source="46" target="51" event="2">
+	</transition>
+	<transition id="98" source="46" target="52" event="5">
+	</transition>
+	<transition id="99" source="46" target="53" event="1">
+	</transition>
+	<transition id="100" source="46" target="54" event="4">
+	</transition>
+	<transition id="101" source="47" target="55" event="11">
+	</transition>
+	<transition id="102" source="48" target="56" event="11">
+	</transition>
+	<transition id="103" source="49" target="57" event="6">
+	</transition>
+	<transition id="104" source="49" target="50" event="3">
+	</transition>
+	<transition id="105" source="49" target="55" event="4">
+	</transition>
+	<transition id="106" source="49" target="56" event="5">
+	</transition>
+	<transition id="107" source="50" target="58" event="6">
+	</transition>
+	<transition id="108" source="50" target="59" event="8">
+	</transition>
+	<transition id="109" source="51" target="59" event="11">
+	</transition>
+	<transition id="110" source="51" target="60" event="5">
+	</transition>
+	<transition id="111" source="51" target="61" event="1">
+	</transition>
+	<transition id="112" source="51" target="62" event="4">
+	</transition>
+	<transition id="113" source="52" target="60" event="2">
+	</transition>
+	<transition id="114" source="53" target="61" event="2">
+	</transition>
+	<transition id="115" source="54" target="62" event="2">
+	</transition>
+	<transition id="116" source="55" target="63" event="6">
+	</transition>
+	<transition id="117" source="56" target="64" event="6">
+	</transition>
+	<transition id="118" source="57" target="58" event="3">
+	</transition>
+	<transition id="119" source="57" target="63" event="4">
+	</transition>
+	<transition id="120" source="57" target="64" event="5">
+	</transition>
+	<transition id="121" source="58" target="65" event="8">
+	</transition>
+	<transition id="122" source="59" target="65" event="6">
+	</transition>
+	<transition id="123" source="59" target="66" event="5">
+	</transition>
+	<transition id="124" source="59" target="67" event="1">
+	</transition>
+	<transition id="125" source="59" target="68" event="4">
+	</transition>
+	<transition id="126" source="60" target="66" event="11">
+	</transition>
+	<transition id="127" source="61" target="67" event="11">
+	</transition>
+	<transition id="128" source="62" target="68" event="11">
+	</transition>
+	<transition id="129" source="65" target="69" event="5">
+	</transition>
+	<transition id="130" source="65" target="70" event="1">
+	</transition>
+	<transition id="131" source="65" target="71" event="4">
+	</transition>
+	<transition id="132" source="65" target="72" event="13">
+	</transition>
+	<transition id="133" source="66" target="69" event="6">
+	</transition>
+	<transition id="134" source="67" target="70" event="6">
+	</transition>
+	<transition id="135" source="68" target="71" event="6">
+	</transition>
+	<transition id="136" source="69" target="73" event="13">
+	</transition>
+	<transition id="137" source="70" target="74" event="13">
+	</transition>
+	<transition id="138" source="71" target="75" event="13">
+	</transition>
+	<transition id="139" source="72" target="76" event="2">
+	</transition>
+	<transition id="140" source="72" target="73" event="5">
+	</transition>
+	<transition id="141" source="72" target="74" event="1">
+	</transition>
+	<transition id="142" source="72" target="75" event="4">
+	</transition>
+	<transition id="143" source="73" target="77" event="2">
+	</transition>
+	<transition id="144" source="74" target="78" event="2">
+	</transition>
+	<transition id="145" source="75" target="79" event="2">
+	</transition>
+	<transition id="146" source="75" target="80" event="10">
+	</transition>
+	<transition id="147" source="76" target="81" event="11">
+	</transition>
+	<transition id="148" source="76" target="77" event="5">
+	</transition>
+	<transition id="149" source="76" target="78" event="1">
+	</transition>
+	<transition id="150" source="76" target="79" event="4">
+	</transition>
+	<transition id="151" source="77" target="82" event="11">
+	</transition>
+	<transition id="152" source="78" target="83" event="11">
+	</transition>
+	<transition id="153" source="79" target="84" event="11">
+	</transition>
+	<transition id="154" source="79" target="85" event="10">
+	</transition>
+	<transition id="155" source="80" target="85" event="2">
+	</transition>
+	<transition id="156" source="80" target="86" event="1">
+	</transition>
+	<transition id="157" source="80" target="87" event="3">
+	</transition>
+	<transition id="158" source="80" target="88" event="5">
+	</transition>
+	<transition id="159" source="81" target="89" event="6">
+	</transition>
+	<transition id="160" source="81" target="82" event="5">
+	</transition>
+	<transition id="161" source="81" target="83" event="1">
+	</transition>
+	<transition id="162" source="81" target="84" event="4">
+	</transition>
+	<transition id="163" source="82" target="90" event="6">
+	</transition>
+	<transition id="164" source="83" target="91" event="6">
+	</transition>
+	<transition id="165" source="84" target="92" event="6">
+	</transition>
+	<transition id="166" source="84" target="93" event="10">
+	</transition>
+	<transition id="167" source="85" target="93" event="11">
+	</transition>
+	<transition id="168" source="85" target="94" event="1">
+	</transition>
+	<transition id="169" source="85" target="95" event="3">
+	</transition>
+	<transition id="170" source="85" target="96" event="5">
+	</transition>
+	<transition id="171" source="86" target="94" event="2">
+	</transition>
+	<transition id="172" source="87" target="95" event="2">
+	</transition>
+	<transition id="173" source="88" target="96" event="2">
+	</transition>
+	<transition id="174" source="89" target="90" event="5">
+	</transition>
+	<transition id="175" source="89" target="91" event="1">
+	</transition>
+	<transition id="176" source="89" target="92" event="4">
+	</transition>
+	<transition id="177" source="92" target="97" event="10">
+	</transition>
+	<transition id="178" source="93" target="97" event="6">
+	</transition>
+	<transition id="179" source="93" target="98" event="1">
+	</transition>
+	<transition id="180" source="93" target="99" event="3">
+	</transition>
+	<transition id="181" source="93" target="100" event="5">
+	</transition>
+	<transition id="182" source="94" target="98" event="11">
+	</transition>
+	<transition id="183" source="95" target="99" event="11">
+	</transition>
+	<transition id="184" source="96" target="100" event="11">
+	</transition>
+	<transition id="185" source="97" target="101" event="1">
+	</transition>
+	<transition id="186" source="97" target="102" event="3">
+	</transition>
+	<transition id="187" source="97" target="103" event="5">
+	</transition>
+	<transition id="188" source="97" target="104" event="13">
+	</transition>
+	<transition id="189" source="98" target="101" event="6">
+	</transition>
+	<transition id="190" source="99" target="102" event="6">
+	</transition>
+	<transition id="191" source="100" target="103" event="6">
+	</transition>
+	<transition id="192" source="101" target="105" event="13">
+	</transition>
+	<transition id="193" source="102" target="106" event="13">
+	</transition>
+	<transition id="194" source="103" target="107" event="13">
+	</transition>
+	<transition id="195" source="104" target="108" event="2">
+	</transition>
+	<transition id="196" source="104" target="105" event="1">
+	</transition>
+	<transition id="197" source="104" target="106" event="3">
+	</transition>
+	<transition id="198" source="104" target="107" event="5">
+	</transition>
+	<transition id="199" source="105" target="109" event="2">
+	</transition>
+	<transition id="200" source="106" target="110" event="2">
+	</transition>
+	<transition id="201" source="107" target="111" event="2">
+	</transition>
+	<transition id="202" source="107" target="11" event="12">
+	</transition>
+	<transition id="203" source="108" target="112" event="11">
+	</transition>
+	<transition id="204" source="108" target="109" event="1">
+	</transition>
+	<transition id="205" source="108" target="110" event="3">
+	</transition>
+	<transition id="206" source="108" target="111" event="5">
+	</transition>
+	<transition id="207" source="109" target="113" event="11">
+	</transition>
+	<transition id="208" source="110" target="114" event="11">
+	</transition>
+	<transition id="209" source="111" target="115" event="11">
+	</transition>
+	<transition id="210" source="111" target="18" event="12">
+	</transition>
+	<transition id="211" source="112" target="116" event="6">
+	</transition>
+	<transition id="212" source="112" target="113" event="1">
+	</transition>
+	<transition id="213" source="112" target="114" event="3">
+	</transition>
+	<transition id="214" source="112" target="115" event="5">
+	</transition>
+	<transition id="215" source="113" target="117" event="6">
+	</transition>
+	<transition id="216" source="114" target="118" event="6">
+	</transition>
+	<transition id="217" source="115" target="119" event="6">
+	</transition>
+	<transition id="218" source="115" target="27" event="12">
+	</transition>
+	<transition id="219" source="116" target="117" event="1">
+	</transition>
+	<transition id="220" source="116" target="118" event="3">
+	</transition>
+	<transition id="221" source="116" target="119" event="5">
+	</transition>
+	<transition id="222" source="119" target="32" event="12">
+	</transition>
+</data>
+<meta tag="annotation" version="3">sync(E_ELEVATOR_FITTER,S_ELEVATOR_FITTER): Composed automaton</meta>
+<meta tag="layout" version="2.1">
+	<font size="12.0"/>
+	<layout uniformnodes="false"/>
+</meta>
+</model>

@@ -9,9 +9,20 @@
 	<model file="E_FITTER_FLOOR.xmd" position="6"/>
 	<model file="E_ELEVATOR_FITTER.xmd" position="7"/>
 	<model file="E_IBOX_FLOOR.xmd" position="8"/>
-	<model file="E_IBOX_FLOOR2.xmd" position="9"/>
-	<model file="PlantTotal.xmd" position="10"/>
-	<model file="SpecsTotal.xmd" position="11"/>
-	<model file="K.xmd" position="12"/>
-	<model file="MonoSupCon.xmd" position="13" selected="true"/>
+	<model file="PlantTotal.xmd" position="9"/>
+	<model file="SpecsTotal.xmd" position="10"/>
+	<model file="K.xmd" position="11"/>
+	<model file="MonoSupCon.xmd" position="12"/>
+	<model file="S_IPALLET_ELEVATOR.xmd" position="13"/>
+	<model file="S_ELEVATOR_FITTER.xmd" position="14"/>
+	<model file="S_IBOX_FLOOR.xmd" position="15"/>
+	<model file="S_FITTER_FLOOR.xmd" position="16"/>
+	<model file="K_ELEVATOR_FITTER.xmd" position="17"/>
+	<model file="K_FITTER_FLOOR.xmd" position="18"/>
+	<model file="K_IBOX_FLOOR.xmd" position="19"/>
+	<model file="K_IPALLET_ELEVATOR.xmd" position="20"/>
+	<model file="supcon(S_ELEVATOR_FITTER).xmd" position="21"/>
+	<model file="supcon(S_FITTER_FLOOR).xmd" position="22"/>
+	<model file="supcon(S_IBOX_FLOOR).xmd" position="23"/>
+	<model file="supcon(S_IPALLET_ELEVATOR).xmd" position="24" selected="true"/>
 </workspace>
