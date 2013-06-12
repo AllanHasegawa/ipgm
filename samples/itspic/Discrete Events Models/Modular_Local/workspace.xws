@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workspace version="3">
+	<model file="P_INPUT_BOX.xmd" position="0"/>
+	<model file="P_INPUT_PALLET.xmd" position="1"/>
+	<model file="P_ELEVATOR.xmd" position="2"/>
+	<model file="P_RETRACTABLE_FLOOR.xmd" position="3"/>
+	<model file="P_BOX_FITTER.xmd" position="4"/>
+	<model file="E_IPALLET_ELEVATOR.xmd" position="5"/>
+	<model file="E_FITTER_FLOOR.xmd" position="6"/>
+	<model file="E_ELEVATOR_FITTER.xmd" position="7"/>
+	<model file="E_IBOX_FLOOR.xmd" position="8"/>
+	<model file="E_IBOX_FLOOR2.xmd" position="9"/>
+	<model file="PlantTotal.xmd" position="10"/>
+	<model file="SpecsTotal.xmd" position="11"/>
+	<model file="K.xmd" position="12"/>
+	<model file="MonoSupCon.xmd" position="13" selected="true"/>
+</workspace>

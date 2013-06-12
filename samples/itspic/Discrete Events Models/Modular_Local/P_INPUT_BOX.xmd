@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model version="2.1" type="FSA" id="P_INPUT_BOX">
+<data>
+	<state id="1">
+		<properties>
+			<initial />
+			<marked />
+		</properties>
+		<name>1</name>
+	</state>
+	<state id="2">
+		<properties/>
+		<name>2</name>
+	</state>
+	<event id="2">
+		<properties>
+			<controllable />
+			<observable />
+		</properties>
+		<name>input_box</name>
+	</event>
+	<event id="3">
+		<properties>
+			<observable />
+		</properties>
+		<name>end_input_box</name>
+	</event>
+	<transition id="5" source="1" target="2" event="2">
+	</transition>
+	<transition id="6" source="2" target="1" event="3">
+	</transition>
+</data>
+<meta tag="layout" version="2.1">
+	<font size="12.0"/>
+	<layout uniformnodes="false"/>
+	<state id="1">
+		<circle r="18.0" x="37.0" y="57.0" />
+		<arrow x="36.0" y="0.0" />
+	</state>
+	<state id="2">
+		<circle r="18.0" x="279.0" y="55.0" />
+		<arrow x="1.0" y="0.0" />
+	</state>
+	<transition id="5">
+		<bezier x1="37.0" y1="57.0" x2="279.0" y2="55.0" ctrlx1="106.52606201171875" ctrly1="16.089305877685547" ctrlx2="208.80728149414062" ctrly2="15.2440185546875" />
+		<label x="-3.0" y="-13.0" />
+	</transition>
+	<transition id="6">
+		<bezier x1="279.0" y1="55.0" x2="37.0" y2="57.0" ctrlx1="209.47393798828125" ctrly1="95.91069030761719" ctrlx2="107.1927261352539" ctrly2="96.7559814453125" />
+		<label x="5.0" y="5.0" />
+	</transition>
+</meta>
+</model>
