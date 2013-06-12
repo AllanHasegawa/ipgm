@@ -1,0 +1,10 @@
+(START) |- 0
+0 -| (FINAL)
+0 close_floor 2
+2 end_close_floor 4
+4 fit_box 5
+5 end_fit_box 7
+7 open_floor 10
+10 end_open_floor 12
+12 release_box 13
+13 end_release_box 0
