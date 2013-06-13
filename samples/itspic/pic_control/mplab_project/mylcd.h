@@ -9,7 +9,6 @@
 #define	MYLCD_H
 #include "datatypes.h"
 #include "lcd.h"
-#include "itoa.h"
 
 char lcd_sensors_str[4];
 char lcd_actuators_str[4];
