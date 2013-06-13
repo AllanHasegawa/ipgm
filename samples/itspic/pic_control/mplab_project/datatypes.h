@@ -41,6 +41,11 @@ typedef union {
         unsigned char b08 : 1;
         unsigned char b09 : 1;
         unsigned char b10 : 1;
+        unsigned char b11 : 1;
+        unsigned char b12 : 1;
+        unsigned char b13 : 1;
+        unsigned char b14 : 1;
+        unsigned char b15 : 1;
     } id;
 } sensors;
 
