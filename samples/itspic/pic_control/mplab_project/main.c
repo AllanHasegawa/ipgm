@@ -1,10 +1,5 @@
-/* 
- * File:   main.c
- * Author: AranHase
- *
- * Created on June 9, 2013, 8:34 PM
- */
 #include <p18f452.h>
+#include <stdlib.h>
 #include "atraso.h"
 #include "mylcd.h"
 #include "datatypes.h"
@@ -84,9 +79,17 @@
 #define TURN_ON_A6 SERIAL_TX(136);A.bits.b6=1;
 #define TURN_ON_A7 SERIAL_TX(137);A.bits.b7=1;
 
-/**************************************************/
-/**************** Events Declarations *************/
-/**************************************************/
+#define RAISE_EVENT_N_END_MOVE_2 events_n_todo[events_n_todo_count++] = EVENT_N_END_MOVE_2;
+#define RAISE_EVENT_N_END_MOVE_3 events_n_todo[events_n_todo_count++] = EVENT_N_END_MOVE_3;
+#define RAISE_EVENT_N_END_MOVE_0 events_n_todo[events_n_todo_count++] = EVENT_N_END_MOVE_0;
+#define RAISE_EVENT_N_END_MOVE_1 events_n_todo[events_n_todo_count++] = EVENT_N_END_MOVE_1;
+#define RAISE_EVENT_N_END_OPEN_FLOOR events_n_todo[events_n_todo_count++] = EVENT_N_END_OPEN_FLOOR;
+#define RAISE_EVENT_N_END_CLOSE_FLOOR events_n_todo[events_n_todo_count++] = EVENT_N_END_CLOSE_FLOOR;
+#define RAISE_EVENT_N_END_FIT_BOX events_n_todo[events_n_todo_count++] = EVENT_N_END_FIT_BOX;
+#define RAISE_EVENT_N_END_INPUT_BOX events_n_todo[events_n_todo_count++] = EVENT_N_END_INPUT_BOX;
+#define RAISE_EVENT_N_END_RELEASE_BOX events_n_todo[events_n_todo_count++] = EVENT_N_END_RELEASE_BOX;
+#define RAISE_EVENT_N_END_INPUT_PALLET events_n_todo[events_n_todo_count++] = EVENT_N_END_INPUT_PALLET;
+
 #define EVENT_C_MOVE_0 0
 #define EVENT_C_MOVE_1 1
 #define EVENT_C_MOVE_2 2
@@ -108,22 +111,51 @@
 #define EVENT_N_END_RELEASE_BOX 18
 #define EVENT_N_END_INPUT_PALLET 19
 
-#define RAISE_EVENT_N_END_MOVE_2 events_n_todo[events_n_todo_count++] = EVENT_N_END_MOVE_2;
-#define RAISE_EVENT_N_END_MOVE_3 events_n_todo[events_n_todo_count++] = EVENT_N_END_MOVE_3;
-#define RAISE_EVENT_N_END_MOVE_0 events_n_todo[events_n_todo_count++] = EVENT_N_END_MOVE_0;
-#define RAISE_EVENT_N_END_MOVE_1 events_n_todo[events_n_todo_count++] = EVENT_N_END_MOVE_1;
-#define RAISE_EVENT_N_END_OPEN_FLOOR events_n_todo[events_n_todo_count++] = EVENT_N_END_OPEN_FLOOR;
-#define RAISE_EVENT_N_END_CLOSE_FLOOR events_n_todo[events_n_todo_count++] = EVENT_N_END_CLOSE_FLOOR;
-#define RAISE_EVENT_N_END_FIT_BOX events_n_todo[events_n_todo_count++] = EVENT_N_END_FIT_BOX;
-#define RAISE_EVENT_N_END_INPUT_BOX events_n_todo[events_n_todo_count++] = EVENT_N_END_INPUT_BOX;
-#define RAISE_EVENT_N_END_RELEASE_BOX events_n_todo[events_n_todo_count++] = EVENT_N_END_RELEASE_BOX;
-#define RAISE_EVENT_N_END_INPUT_PALLET events_n_todo[events_n_todo_count++] = EVENT_N_END_INPUT_PALLET;
 
+#define DES_EVENT_MOVE_0 des0.bits.b0 = 1;
+#define DES_EVENT_MOVE_1 des0.bits.b1 = 1;
+#define DES_EVENT_MOVE_2 des0.bits.b2 = 1;
+#define DES_EVENT_MOVE_3 des0.bits.b3 = 1;
+#define DES_EVENT_CLOSE_FLOOR des0.bits.b4 = 1;
+#define DES_EVENT_INPUT_PALLET des0.bits.b5 = 1;
+#define DES_EVENT_INPUT_BOX des0.bits.b6 = 1;
+#define DES_EVENT_FIT_BOX des0.bits.b7 = 1;
+#define DES_EVENT_OPEN_FLOOR des1.bits.b0 = 1;
+#define DES_EVENT_RELEASE_BOX des1.bits.b1 = 1;
+
+
+#define IS_DES_EVENT_MOVE_0 (des0.bits.b0 == 1)
+#define IS_DES_EVENT_MOVE_1 (des0.bits.b1 == 1)
+#define IS_DES_EVENT_MOVE_2 (des0.bits.b2 == 1)
+#define IS_DES_EVENT_MOVE_3 (des0.bits.b3 == 1)
+#define IS_DES_EVENT_CLOSE_FLOOR (des0.bits.b4 == 1)
+#define IS_DES_EVENT_INPUT_PALLET (des0.bits.b5 == 1)
+#define IS_DES_EVENT_INPUT_BOX (des0.bits.b6 == 1)
+#define IS_DES_EVENT_FIT_BOX (des0.bits.b7 == 1)
+#define IS_DES_EVENT_OPEN_FLOOR (des1.bits.b0 == 1)
+#define IS_DES_EVENT_RELEASE_BOX (des1.bits.b1 == 1)
+// keep state of sensors and actuators
 sensors S;
 bybit A;
+
+// keep a queue of events to be processed
 unsigned char events_n_todo[10];
 unsigned char events_n_todo_count;
+
+// used with TMR0 through all operations
 unsigned int seconds;
+
+// keep supervisors state
+unsigned char s0_s;
+unsigned char s1_s;
+unsigned char s2_s;
+unsigned char s3_s;
+
+// desabilitation variables
+bybit des0;
+bybit des1;
+
+
 
 // MEMORY BANK 0 (8bits)
 // 0-1 = input_pallet
@@ -451,6 +483,743 @@ void update_input_box(void) {
     }
 }
 
+unsigned char events_n_todo[10];
+unsigned char events_n_todo_count;
+
+void sup_response_step() {
+unsigned char i = 0;
+for (; i < events_n_todo_count;i++) {
+const unsigned char a_event = events_n_todo[i];
+if (s0_s == 1) {
+	if (a_event == EVENT_N_END_FIT_BOX) {
+		s0_s = 4;
+	}
+}
+else if (s0_s == 2) {
+	if (a_event == EVENT_N_END_MOVE_0) {
+		s0_s = 7;
+	}
+}
+else if (s0_s == 3) {
+	if (a_event == EVENT_N_END_MOVE_3) {
+		s0_s = 8;
+	}
+}
+else if (s0_s == 5) {
+	if (a_event == EVENT_N_END_FIT_BOX) {
+		s0_s = 9;
+	}
+	else if (a_event == EVENT_N_END_MOVE_0) {
+		s0_s = 11;
+	}
+}
+else if (s0_s == 6) {
+	if (a_event == EVENT_N_END_FIT_BOX) {
+		s0_s = 10;
+	}
+	else if (a_event == EVENT_N_END_MOVE_3) {
+		s0_s = 12;
+	}
+}
+else if (s0_s == 9) {
+	if (a_event == EVENT_N_END_MOVE_0) {
+		s0_s = 13;
+	}
+}
+else if (s0_s == 10) {
+	if (a_event == EVENT_N_END_MOVE_3) {
+		s0_s = 14;
+	}
+}
+else if (s0_s == 11) {
+	if (a_event == EVENT_N_END_FIT_BOX) {
+		s0_s = 13;
+	}
+}
+else if (s0_s == 12) {
+	if (a_event == EVENT_N_END_FIT_BOX) {
+		s0_s = 14;
+	}
+}
+else if (s0_s == 15) {
+	if (a_event == EVENT_N_END_RELEASE_BOX) {
+		s0_s = 16;
+	}
+}
+else if (s0_s == 17) {
+	if (a_event == EVENT_N_END_FIT_BOX) {
+		s0_s = 19;
+	}
+}
+else if (s0_s == 18) {
+	if (a_event == EVENT_N_END_MOVE_2) {
+		s0_s = 21;
+	}
+}
+else if (s0_s == 20) {
+	if (a_event == EVENT_N_END_FIT_BOX) {
+		s0_s = 22;
+	}
+	else if (a_event == EVENT_N_END_MOVE_2) {
+		s0_s = 23;
+	}
+}
+else if (s0_s == 22) {
+	if (a_event == EVENT_N_END_MOVE_2) {
+		s0_s = 24;
+	}
+}
+else if (s0_s == 23) {
+	if (a_event == EVENT_N_END_FIT_BOX) {
+		s0_s = 24;
+	}
+}
+else if (s0_s == 25) {
+	if (a_event == EVENT_N_END_RELEASE_BOX) {
+		s0_s = 26;
+	}
+}
+else if (s0_s == 27) {
+	if (a_event == EVENT_N_END_FIT_BOX) {
+		s0_s = 29;
+	}
+}
+else if (s0_s == 28) {
+	if (a_event == EVENT_N_END_MOVE_1) {
+		s0_s = 31;
+	}
+}
+else if (s0_s == 30) {
+	if (a_event == EVENT_N_END_FIT_BOX) {
+		s0_s = 32;
+	}
+	else if (a_event == EVENT_N_END_MOVE_1) {
+		s0_s = 33;
+	}
+}
+else if (s0_s == 32) {
+	if (a_event == EVENT_N_END_MOVE_1) {
+		s0_s = 34;
+	}
+}
+else if (s0_s == 33) {
+	if (a_event == EVENT_N_END_FIT_BOX) {
+		s0_s = 34;
+	}
+}
+else if (s0_s == 35) {
+	if (a_event == EVENT_N_END_RELEASE_BOX) {
+		s0_s = 36;
+	}
+}
+else if (s0_s == 37) {
+	if (a_event == EVENT_N_END_FIT_BOX) {
+		s0_s = 39;
+	}
+}
+else if (s0_s == 38) {
+	if (a_event == EVENT_N_END_MOVE_0) {
+		s0_s = 7;
+	}
+}
+else if (s0_s == 40) {
+	if (a_event == EVENT_N_END_FIT_BOX) {
+		s0_s = 41;
+	}
+	else if (a_event == EVENT_N_END_MOVE_0) {
+		s0_s = 11;
+	}
+}
+else if (s0_s == 41) {
+	if (a_event == EVENT_N_END_MOVE_0) {
+		s0_s = 13;
+	}
+}
+if (s1_s == 1) {
+	if (a_event == EVENT_N_END_CLOSE_FLOOR) {
+		s1_s = 2;
+	}
+}
+else if (s1_s == 3) {
+	if (a_event == EVENT_N_END_FIT_BOX) {
+		s1_s = 4;
+	}
+}
+else if (s1_s == 5) {
+	if (a_event == EVENT_N_END_OPEN_FLOOR) {
+		s1_s = 6;
+	}
+}
+else if (s1_s == 7) {
+	if (a_event == EVENT_N_END_RELEASE_BOX) {
+		s1_s = 0;
+	}
+}
+if (s2_s == 1) {
+	if (a_event == EVENT_N_END_INPUT_BOX) {
+		s2_s = 2;
+	}
+}
+else if (s2_s == 3) {
+	if (a_event == EVENT_N_END_CLOSE_FLOOR) {
+		s2_s = 4;
+	}
+}
+else if (s2_s == 5) {
+	if (a_event == EVENT_N_END_INPUT_BOX) {
+		s2_s = 7;
+	}
+}
+else if (s2_s == 6) {
+	if (a_event == EVENT_N_END_OPEN_FLOOR) {
+		s2_s = 0;
+	}
+}
+else if (s2_s == 8) {
+	if (a_event == EVENT_N_END_INPUT_BOX) {
+		s2_s = 9;
+	}
+	else if (a_event == EVENT_N_END_OPEN_FLOOR) {
+		s2_s = 1;
+	}
+}
+else if (s2_s == 9) {
+	if (a_event == EVENT_N_END_OPEN_FLOOR) {
+		s2_s = 2;
+	}
+}
+if (s3_s == 1) {
+	if (a_event == EVENT_N_END_MOVE_0) {
+		s3_s = 4;
+	}
+}
+else if (s3_s == 2) {
+	if (a_event == EVENT_N_END_MOVE_1) {
+		s3_s = 5;
+	}
+}
+else if (s3_s == 3) {
+	if (a_event == EVENT_N_END_MOVE_2) {
+		s3_s = 6;
+	}
+}
+else if (s3_s == 7) {
+	if (a_event == EVENT_N_END_INPUT_PALLET) {
+		s3_s = 8;
+	}
+}
+else if (s3_s == 9) {
+	if (a_event == EVENT_N_END_MOVE_3) {
+		s3_s = 10;
+	}
+}
+}
+events_n_todo_count = 0;
+}
+
+void des_step(void) {
+des0.byte = 0;
+des1.byte = 0;
+if (s0_s == 0) {
+DES_EVENT_RELEASE_BOX;
+DES_EVENT_MOVE_2;
+DES_EVENT_MOVE_1;
+}
+else if (s0_s == 1) {
+DES_EVENT_FIT_BOX;
+DES_EVENT_RELEASE_BOX;
+DES_EVENT_MOVE_2;
+DES_EVENT_MOVE_1;
+}
+else if (s0_s == 2) {
+DES_EVENT_MOVE_0;
+DES_EVENT_MOVE_3;
+DES_EVENT_RELEASE_BOX;
+DES_EVENT_MOVE_2;
+DES_EVENT_MOVE_1;
+}
+else if (s0_s == 3) {
+DES_EVENT_MOVE_0;
+DES_EVENT_MOVE_3;
+DES_EVENT_RELEASE_BOX;
+DES_EVENT_MOVE_2;
+DES_EVENT_MOVE_1;
+}
+else if (s0_s == 4) {
+DES_EVENT_FIT_BOX;
+DES_EVENT_RELEASE_BOX;
+DES_EVENT_MOVE_2;
+DES_EVENT_MOVE_1;
+}
+else if (s0_s == 7) {
+DES_EVENT_MOVE_0;
+DES_EVENT_RELEASE_BOX;
+DES_EVENT_MOVE_2;
+DES_EVENT_MOVE_1;
+}
+else if (s0_s == 8) {
+DES_EVENT_MOVE_0;
+DES_EVENT_MOVE_3;
+DES_EVENT_RELEASE_BOX;
+DES_EVENT_MOVE_2;
+DES_EVENT_MOVE_1;
+}
+else if (s0_s == 11) {
+DES_EVENT_FIT_BOX;
+DES_EVENT_MOVE_0;
+DES_EVENT_RELEASE_BOX;
+DES_EVENT_MOVE_2;
+DES_EVENT_MOVE_1;
+}
+else if (s0_s == 13) {
+DES_EVENT_FIT_BOX;
+DES_EVENT_MOVE_0;
+DES_EVENT_RELEASE_BOX;
+DES_EVENT_MOVE_2;
+DES_EVENT_MOVE_1;
+}
+else if (s0_s == 14) {
+DES_EVENT_FIT_BOX;
+DES_EVENT_MOVE_0;
+DES_EVENT_MOVE_3;
+DES_EVENT_MOVE_2;
+DES_EVENT_MOVE_1;
+}
+else if (s0_s == 16) {
+DES_EVENT_MOVE_0;
+DES_EVENT_MOVE_3;
+DES_EVENT_RELEASE_BOX;
+DES_EVENT_MOVE_1;
+}
+else if (s0_s == 17) {
+DES_EVENT_FIT_BOX;
+DES_EVENT_MOVE_0;
+DES_EVENT_MOVE_3;
+DES_EVENT_RELEASE_BOX;
+DES_EVENT_MOVE_1;
+}
+else if (s0_s == 18) {
+DES_EVENT_MOVE_0;
+DES_EVENT_MOVE_3;
+DES_EVENT_RELEASE_BOX;
+DES_EVENT_MOVE_2;
+DES_EVENT_MOVE_1;
+}
+else if (s0_s == 19) {
+DES_EVENT_FIT_BOX;
+DES_EVENT_MOVE_0;
+DES_EVENT_MOVE_3;
+DES_EVENT_RELEASE_BOX;
+DES_EVENT_MOVE_1;
+}
+else if (s0_s == 21) {
+DES_EVENT_MOVE_0;
+DES_EVENT_MOVE_3;
+DES_EVENT_RELEASE_BOX;
+DES_EVENT_MOVE_2;
+DES_EVENT_MOVE_1;
+}
+else if (s0_s == 24) {
+DES_EVENT_FIT_BOX;
+DES_EVENT_MOVE_0;
+DES_EVENT_MOVE_3;
+DES_EVENT_MOVE_2;
+DES_EVENT_MOVE_1;
+}
+else if (s0_s == 26) {
+DES_EVENT_MOVE_0;
+DES_EVENT_MOVE_3;
+DES_EVENT_RELEASE_BOX;
+DES_EVENT_MOVE_2;
+}
+else if (s0_s == 27) {
+DES_EVENT_FIT_BOX;
+DES_EVENT_MOVE_0;
+DES_EVENT_MOVE_3;
+DES_EVENT_RELEASE_BOX;
+DES_EVENT_MOVE_2;
+}
+else if (s0_s == 28) {
+DES_EVENT_MOVE_0;
+DES_EVENT_MOVE_3;
+DES_EVENT_RELEASE_BOX;
+DES_EVENT_MOVE_2;
+DES_EVENT_MOVE_1;
+}
+else if (s0_s == 29) {
+DES_EVENT_FIT_BOX;
+DES_EVENT_MOVE_0;
+DES_EVENT_MOVE_3;
+DES_EVENT_RELEASE_BOX;
+DES_EVENT_MOVE_2;
+}
+else if (s0_s == 31) {
+DES_EVENT_MOVE_0;
+DES_EVENT_MOVE_3;
+DES_EVENT_RELEASE_BOX;
+DES_EVENT_MOVE_2;
+DES_EVENT_MOVE_1;
+}
+else if (s0_s == 34) {
+DES_EVENT_FIT_BOX;
+DES_EVENT_MOVE_0;
+DES_EVENT_MOVE_3;
+DES_EVENT_MOVE_2;
+DES_EVENT_MOVE_1;
+}
+else if (s0_s == 36) {
+DES_EVENT_MOVE_3;
+DES_EVENT_RELEASE_BOX;
+DES_EVENT_MOVE_2;
+DES_EVENT_MOVE_1;
+}
+else if (s0_s == 37) {
+DES_EVENT_FIT_BOX;
+DES_EVENT_MOVE_3;
+DES_EVENT_RELEASE_BOX;
+DES_EVENT_MOVE_2;
+DES_EVENT_MOVE_1;
+}
+else if (s0_s == 38) {
+DES_EVENT_MOVE_0;
+DES_EVENT_MOVE_3;
+DES_EVENT_RELEASE_BOX;
+DES_EVENT_MOVE_2;
+DES_EVENT_MOVE_1;
+}
+else if (s0_s == 39) {
+DES_EVENT_FIT_BOX;
+DES_EVENT_MOVE_3;
+DES_EVENT_RELEASE_BOX;
+DES_EVENT_MOVE_2;
+DES_EVENT_MOVE_1;
+}
+if (s1_s == 0) {
+DES_EVENT_FIT_BOX;
+DES_EVENT_OPEN_FLOOR;
+DES_EVENT_RELEASE_BOX;
+}
+else if (s1_s == 2) {
+DES_EVENT_CLOSE_FLOOR;
+DES_EVENT_OPEN_FLOOR;
+DES_EVENT_RELEASE_BOX;
+}
+else if (s1_s == 4) {
+DES_EVENT_CLOSE_FLOOR;
+DES_EVENT_FIT_BOX;
+DES_EVENT_RELEASE_BOX;
+}
+else if (s1_s == 6) {
+DES_EVENT_CLOSE_FLOOR;
+DES_EVENT_FIT_BOX;
+DES_EVENT_OPEN_FLOOR;
+}
+if (s2_s == 0) {
+DES_EVENT_CLOSE_FLOOR;
+DES_EVENT_OPEN_FLOOR;
+}
+else if (s2_s == 2) {
+DES_EVENT_INPUT_BOX;
+DES_EVENT_OPEN_FLOOR;
+}
+else if (s2_s == 4) {
+DES_EVENT_CLOSE_FLOOR;
+}
+else if (s2_s == 5) {
+DES_EVENT_INPUT_BOX;
+DES_EVENT_CLOSE_FLOOR;
+}
+else if (s2_s == 6) {
+DES_EVENT_CLOSE_FLOOR;
+DES_EVENT_OPEN_FLOOR;
+}
+else if (s2_s == 7) {
+DES_EVENT_INPUT_BOX;
+DES_EVENT_CLOSE_FLOOR;
+}
+if (s3_s == 0) {
+DES_EVENT_INPUT_PALLET;
+DES_EVENT_MOVE_3;
+}
+else if (s3_s == 4) {
+DES_EVENT_MOVE_0;
+DES_EVENT_MOVE_1;
+DES_EVENT_MOVE_2;
+DES_EVENT_MOVE_3;
+}
+else if (s3_s == 5) {
+DES_EVENT_MOVE_1;
+DES_EVENT_INPUT_PALLET;
+DES_EVENT_MOVE_3;
+}
+else if (s3_s == 6) {
+DES_EVENT_MOVE_2;
+DES_EVENT_INPUT_PALLET;
+DES_EVENT_MOVE_3;
+}
+else if (s3_s == 8) {
+DES_EVENT_MOVE_0;
+DES_EVENT_MOVE_1;
+DES_EVENT_MOVE_2;
+DES_EVENT_INPUT_PALLET;
+}
+else if (s3_s == 10) {
+DES_EVENT_INPUT_PALLET;
+DES_EVENT_MOVE_3;
+}
+}
+
+unsigned char decisions[10];
+unsigned char decisions_count;
+unsigned char decided_action;
+void decisions_step() {
+decisions_count = 0;
+if (IS_DES_EVENT_MOVE_0) {
+	decisions[decisions_count++] = EVENT_C_MOVE_0;
+}
+if (IS_DES_EVENT_MOVE_1) {
+	decisions[decisions_count++] = EVENT_C_MOVE_1;
+}
+if (IS_DES_EVENT_MOVE_2) {
+	decisions[decisions_count++] = EVENT_C_MOVE_2;
+}
+if (IS_DES_EVENT_MOVE_3) {
+	decisions[decisions_count++] = EVENT_C_MOVE_3;
+}
+if (IS_DES_EVENT_CLOSE_FLOOR) {
+	decisions[decisions_count++] = EVENT_C_CLOSE_FLOOR;
+}
+if (IS_DES_EVENT_INPUT_PALLET) {
+	decisions[decisions_count++] = EVENT_C_INPUT_PALLET;
+}
+if (IS_DES_EVENT_INPUT_BOX) {
+	decisions[decisions_count++] = EVENT_C_INPUT_BOX;
+}
+if (IS_DES_EVENT_FIT_BOX) {
+	decisions[decisions_count++] = EVENT_C_FIT_BOX;
+}
+if (IS_DES_EVENT_OPEN_FLOOR) {
+	decisions[decisions_count++] = EVENT_C_OPEN_FLOOR;
+}
+if (IS_DES_EVENT_RELEASE_BOX) {
+	decisions[decisions_count++] = EVENT_C_RELEASE_BOX;
+}
+decided_action = rand() % decisions_count;
+}
+
+void sup_advance_step() {
+if (decided_action == EVENT_C_MOVE_0) {
+if (s0_s == 0) {
+s0_s = 2;
+}
+else if (s0_s == 1) {
+s0_s = 5;
+}
+else if (s0_s == 4) {
+s0_s = 9;
+}
+else if (s0_s == 36) {
+s0_s = 38;
+}
+else if (s0_s == 37) {
+s0_s = 40;
+}
+else if (s0_s == 39) {
+s0_s = 41;
+}
+if (s3_s == 0) {
+s3_s = 1;
+}
+else if (s3_s == 5) {
+s3_s = 1;
+}
+else if (s3_s == 6) {
+s3_s = 1;
+}
+else if (s3_s == 10) {
+s3_s = 1;
+}
+move_0();
+}
+
+else if (decided_action == EVENT_C_MOVE_1) {
+if (s0_s == 26) {
+s0_s = 28;
+}
+else if (s0_s == 27) {
+s0_s = 30;
+}
+else if (s0_s == 29) {
+s0_s = 32;
+}
+if (s3_s == 0) {
+s3_s = 2;
+}
+else if (s3_s == 6) {
+s3_s = 2;
+}
+else if (s3_s == 10) {
+s3_s = 2;
+}
+move_1();
+}
+
+else if (decided_action == EVENT_C_MOVE_2) {
+if (s0_s == 16) {
+s0_s = 18;
+}
+else if (s0_s == 17) {
+s0_s = 20;
+}
+else if (s0_s == 19) {
+s0_s = 22;
+}
+if (s3_s == 0) {
+s3_s = 3;
+}
+else if (s3_s == 5) {
+s3_s = 3;
+}
+else if (s3_s == 10) {
+s3_s = 3;
+}
+move_2();
+}
+
+else if (decided_action == EVENT_C_MOVE_3) {
+if (s0_s == 0) {
+s0_s = 3;
+}
+else if (s0_s == 1) {
+s0_s = 6;
+}
+else if (s0_s == 4) {
+s0_s = 10;
+}
+else if (s0_s == 7) {
+s0_s = 3;
+}
+else if (s0_s == 11) {
+s0_s = 6;
+}
+else if (s0_s == 13) {
+s0_s = 10;
+}
+if (s3_s == 8) {
+s3_s = 9;
+}
+move_3();
+}
+
+else if (decided_action == EVENT_C_CLOSE_FLOOR) {
+if (s1_s == 0) {
+s1_s = 1;
+}
+if (s2_s == 2) {
+s2_s = 3;
+}
+close_floor();
+}
+
+else if (decided_action == EVENT_C_INPUT_PALLET) {
+if (s3_s == 4) {
+s3_s = 7;
+}
+input_pallet();
+}
+
+else if (decided_action == EVENT_C_INPUT_BOX) {
+if (s2_s == 0) {
+s2_s = 1;
+}
+else if (s2_s == 4) {
+s2_s = 5;
+}
+else if (s2_s == 6) {
+s2_s = 8;
+}
+input_box();
+}
+
+else if (decided_action == EVENT_C_FIT_BOX) {
+if (s0_s == 0) {
+s0_s = 1;
+}
+else if (s0_s == 2) {
+s0_s = 5;
+}
+else if (s0_s == 3) {
+s0_s = 6;
+}
+else if (s0_s == 7) {
+s0_s = 11;
+}
+else if (s0_s == 8) {
+s0_s = 12;
+}
+else if (s0_s == 16) {
+s0_s = 17;
+}
+else if (s0_s == 18) {
+s0_s = 20;
+}
+else if (s0_s == 21) {
+s0_s = 23;
+}
+else if (s0_s == 26) {
+s0_s = 27;
+}
+else if (s0_s == 28) {
+s0_s = 30;
+}
+else if (s0_s == 31) {
+s0_s = 33;
+}
+else if (s0_s == 36) {
+s0_s = 37;
+}
+else if (s0_s == 38) {
+s0_s = 40;
+}
+if (s1_s == 2) {
+s1_s = 3;
+}
+fit_box();
+}
+
+else if (decided_action == EVENT_C_OPEN_FLOOR) {
+if (s1_s == 4) {
+s1_s = 5;
+}
+if (s2_s == 4) {
+s2_s = 6;
+}
+else if (s2_s == 5) {
+s2_s = 8;
+}
+else if (s2_s == 7) {
+s2_s = 9;
+}
+open_floor();
+}
+
+else if (decided_action == EVENT_C_RELEASE_BOX) {
+if (s0_s == 14) {
+s0_s = 15;
+}
+else if (s0_s == 24) {
+s0_s = 25;
+}
+else if (s0_s == 34) {
+s0_s = 35;
+}
+if (s1_s == 6) {
+s1_s = 7;
+}
+release_box();
+}
+
+}
 /************************/
 /***** INTERRUPT ********/
 unsigned int tick;
@@ -576,9 +1345,23 @@ void main(void) {
     tick = 0;
     seconds = 0;
 
+    s0_s = 0;
+    s1_s = 0;
+    s2_s = 0;
+    s3_s = 0;
+
     unsigned char lcd_refresh_rate = 255;
 
     while (1) {
+
+	sup_response_step();
+
+	des_step();
+
+	decisions_step();
+
+	sup_advance_step();
+
         update_input_box();
         update_input_pallet();
         update_move_0();
@@ -597,3 +1380,4 @@ void main(void) {
         }
     }
 }
+
