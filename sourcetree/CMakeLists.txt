@@ -12,5 +12,3 @@ include_directories(${CMAKE_SOURCE_DIR}/3rdparty)
 
 add_subdirectory(3rdparty)
 add_subdirectory(ipgm)
-
-

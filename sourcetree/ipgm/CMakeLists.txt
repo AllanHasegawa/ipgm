@@ -5,7 +5,6 @@ include_directories(${INCLUDE_DIR})
 
 set(SRCS
 	Log.cpp
-	main.cpp
 	IPGM.cpp
 	IPSystem.cpp
 	MouseSystem.cpp
@@ -27,5 +26,5 @@ foreach(V ${HEADERS})
 	set(_HEADERS ${_HEADERS} ${INCLUDE_DIR}/${V})
 endforeach()
 
-add_executable(ipmg WIN32 ${SRCS} ${_HEADERS})
-target_link_libraries(ipmg ${OpenCV_LIBS} opencv-screen-capture)
+add_library(ipgm ${SRCS} ${_HEADERS})
+target_link_libraries(ipgm ${OpenCV_LIBS} opencv-screen-capture)
