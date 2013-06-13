@@ -160,9 +160,6 @@ bybit membank1;
 bybit membank2;
 bybit tmembank;
 
-void update_rx() {
-}
-
 /************* INPUT_PALLET SEQUENCE OPERATIONS *************/
 /*
  * INPUT_PALLET COMMANDS
@@ -224,6 +221,7 @@ void update_move_0(void) {
             bELEVATOR_P1 = 0;
             bELEVATOR_P2 = 0;
             bELEVATOR_P3 = 0;
+            RAISE_EVENT_N_END_MOVE_0;
         }
     }
 }
@@ -253,6 +251,7 @@ void update_move_1(void) {
             }
             bELEVATOR_P1 = 1;
             bMOVE_1_ACTIVE = 0;
+            RAISE_EVENT_N_END_MOVE_1;
         }
     }
 }
@@ -284,6 +283,7 @@ void update_move_2(void) {
             }
             bELEVATOR_P2 = 1;
             bMOVE_2_ACTIVE = 0;
+            RAISE_EVENT_N_END_MOVE_2;
         }
     }
 }
@@ -305,6 +305,7 @@ void update_move_3(void) {
             bELEVATOR_P2 = 0;
             bELEVATOR_P3 = 1;
             bMOVE_3_ACTIVE = 0;
+            RAISE_EVENT_N_END_MOVE_3;
         }
     }
 }
@@ -330,6 +331,7 @@ void update_fit_box(void) {
         if (IS_BOX_FITTED) {
             // end_fit_box
             bFIT_BOX_ACTIVE = 0;
+            RAISE_EVENT_N_END_FIT_BOX;
         }
     }
 }
@@ -346,6 +348,7 @@ void update_release_box(void) {
         if (IS_BOX_RELEASE) {
             // end_release_box
             bRELEASE_BOX_ACTIVE = 0;
+            RAISE_EVENT_N_END_RELEASE_BOX;
         }
     }
 }
@@ -371,6 +374,7 @@ void update_open_floor(void) {
         if (IS_FLOOR_OPENED) {
             // end_open_floor
             bOPEN_FLOOR_ACTIVE = 0;
+            RAISE_EVENT_N_END_OPEN_FLOOR;
         }
     }
 }
@@ -387,6 +391,7 @@ void update_close_floor(void) {
         if (IS_FLOOR_CLOSED) {
             // end_close_floor
             bCLOSE_FLOOR_ACTIVE = 0;
+            RAISE_EVENT_N_END_CLOSE_FLOOR;
         }
     }
 }
