@@ -162,47 +162,47 @@
 	<font size="12.0"/>
 	<layout uniformnodes="false"/>
 	<state id="0">
-		<circle r="56.0" x="84.0" y="166.0" />
-		<arrow x="74.0" y="0.0" />
+		<circle r="47.5" x="84.0" y="166.0" />
+		<arrow x="65.5" y="0.0" />
 	</state>
 	<state id="1">
-		<circle r="56.0" x="234.0" y="66.0" />
+		<circle r="47.5" x="234.0" y="66.0" />
 		<arrow x="1.0" y="0.0" />
 	</state>
 	<state id="2">
-		<circle r="56.0" x="234.0" y="166.0" />
+		<circle r="47.5" x="234.0" y="166.0" />
 		<arrow x="1.0" y="0.0" />
 	</state>
 	<state id="3">
-		<circle r="56.0" x="234.0" y="266.0" />
+		<circle r="47.5" x="234.0" y="266.0" />
 		<arrow x="1.0" y="0.0" />
 	</state>
 	<state id="6">
-		<circle r="56.0" x="384.0" y="66.0" />
+		<circle r="47.5" x="384.0" y="66.0" />
 		<arrow x="1.0" y="0.0" />
 	</state>
 	<state id="8">
-		<circle r="56.0" x="384.0" y="166.0" />
+		<circle r="47.5" x="384.0" y="166.0" />
 		<arrow x="1.0" y="0.0" />
 	</state>
 	<state id="10">
-		<circle r="56.0" x="384.0" y="266.0" />
+		<circle r="47.5" x="384.0" y="266.0" />
 		<arrow x="1.0" y="0.0" />
 	</state>
 	<state id="16">
-		<circle r="56.0" x="534.0" y="166.0" />
+		<circle r="47.5" x="534.0" y="166.0" />
 		<arrow x="1.0" y="0.0" />
 	</state>
 	<state id="22">
-		<circle r="56.0" x="684.0" y="166.0" />
+		<circle r="47.5" x="684.0" y="166.0" />
 		<arrow x="1.0" y="0.0" />
 	</state>
 	<state id="23">
-		<circle r="56.0" x="834.0" y="166.0" />
+		<circle r="47.5" x="834.0" y="166.0" />
 		<arrow x="1.0" y="0.0" />
 	</state>
 	<state id="27">
-		<circle r="56.0" x="984.0" y="166.0" />
+		<circle r="47.5" x="984.0" y="166.0" />
 		<arrow x="1.0" y="0.0" />
 	</state>
 	<transition id="1">

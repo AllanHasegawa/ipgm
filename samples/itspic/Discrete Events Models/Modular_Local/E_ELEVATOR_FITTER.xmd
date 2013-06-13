@@ -97,7 +97,6 @@
 	<transition id="30" source="10" target="1" event="5">
 	</transition>
 </data>
-<meta tag="annotation" version="3">Evitar que o elevador desça um andar sem que a caixa esteja ajustada em cima dele, no andar adequado;</meta>
 <meta tag="layout" version="2.1">
 	<font size="12.0"/>
 	<layout uniformnodes="false"/>
@@ -162,4 +161,5 @@
 		<label x="35.0" y="13.0" />
 	</transition>
 </meta>
+<meta tag="annotation" version="3">Evitar que o elevador desça um andar sem que a caixa esteja ajustada em cima dele, no andar adequado;</meta>
 </model>
