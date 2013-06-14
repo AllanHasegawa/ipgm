@@ -4,9 +4,12 @@
 #include <thread>
 #include <chrono>
 
+#include "boost\asio.hpp"
+
 #include "IPGM.hpp"
 #include "IPGMCallbacks.hpp"
 #include "Log.hpp"
+
 
 class TI : public ipgm::IPGMCallbacks {
 public:
