@@ -35,11 +35,21 @@ void main(void) {
     TMR0ON = 1; //Timer0 On/Off Control bit
     T08BIT = 1; //: Timer0 8-bit/16-bit Control bit
 
+    // Let's sent 10 'ready'(255) characters to serial
+    //  so the plant knows we are rEADY!
+    SERIAL_TX(255);
+    SERIAL_TX(255);
+    SERIAL_TX(255);
+    SERIAL_TX(255);
+
     mylcd_init();
 
     /* Initialize variables */
     S.bytes.byte1 = 0;
     S.bytes.byte2 = 0;
+    // sensor 03 in the plant
+    // starts lit
+    S.id.b03 = 1;
     A.byte = 0;
     membank0.byte = 0;
     membank1.byte = 0;
