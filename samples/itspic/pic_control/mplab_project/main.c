@@ -974,37 +974,37 @@ unsigned char decisions_count;
 unsigned char decided_action;
 void decisions_step() {
 decisions_count = 0;
-if (IS_DES_EVENT_MOVE_0) {
+if (!IS_DES_EVENT_MOVE_0) {
 	decisions[decisions_count++] = EVENT_C_MOVE_0;
 }
-if (IS_DES_EVENT_MOVE_1) {
+if (!IS_DES_EVENT_MOVE_1) {
 	decisions[decisions_count++] = EVENT_C_MOVE_1;
 }
-if (IS_DES_EVENT_MOVE_2) {
+if (!IS_DES_EVENT_MOVE_2) {
 	decisions[decisions_count++] = EVENT_C_MOVE_2;
 }
-if (IS_DES_EVENT_MOVE_3) {
+if (!IS_DES_EVENT_MOVE_3) {
 	decisions[decisions_count++] = EVENT_C_MOVE_3;
 }
-if (IS_DES_EVENT_CLOSE_FLOOR) {
+if (!IS_DES_EVENT_CLOSE_FLOOR) {
 	decisions[decisions_count++] = EVENT_C_CLOSE_FLOOR;
 }
-if (IS_DES_EVENT_INPUT_PALLET) {
+if (!IS_DES_EVENT_INPUT_PALLET) {
 	decisions[decisions_count++] = EVENT_C_INPUT_PALLET;
 }
-if (IS_DES_EVENT_INPUT_BOX) {
+if (!IS_DES_EVENT_INPUT_BOX) {
 	decisions[decisions_count++] = EVENT_C_INPUT_BOX;
 }
-if (IS_DES_EVENT_FIT_BOX) {
+if (!IS_DES_EVENT_FIT_BOX) {
 	decisions[decisions_count++] = EVENT_C_FIT_BOX;
 }
-if (IS_DES_EVENT_OPEN_FLOOR) {
+if (!IS_DES_EVENT_OPEN_FLOOR) {
 	decisions[decisions_count++] = EVENT_C_OPEN_FLOOR;
 }
-if (IS_DES_EVENT_RELEASE_BOX) {
+if (!IS_DES_EVENT_RELEASE_BOX) {
 	decisions[decisions_count++] = EVENT_C_RELEASE_BOX;
 }
-decided_action = rand() % decisions_count;
+decided_action = decisions[0];//rand() % decisions_count];
 }
 
 void sup_advance_step() {
@@ -1228,9 +1228,6 @@ void interrupt ISR_interrupt() {
     if (RCIF) { // test the interrupt for uart rx
         const unsigned char c = RCREG;
 
-        if (c == 244) {
-            input_box();
-        }
         if (c == 10) {
             TURN_OFF_S0;
         } else if (c == 11) {
@@ -1330,11 +1327,21 @@ void main(void) {
     TMR0ON = 1; //Timer0 On/Off Control bit
     T08BIT = 1; //: Timer0 8-bit/16-bit Control bit
 
+    // Let's sent 10 'ready'(255) characters to serial
+    //  so the plant knows we are rEADY!
+    SERIAL_TX(255);
+    SERIAL_TX(255);
+    SERIAL_TX(255);
+    SERIAL_TX(255);
+
     mylcd_init();
 
     /* Initialize variables */
     S.bytes.byte1 = 0;
     S.bytes.byte2 = 0;
+    // sensor 03 in the plant
+    // starts lit
+    S.id.b03 = 1;
     A.byte = 0;
     membank0.byte = 0;
     membank1.byte = 0;
