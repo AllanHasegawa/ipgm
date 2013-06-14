@@ -6,9 +6,6 @@ void interrupt ISR_interrupt() {
     if (RCIF) { // test the interrupt for uart rx
         const unsigned char c = RCREG;
 
-        if (c == 244) {
-            input_box();
-        }
         if (c == 10) {
             TURN_OFF_S0;
         } else if (c == 11) {
