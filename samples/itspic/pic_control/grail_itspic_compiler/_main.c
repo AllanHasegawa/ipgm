@@ -65,7 +65,7 @@ void main(void) {
     s2_s = 0;
     s3_s = 0;
 
-    unsigned char lcd_refresh_rate = 255;
+    //unsigned char lcd_refresh_rate = 255;
 
     while (1) {
 
@@ -88,11 +88,11 @@ void main(void) {
         update_open_floor();
         update_close_floor();
 
-        lcd_refresh_rate--;
+        /*lcd_refresh_rate--;
         if (lcd_refresh_rate == 0) {
             lcd_update(S, A);
             lcd_refresh_rate = 255;
-        }
+        }*/
     }
 }
 
