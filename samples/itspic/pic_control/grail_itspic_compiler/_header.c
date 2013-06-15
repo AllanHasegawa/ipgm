@@ -1,8 +1,8 @@
 #include <p18f452.h>
 #include <stdlib.h>
-#include "atraso.h"
-#include "mylcd.h"
-#include "datatypes.h"
+#include "../mplab_project/atraso.h"
+#include "../mplab_project/mylcd.h"
+#include "../mplab_project/datatypes.h"
 
 #pragma config WDT=OFF
 

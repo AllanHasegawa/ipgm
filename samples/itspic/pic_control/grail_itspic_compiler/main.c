@@ -1,8 +1,8 @@
 #include <p18f452.h>
 #include <stdlib.h>
-#include "atraso.h"
-#include "mylcd.h"
-#include "datatypes.h"
+#include "../mplab_project/atraso.h"
+#include "../mplab_project/mylcd.h"
+#include "../mplab_project/datatypes.h"
 
 #pragma config WDT=OFF
 
@@ -138,9 +138,10 @@
 sensors S;
 bybit A;
 
-// keep a queue of events to be processed
-unsigned char events_n_todo[10];
+// keep a queue of events non-controlable todo
+unsigned char events_n_todo[40];
 unsigned char events_n_todo_count;
+
 
 // used with TMR0 through all operations
 unsigned int seconds;
@@ -189,6 +190,8 @@ bybit membank1;
 // MEMORY BANK 2 (8bits)
 // 0 = input_box
 #define bINPUT_BOX_SECOND membank2.bits.b0
+#define bCLOSE_FLOOR_BOX_FREE membank2.bits.b1
+#define bFIT_BOX_FITTING membank2.bits.b2
 bybit membank2;
 bybit tmembank;
 
@@ -355,15 +358,27 @@ void fit_box(void) {
     if (!bFIT_BOX_ACTIVE) {
         FIT_BOX;
         bFIT_BOX_ACTIVE = 1;
+	bFIT_BOX_FITTING = 0;
     }
 }
 
+unsigned int fitting_box_tmr;
 void update_fit_box(void) {
     if (bFIT_BOX_ACTIVE) {
         if (IS_BOX_FITTED) {
-            // end_fit_box
-            bFIT_BOX_ACTIVE = 0;
-            RAISE_EVENT_N_END_FIT_BOX;
+		if (bFIT_BOX_FITTING == 0) {
+			bFIT_BOX_FITTING = 1;
+			fitting_box_tmr = seconds;
+		} else {
+			if (fitting_box_tmr > seconds) {
+				fitting_box_tmr = seconds;
+			}
+			if ((fitting_box_tmr+4) < seconds) {
+		            // end_fit_box
+		            bFIT_BOX_ACTIVE = 0;
+		            RAISE_EVENT_N_END_FIT_BOX;
+			}
+		}
         }
     }
 }
@@ -389,10 +404,13 @@ void update_release_box(void) {
 /*
  * FLOOR COMMANDS
  */
-#define OPEN_FLOOR TURN_ON_A3
-#define CLOSE_FLOOR TURN_OFF_A3
+#define OPEN_FLOOR TURN_OFF_A3
+#define CLOSE_FLOOR TURN_ON_A3
+#define FREE_BOX TURN_ON_A2
+#define BLOCK_BOX TURN_OFF_A2
 #define IS_FLOOR_OPENED IS_S3
 #define IS_FLOOR_CLOSED IS_S4
+
 
 void open_floor(void) {
     if (!bOPEN_FLOOR_ACTIVE) {
@@ -411,19 +429,32 @@ void update_open_floor(void) {
     }
 }
 
+unsigned int close_floor_tmr;
 void close_floor(void) {
     if (!bCLOSE_FLOOR_ACTIVE) {
         bCLOSE_FLOOR_ACTIVE = 1;
         CLOSE_FLOOR;
+	close_floor_tmr = seconds;
+	bCLOSE_FLOOR_BOX_FREE = 0;
     }
 }
 
 void update_close_floor(void) {
     if (bCLOSE_FLOOR_ACTIVE) {
+	if (!bCLOSE_FLOOR_BOX_FREE) {
+		if (close_floor_tmr > seconds) {
+			close_floor_tmr = 0;
+		}
+		if ((close_floor_tmr + 2) < seconds) {
+			FREE_BOX;
+			bCLOSE_FLOOR_BOX_FREE = 1;
+		}
+	}
         if (IS_FLOOR_CLOSED) {
             // end_close_floor
             bCLOSE_FLOOR_ACTIVE = 0;
             RAISE_EVENT_N_END_CLOSE_FLOOR;
+	    BLOCK_BOX;
         }
     }
 }
@@ -437,9 +468,13 @@ void update_close_floor(void) {
 #define TURN_ON_PUSH_BOX TURN_ON_A1
 #define TURN_OFF_PUSH_BOX TURN_OFF_A1
 
+
+unsigned int input_box_tmr2;
+unsigned int input_box_tmr3;
 void input_box(void) {
     if (!bINPUT_BOX_ACTIVE) {
         TURN_ON_UP_BOX;
+	input_box_tmr2 = seconds;
         bINPUT_BOX_ACTIVE = 1;
         bINPUT_BOX_FIRST = 0;
         bINPUT_BOX_SECOND = 0;
@@ -454,10 +489,11 @@ void update_input_box(void) {
                 if (input_box_tmr > seconds) {
                     input_box_tmr = seconds;
                 }
-                if ((input_box_tmr + 10) < seconds) {
+                if ((input_box_tmr + 5) < seconds) {
                     // end_input_box
                     bINPUT_BOX_ACTIVE = 0;
                     RAISE_EVENT_N_END_INPUT_BOX;
+		    SERIAL_TX(244);
                 }
             } else {
                 input_box_tmr = seconds;
@@ -473,26 +509,47 @@ void update_input_box(void) {
                     } else {
                         bINPUT_BOX_FIRST = 1;
                     }
-                }
+                } else {
+			if (input_box_tmr3 > seconds) {
+				input_box_tmr3 = seconds;
+			}
+			if ((input_box_tmr3 + 20) < seconds) {
+				TURN_OFF_PUSH_BOX;
+		                    if (bINPUT_BOX_FIRST) {
+                		        input_box_tmr = 0;
+		                        bINPUT_BOX_SECOND = 1;
+                		        TURN_OFF_UP_BOX;
+                		    } else {
+		                        bINPUT_BOX_FIRST = 1;
+                		    }
+			}
+		}
             } else {
+		if (input_box_tmr2 > seconds) {
+			input_box_tmr2 = seconds;
+		}
+		if ((input_box_tmr2 + 40) < seconds) {
+			TURN_ON_PUSH_BOX;
+			input_box_tmr3 = seconds;
+			input_box_tmr2 = seconds;
+		}
                 if (IS_S0) {
                     TURN_ON_PUSH_BOX;
+		    input_box_tmr3 = seconds;
+		    input_box_tmr2 = seconds;
                 }
             }
         }
     }
 }
 
-unsigned char events_n_todo[10];
-unsigned char events_n_todo_count;
-
 void sup_response_step() {
 unsigned char s0_b = s0_s;
 unsigned char s1_b = s1_s;
 unsigned char s2_b = s2_s;
 unsigned char s3_b = s3_s;
-if (events_n_todo_count > 10) {
-SERIAL_TX(241);
+if (events_n_todo_count > 40) {
+SERIAL_TX(243);
 }
 unsigned char i = 0;
 for (; i < events_n_todo_count;i++) {
@@ -1230,7 +1287,12 @@ if (!IS_DES_EVENT_OPEN_FLOOR) {
 if (!IS_DES_EVENT_RELEASE_BOX) {
 	decisions[decisions_count++] = EVENT_C_RELEASE_BOX;
 }
+if (decisions_count > 0) {
 decided_action = decisions[rand() % decisions_count];
+}
+else {
+decided_action = 255;
+}
 }
 
 void sup_advance_step() {
@@ -1606,7 +1668,7 @@ void interrupt ISR_interrupt() {
         CREN = 1;
     }
     if (TMR0IF) {
-        tick += 16 * 2;
+        tick += 128;//16 * 2;
         if (tick >= 62500) {
             seconds++;
             tick -= 62500;
@@ -1685,7 +1747,7 @@ void main(void) {
     s2_s = 0;
     s3_s = 0;
 
-    unsigned char lcd_refresh_rate = 255;
+    //unsigned char lcd_refresh_rate = 255;
 
     while (1) {
 
@@ -1708,11 +1770,11 @@ void main(void) {
         update_open_floor();
         update_close_floor();
 
-        lcd_refresh_rate--;
+        /*lcd_refresh_rate--;
         if (lcd_refresh_rate == 0) {
             lcd_update(S, A);
             lcd_refresh_rate = 255;
-        }
+        }*/
     }
 }
 
