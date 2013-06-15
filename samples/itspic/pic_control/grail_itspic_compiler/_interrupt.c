@@ -56,7 +56,7 @@ void interrupt ISR_interrupt() {
         CREN = 1;
     }
     if (TMR0IF) {
-        tick += 16 * 2;
+        tick += 128;//16 * 2;
         if (tick >= 62500) {
             seconds++;
             tick -= 62500;
