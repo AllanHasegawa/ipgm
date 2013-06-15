@@ -24,7 +24,5 @@
 	<model file="SUP_ELEVATOR_FITTER.xmd" position="21"/>
 	<model file="SUP_FITTER_FLOOR.xmd" position="22"/>
 	<model file="SUP_IBOX_FLOOR.xmd" position="23"/>
-	<model file="SUP_IPALLET_ELEVATOR.xmd" position="24"/>
-	<model file="TesteModularidade.xmd" position="25" selected="true"/>
-	<model file="trim(TesteModularidade).xmd" position="26"/>
+	<model file="SUP_IPALLET_ELEVATOR.xmd" position="24" selected="true"/>
 </workspace>

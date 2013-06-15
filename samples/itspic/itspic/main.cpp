@@ -108,10 +108,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 					c -= 200;
 					Log::instance()->rprintf("SUP 0 [ %d ]\n", c);
 					continue;
-				} else if (c >= 0 && c < 8) {
+				} else if (c >= 0 && c < 9) {
 					Log::instance()->rprintf("SUP 1 [ %d ]\n", c);
 					continue;
-				} else if (c >= 10 && c < 20) {
+				} else if (c >= 10 && c < 23) {
 					c -= 10;
 					Log::instance()->rprintf("SUP 2 [ %d ]\n", c);
 					continue;

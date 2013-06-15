@@ -72,6 +72,7 @@
 #define RAISE_EVENT_N_END_MOVE_0 events_n_todo[events_n_todo_count++] = EVENT_N_END_MOVE_0;
 #define RAISE_EVENT_N_END_MOVE_1 events_n_todo[events_n_todo_count++] = EVENT_N_END_MOVE_1;
 #define RAISE_EVENT_N_END_OPEN_FLOOR events_n_todo[events_n_todo_count++] = EVENT_N_END_OPEN_FLOOR;
+#define RAISE_EVENT_N_END_MID_CLOSE_FLOOR events_n_todo[events_n_todo_count++] = EVENT_N_END_MID_CLOSE_FLOOR;
 #define RAISE_EVENT_N_END_CLOSE_FLOOR events_n_todo[events_n_todo_count++] = EVENT_N_END_CLOSE_FLOOR;
 #define RAISE_EVENT_N_END_FIT_BOX events_n_todo[events_n_todo_count++] = EVENT_N_END_FIT_BOX;
 #define RAISE_EVENT_N_END_INPUT_BOX events_n_todo[events_n_todo_count++] = EVENT_N_END_INPUT_BOX;

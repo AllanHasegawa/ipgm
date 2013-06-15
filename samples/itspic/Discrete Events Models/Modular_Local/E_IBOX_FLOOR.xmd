@@ -20,17 +20,20 @@
 		</properties>
 		<name>end_input_box</name>
 	</event>
-	<event id="5">
+	<event id="6">
 		<properties>
 			<observable />
 		</properties>
-		<name>end_close_floor</name>
+		<name>end_mid_close_floor</name>
 	</event>
 	<transition id="11" source="1" target="2" event="3">
 	</transition>
-	<transition id="12" source="2" target="1" event="5">
+	<transition id="13" source="2" target="1" event="6">
 	</transition>
 </data>
+<meta tag="annotation" version="3">Evitar abrir o chão sem uma caixa no buffer de entrada;
+
+Evitar iniciar entrada de caixa com a porta aberta;</meta>
 <meta tag="layout" version="2.1">
 	<font size="12.0"/>
 	<layout uniformnodes="false"/>
@@ -46,12 +49,9 @@
 		<bezier x1="60.0" y1="60.0" x2="340.0" y2="60.0" ctrlx1="140.82904052734375" ctrly1="13.333332061767578" ctrlx2="259.17095947265625" ctrly2="13.333332061767578" />
 		<label x="5.0" y="5.0" />
 	</transition>
-	<transition id="12">
+	<transition id="13">
 		<bezier x1="340.0" y1="60.0" x2="60.0" y2="60.0" ctrlx1="259.17095947265625" ctrly1="106.66667175292969" ctrlx2="140.82904052734375" ctrly2="106.66667175292969" />
-		<label x="5.0" y="5.0" />
+		<label x="1.0" y="7.0" />
 	</transition>
 </meta>
-<meta tag="annotation" version="3">Evitar abrir o chão sem uma caixa no buffer de entrada;
-
-Evitar iniciar entrada de caixa com a porta aberta;</meta>
 </model>

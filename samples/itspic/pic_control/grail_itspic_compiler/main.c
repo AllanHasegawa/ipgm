@@ -84,6 +84,7 @@
 #define RAISE_EVENT_N_END_MOVE_0 events_n_todo[events_n_todo_count++] = EVENT_N_END_MOVE_0;
 #define RAISE_EVENT_N_END_MOVE_1 events_n_todo[events_n_todo_count++] = EVENT_N_END_MOVE_1;
 #define RAISE_EVENT_N_END_OPEN_FLOOR events_n_todo[events_n_todo_count++] = EVENT_N_END_OPEN_FLOOR;
+#define RAISE_EVENT_N_END_MID_CLOSE_FLOOR events_n_todo[events_n_todo_count++] = EVENT_N_END_MID_CLOSE_FLOOR;
 #define RAISE_EVENT_N_END_CLOSE_FLOOR events_n_todo[events_n_todo_count++] = EVENT_N_END_CLOSE_FLOOR;
 #define RAISE_EVENT_N_END_FIT_BOX events_n_todo[events_n_todo_count++] = EVENT_N_END_FIT_BOX;
 #define RAISE_EVENT_N_END_INPUT_BOX events_n_todo[events_n_todo_count++] = EVENT_N_END_INPUT_BOX;
@@ -104,12 +105,13 @@
 #define EVENT_N_END_MOVE_3 11
 #define EVENT_N_END_MOVE_0 12
 #define EVENT_N_END_MOVE_1 13
-#define EVENT_N_END_OPEN_FLOOR 14
-#define EVENT_N_END_CLOSE_FLOOR 15
-#define EVENT_N_END_FIT_BOX 16
-#define EVENT_N_END_INPUT_BOX 17
-#define EVENT_N_END_RELEASE_BOX 18
-#define EVENT_N_END_INPUT_PALLET 19
+#define EVENT_N_END_MID_CLOSE_FLOOR 14
+#define EVENT_N_END_OPEN_FLOOR 15
+#define EVENT_N_END_CLOSE_FLOOR 16
+#define EVENT_N_END_FIT_BOX 17
+#define EVENT_N_END_INPUT_BOX 18
+#define EVENT_N_END_RELEASE_BOX 19
+#define EVENT_N_END_INPUT_PALLET 20
 
 
 #define DES_EVENT_MOVE_0 des0.bits.b0 = 1;
@@ -239,6 +241,7 @@ void update_input_pallet(void) {
 #define ELEVATOR_IS_P2 IS_S8
 #define ELEVATOR_IS_P3 IS_S7
 
+unsigned int elevator_tmr;
 void move_0(void) {
     if (!bMOVE_0_ACTIVE) {
         ELEVATOR_DOWN;
@@ -267,6 +270,7 @@ void move_1(void) {
             ELEVATOR_UP;
         } else {
             ELEVATOR_DOWN;
+	    elevator_tmr = seconds;
         }
         bMOVE_1_ACTIVE = 1;
     }
@@ -287,7 +291,27 @@ void update_move_1(void) {
             bELEVATOR_P1 = 1;
             bMOVE_1_ACTIVE = 0;
             RAISE_EVENT_N_END_MOVE_1;
-        }
+        } else {
+		if (bELEVATOR_P2){
+		if (elevator_tmr > seconds) {
+			elevator_tmr = seconds;
+		}
+		if ((elevator_tmr + 2) < seconds) {
+			// end_move_1
+            if (bELEVATOR_P0) {
+                ELEVATOR_UP_STOP;
+                bELEVATOR_P0 = 0;
+            } else {
+                ELEVATOR_DOWN_STOP;
+                bELEVATOR_P2 = 0;
+                bELEVATOR_P3 = 0;
+            }
+            bELEVATOR_P1 = 1;
+            bMOVE_1_ACTIVE = 0;
+            RAISE_EVENT_N_END_MOVE_1;
+		}
+		}
+	}
     }
 }
 
@@ -297,6 +321,7 @@ void move_2(void) {
                 || bELEVATOR_P1) {
             ELEVATOR_UP;
         } else {
+		elevator_tmr = seconds;
             ELEVATOR_DOWN;
         }
         bMOVE_2_ACTIVE = 1;
@@ -305,7 +330,7 @@ void move_2(void) {
 
 void update_move_2(void) {
     if (bMOVE_2_ACTIVE) {
-        if (ELEVATOR_IS_P2) {
+        if (ELEVATOR_IS_P2 || ELEVATOR_IS_P1) {
             // end_move_2
             if (bELEVATOR_P0
                     || bELEVATOR_P1) {
@@ -319,7 +344,28 @@ void update_move_2(void) {
             bELEVATOR_P2 = 1;
             bMOVE_2_ACTIVE = 0;
             RAISE_EVENT_N_END_MOVE_2;
-        }
+        } else {
+		if (bELEVATOR_P3) {
+		if (elevator_tmr > seconds) {
+			elevator_tmr = seconds;
+		}
+		if ((elevator_tmr + 2) < seconds) {
+			// end_move_2
+            if (bELEVATOR_P0
+                    || bELEVATOR_P1) {
+                ELEVATOR_UP_STOP;
+                bELEVATOR_P0 = 0;
+                bELEVATOR_P1 = 0;
+            } else {
+                ELEVATOR_DOWN_STOP;
+                bELEVATOR_P3 = 0;
+            }
+            bELEVATOR_P2 = 1;
+            bMOVE_2_ACTIVE = 0;
+            RAISE_EVENT_N_END_MOVE_2;
+		}
+		}
+	}
     }
 }
 
@@ -443,11 +489,20 @@ void update_close_floor(void) {
     if (bCLOSE_FLOOR_ACTIVE) {
 	if (!bCLOSE_FLOOR_BOX_FREE) {
 		if (close_floor_tmr > seconds) {
-			close_floor_tmr = 0;
+			close_floor_tmr = seconds;
 		}
-		if ((close_floor_tmr + 2) < seconds) {
+		if ((close_floor_tmr + 1) < seconds) {
 			FREE_BOX;
 			bCLOSE_FLOOR_BOX_FREE = 1;
+			close_floor_tmr = seconds;
+		}
+	} else {
+		if (close_floor_tmr > seconds) {
+			close_floor_tmr = seconds;
+		}
+		if ((close_floor_tmr + 5) < seconds) {
+			BLOCK_BOX;
+			RAISE_EVENT_N_END_MID_CLOSE_FLOOR;	
 		}
 	}
         if (IS_FLOOR_CLOSED) {
@@ -700,21 +755,26 @@ else if (s0_s == 41) {
 	}
 }
 if (s1_s == 1) {
-	if (a_event == EVENT_N_END_CLOSE_FLOOR) {
+	if (a_event == EVENT_N_END_MID_CLOSE_FLOOR) {
 		s1_s = 2;
 	}
 }
-else if (s1_s == 3) {
+else if (s1_s == 2) {
+	if (a_event == EVENT_N_END_CLOSE_FLOOR) {
+		s1_s = 3;
+	}
+}
+else if (s1_s == 4) {
 	if (a_event == EVENT_N_END_FIT_BOX) {
-		s1_s = 4;
+		s1_s = 5;
 	}
 }
-else if (s1_s == 5) {
+else if (s1_s == 6) {
 	if (a_event == EVENT_N_END_OPEN_FLOOR) {
-		s1_s = 6;
+		s1_s = 7;
 	}
 }
-else if (s1_s == 7) {
+else if (s1_s == 8) {
 	if (a_event == EVENT_N_END_RELEASE_BOX) {
 		s1_s = 0;
 	}
@@ -725,29 +785,47 @@ if (s2_s == 1) {
 	}
 }
 else if (s2_s == 3) {
-	if (a_event == EVENT_N_END_CLOSE_FLOOR) {
+	if (a_event == EVENT_N_END_MID_CLOSE_FLOOR) {
 		s2_s = 4;
+	}
+}
+else if (s2_s == 4) {
+	if (a_event == EVENT_N_END_CLOSE_FLOOR) {
+		s2_s = 6;
 	}
 }
 else if (s2_s == 5) {
 	if (a_event == EVENT_N_END_INPUT_BOX) {
 		s2_s = 7;
 	}
+	else if (a_event == EVENT_N_END_CLOSE_FLOOR) {
+		s2_s = 8;
+	}
 }
-else if (s2_s == 6) {
-	if (a_event == EVENT_N_END_OPEN_FLOOR) {
-		s2_s = 0;
+else if (s2_s == 7) {
+	if (a_event == EVENT_N_END_CLOSE_FLOOR) {
+		s2_s = 10;
 	}
 }
 else if (s2_s == 8) {
 	if (a_event == EVENT_N_END_INPUT_BOX) {
-		s2_s = 9;
+		s2_s = 10;
+	}
+}
+else if (s2_s == 9) {
+	if (a_event == EVENT_N_END_OPEN_FLOOR) {
+		s2_s = 0;
+	}
+}
+else if (s2_s == 11) {
+	if (a_event == EVENT_N_END_INPUT_BOX) {
+		s2_s = 12;
 	}
 	else if (a_event == EVENT_N_END_OPEN_FLOOR) {
 		s2_s = 1;
 	}
 }
-else if (s2_s == 9) {
+else if (s2_s == 12) {
 	if (a_event == EVENT_N_END_OPEN_FLOOR) {
 		s2_s = 2;
 	}
@@ -793,7 +871,7 @@ SERIAL_TX(s3_s+50);
 }
 }
 
-void des_step(void) {
+void sup_des_step(void) {
 des0.byte = 0;
 des1.byte = 0;
 if (s0_s == 0) {
@@ -1111,32 +1189,38 @@ DES_EVENT_RELEASE_BOX;
 }
 else if (s1_s == 2) {
 DES_EVENT_CLOSE_FLOOR;
+DES_EVENT_FIT_BOX;
 DES_EVENT_OPEN_FLOOR;
 DES_EVENT_RELEASE_BOX;
 }
 else if (s1_s == 3) {
 DES_EVENT_CLOSE_FLOOR;
-DES_EVENT_FIT_BOX;
 DES_EVENT_OPEN_FLOOR;
 DES_EVENT_RELEASE_BOX;
 }
 else if (s1_s == 4) {
 DES_EVENT_CLOSE_FLOOR;
 DES_EVENT_FIT_BOX;
+DES_EVENT_OPEN_FLOOR;
 DES_EVENT_RELEASE_BOX;
 }
 else if (s1_s == 5) {
 DES_EVENT_CLOSE_FLOOR;
 DES_EVENT_FIT_BOX;
-DES_EVENT_OPEN_FLOOR;
 DES_EVENT_RELEASE_BOX;
 }
 else if (s1_s == 6) {
 DES_EVENT_CLOSE_FLOOR;
 DES_EVENT_FIT_BOX;
 DES_EVENT_OPEN_FLOOR;
+DES_EVENT_RELEASE_BOX;
 }
 else if (s1_s == 7) {
+DES_EVENT_CLOSE_FLOOR;
+DES_EVENT_FIT_BOX;
+DES_EVENT_OPEN_FLOOR;
+}
+else if (s1_s == 8) {
 DES_EVENT_CLOSE_FLOOR;
 DES_EVENT_FIT_BOX;
 DES_EVENT_OPEN_FLOOR;
@@ -1162,25 +1246,39 @@ DES_EVENT_OPEN_FLOOR;
 }
 else if (s2_s == 4) {
 DES_EVENT_CLOSE_FLOOR;
+DES_EVENT_OPEN_FLOOR;
 }
 else if (s2_s == 5) {
 DES_EVENT_INPUT_BOX;
 DES_EVENT_CLOSE_FLOOR;
+DES_EVENT_OPEN_FLOOR;
 }
 else if (s2_s == 6) {
 DES_EVENT_CLOSE_FLOOR;
-DES_EVENT_OPEN_FLOOR;
 }
 else if (s2_s == 7) {
 DES_EVENT_INPUT_BOX;
 DES_EVENT_CLOSE_FLOOR;
+DES_EVENT_OPEN_FLOOR;
 }
 else if (s2_s == 8) {
 DES_EVENT_INPUT_BOX;
 DES_EVENT_CLOSE_FLOOR;
-DES_EVENT_OPEN_FLOOR;
 }
 else if (s2_s == 9) {
+DES_EVENT_CLOSE_FLOOR;
+DES_EVENT_OPEN_FLOOR;
+}
+else if (s2_s == 10) {
+DES_EVENT_INPUT_BOX;
+DES_EVENT_CLOSE_FLOOR;
+}
+else if (s2_s == 11) {
+DES_EVENT_INPUT_BOX;
+DES_EVENT_CLOSE_FLOOR;
+DES_EVENT_OPEN_FLOOR;
+}
+else if (s2_s == 12) {
 DES_EVENT_INPUT_BOX;
 DES_EVENT_CLOSE_FLOOR;
 DES_EVENT_OPEN_FLOOR;
@@ -1255,7 +1353,7 @@ DES_EVENT_MOVE_3;
 unsigned char decisions[10];
 unsigned char decisions_count;
 unsigned char decided_action;
-void decisions_step() {
+void sup_decisions_step() {
 decisions_count = 0;
 if (!IS_DES_EVENT_MOVE_0) {
 	decisions[decisions_count++] = EVENT_C_MOVE_0;
@@ -1483,6 +1581,10 @@ else if (s2_s == 6) {
 s2_s = 8;
 tmembank.bits.b1 = 1;
 }
+else if (s2_s == 9) {
+s2_s = 11;
+tmembank.bits.b1 = 1;
+}
 if (tmembank.bits.b1 == 1){
 input_box();
 }
@@ -1542,8 +1644,8 @@ else if (s0_s == 38) {
 s0_s = 40;
 tmembank.bits.b1 = 1;
 }
-if (s1_s == 2) {
-s1_s = 3;
+if (s1_s == 3) {
+s1_s = 4;
 tmembank.bits.b1 = 1;
 }
 if (tmembank.bits.b1 == 1){
@@ -1553,20 +1655,20 @@ fit_box();
 
 else if (decided_action == EVENT_C_OPEN_FLOOR) {
 tmembank.bits.b1 = 0;
-if (s1_s == 4) {
-s1_s = 5;
+if (s1_s == 5) {
+s1_s = 6;
 tmembank.bits.b1 = 1;
 }
-if (s2_s == 4) {
-s2_s = 6;
-tmembank.bits.b1 = 1;
-}
-else if (s2_s == 5) {
-s2_s = 8;
-tmembank.bits.b1 = 1;
-}
-else if (s2_s == 7) {
+if (s2_s == 6) {
 s2_s = 9;
+tmembank.bits.b1 = 1;
+}
+else if (s2_s == 8) {
+s2_s = 11;
+tmembank.bits.b1 = 1;
+}
+else if (s2_s == 10) {
+s2_s = 12;
 tmembank.bits.b1 = 1;
 }
 if (tmembank.bits.b1 == 1){
@@ -1588,8 +1690,8 @@ else if (s0_s == 34) {
 s0_s = 35;
 tmembank.bits.b1 = 1;
 }
-if (s1_s == 6) {
-s1_s = 7;
+if (s1_s == 7) {
+s1_s = 8;
 tmembank.bits.b1 = 1;
 }
 if (tmembank.bits.b1 == 1){
@@ -1747,15 +1849,15 @@ void main(void) {
     s2_s = 0;
     s3_s = 0;
 
-    //unsigned char lcd_refresh_rate = 255;
+    unsigned char lcd_refresh_rate = 255;
 
     while (1) {
 
 	sup_response_step();
 	
-	des_step();
+	sup_des_step();
 
-	decisions_step();
+	sup_decisions_step();
 
 	sup_advance_step();
 
@@ -1770,11 +1872,11 @@ void main(void) {
         update_open_floor();
         update_close_floor();
 
-        /*lcd_refresh_rate--;
+        lcd_refresh_rate--;
         if (lcd_refresh_rate == 0) {
             lcd_update(S, A);
             lcd_refresh_rate = 255;
-        }*/
+        }
     }
 }
 
