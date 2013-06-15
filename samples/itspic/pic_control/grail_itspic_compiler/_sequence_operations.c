@@ -161,15 +161,27 @@ void fit_box(void) {
     if (!bFIT_BOX_ACTIVE) {
         FIT_BOX;
         bFIT_BOX_ACTIVE = 1;
+	bFIT_BOX_FITTING = 0;
     }
 }
 
+unsigned int fitting_box_tmr;
 void update_fit_box(void) {
     if (bFIT_BOX_ACTIVE) {
         if (IS_BOX_FITTED) {
-            // end_fit_box
-            bFIT_BOX_ACTIVE = 0;
-            RAISE_EVENT_N_END_FIT_BOX;
+		if (bFIT_BOX_FITTING == 0) {
+			bFIT_BOX_FITTING = 1;
+			fitting_box_tmr = seconds;
+		} else {
+			if (fitting_box_tmr > seconds) {
+				fitting_box_tmr = seconds;
+			}
+			if ((fitting_box_tmr+4) < seconds) {
+		            // end_fit_box
+		            bFIT_BOX_ACTIVE = 0;
+		            RAISE_EVENT_N_END_FIT_BOX;
+			}
+		}
         }
     }
 }
@@ -195,10 +207,13 @@ void update_release_box(void) {
 /*
  * FLOOR COMMANDS
  */
-#define OPEN_FLOOR TURN_ON_A3
-#define CLOSE_FLOOR TURN_OFF_A3
+#define OPEN_FLOOR TURN_OFF_A3
+#define CLOSE_FLOOR TURN_ON_A3
+#define FREE_BOX TURN_ON_A2
+#define BLOCK_BOX TURN_OFF_A2
 #define IS_FLOOR_OPENED IS_S3
 #define IS_FLOOR_CLOSED IS_S4
+
 
 void open_floor(void) {
     if (!bOPEN_FLOOR_ACTIVE) {
@@ -217,19 +232,32 @@ void update_open_floor(void) {
     }
 }
 
+unsigned int close_floor_tmr;
 void close_floor(void) {
     if (!bCLOSE_FLOOR_ACTIVE) {
         bCLOSE_FLOOR_ACTIVE = 1;
         CLOSE_FLOOR;
+	close_floor_tmr = seconds;
+	bCLOSE_FLOOR_BOX_FREE = 0;
     }
 }
 
 void update_close_floor(void) {
     if (bCLOSE_FLOOR_ACTIVE) {
+	if (!bCLOSE_FLOOR_BOX_FREE) {
+		if (close_floor_tmr > seconds) {
+			close_floor_tmr = 0;
+		}
+		if ((close_floor_tmr + 2) < seconds) {
+			FREE_BOX;
+			bCLOSE_FLOOR_BOX_FREE = 1;
+		}
+	}
         if (IS_FLOOR_CLOSED) {
             // end_close_floor
             bCLOSE_FLOOR_ACTIVE = 0;
             RAISE_EVENT_N_END_CLOSE_FLOOR;
+	    BLOCK_BOX;
         }
     }
 }
@@ -243,9 +271,13 @@ void update_close_floor(void) {
 #define TURN_ON_PUSH_BOX TURN_ON_A1
 #define TURN_OFF_PUSH_BOX TURN_OFF_A1
 
+
+unsigned int input_box_tmr2;
+unsigned int input_box_tmr3;
 void input_box(void) {
     if (!bINPUT_BOX_ACTIVE) {
         TURN_ON_UP_BOX;
+	input_box_tmr2 = seconds;
         bINPUT_BOX_ACTIVE = 1;
         bINPUT_BOX_FIRST = 0;
         bINPUT_BOX_SECOND = 0;
@@ -260,10 +292,11 @@ void update_input_box(void) {
                 if (input_box_tmr > seconds) {
                     input_box_tmr = seconds;
                 }
-                if ((input_box_tmr + 10) < seconds) {
+                if ((input_box_tmr + 5) < seconds) {
                     // end_input_box
                     bINPUT_BOX_ACTIVE = 0;
                     RAISE_EVENT_N_END_INPUT_BOX;
+		    SERIAL_TX(244);
                 }
             } else {
                 input_box_tmr = seconds;
@@ -279,10 +312,34 @@ void update_input_box(void) {
                     } else {
                         bINPUT_BOX_FIRST = 1;
                     }
-                }
+                } else {
+			if (input_box_tmr3 > seconds) {
+				input_box_tmr3 = seconds;
+			}
+			if ((input_box_tmr3 + 20) < seconds) {
+				TURN_OFF_PUSH_BOX;
+		                    if (bINPUT_BOX_FIRST) {
+                		        input_box_tmr = 0;
+		                        bINPUT_BOX_SECOND = 1;
+                		        TURN_OFF_UP_BOX;
+                		    } else {
+		                        bINPUT_BOX_FIRST = 1;
+                		    }
+			}
+		}
             } else {
+		if (input_box_tmr2 > seconds) {
+			input_box_tmr2 = seconds;
+		}
+		if ((input_box_tmr2 + 40) < seconds) {
+			TURN_ON_PUSH_BOX;
+			input_box_tmr3 = seconds;
+			input_box_tmr2 = seconds;
+		}
                 if (IS_S0) {
                     TURN_ON_PUSH_BOX;
+		    input_box_tmr3 = seconds;
+		    input_box_tmr2 = seconds;
                 }
             }
         }
