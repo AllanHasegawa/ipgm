@@ -2,9 +2,10 @@
 sensors S;
 bybit A;
 
-// keep a queue of events to be processed
-unsigned char events_n_todo[10];
+// keep a queue of events non-controlable todo
+unsigned char events_n_todo[40];
 unsigned char events_n_todo_count;
+
 
 // used with TMR0 through all operations
 unsigned int seconds;
@@ -53,6 +54,8 @@ bybit membank1;
 // MEMORY BANK 2 (8bits)
 // 0 = input_box
 #define bINPUT_BOX_SECOND membank2.bits.b0
+#define bCLOSE_FLOOR_BOX_FREE membank2.bits.b1
+#define bFIT_BOX_FITTING membank2.bits.b2
 bybit membank2;
 bybit tmembank;
 
