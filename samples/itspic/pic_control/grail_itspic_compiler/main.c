@@ -487,6 +487,13 @@ unsigned char events_n_todo[10];
 unsigned char events_n_todo_count;
 
 void sup_response_step() {
+unsigned char s0_b = s0_s;
+unsigned char s1_b = s1_s;
+unsigned char s2_b = s2_s;
+unsigned char s3_b = s3_s;
+if (events_n_todo_count > 10) {
+SERIAL_TX(241);
+}
 unsigned char i = 0;
 for (; i < events_n_todo_count;i++) {
 const unsigned char a_event = events_n_todo[i];
@@ -715,6 +722,18 @@ else if (s3_s == 9) {
 }
 }
 events_n_todo_count = 0;
+if (s0_b != s0_s) {
+SERIAL_TX(s0_s+200);
+}
+if (s1_b != s1_s) {
+SERIAL_TX(s1_s);
+}
+if (s2_b != s2_s) {
+SERIAL_TX(s2_s+10);
+}
+if (s3_b != s3_s) {
+SERIAL_TX(s3_s+50);
+}
 }
 
 void des_step(void) {
@@ -751,6 +770,22 @@ DES_EVENT_RELEASE_BOX;
 DES_EVENT_MOVE_2;
 DES_EVENT_MOVE_1;
 }
+else if (s0_s == 5) {
+DES_EVENT_FIT_BOX;
+DES_EVENT_MOVE_0;
+DES_EVENT_MOVE_3;
+DES_EVENT_RELEASE_BOX;
+DES_EVENT_MOVE_2;
+DES_EVENT_MOVE_1;
+}
+else if (s0_s == 6) {
+DES_EVENT_FIT_BOX;
+DES_EVENT_MOVE_0;
+DES_EVENT_MOVE_3;
+DES_EVENT_RELEASE_BOX;
+DES_EVENT_MOVE_2;
+DES_EVENT_MOVE_1;
+}
 else if (s0_s == 7) {
 DES_EVENT_MOVE_0;
 DES_EVENT_RELEASE_BOX;
@@ -764,9 +799,33 @@ DES_EVENT_RELEASE_BOX;
 DES_EVENT_MOVE_2;
 DES_EVENT_MOVE_1;
 }
+else if (s0_s == 9) {
+DES_EVENT_FIT_BOX;
+DES_EVENT_MOVE_0;
+DES_EVENT_MOVE_3;
+DES_EVENT_RELEASE_BOX;
+DES_EVENT_MOVE_2;
+DES_EVENT_MOVE_1;
+}
+else if (s0_s == 10) {
+DES_EVENT_FIT_BOX;
+DES_EVENT_MOVE_0;
+DES_EVENT_MOVE_3;
+DES_EVENT_RELEASE_BOX;
+DES_EVENT_MOVE_2;
+DES_EVENT_MOVE_1;
+}
 else if (s0_s == 11) {
 DES_EVENT_FIT_BOX;
 DES_EVENT_MOVE_0;
+DES_EVENT_RELEASE_BOX;
+DES_EVENT_MOVE_2;
+DES_EVENT_MOVE_1;
+}
+else if (s0_s == 12) {
+DES_EVENT_FIT_BOX;
+DES_EVENT_MOVE_0;
+DES_EVENT_MOVE_3;
 DES_EVENT_RELEASE_BOX;
 DES_EVENT_MOVE_2;
 DES_EVENT_MOVE_1;
@@ -782,6 +841,14 @@ else if (s0_s == 14) {
 DES_EVENT_FIT_BOX;
 DES_EVENT_MOVE_0;
 DES_EVENT_MOVE_3;
+DES_EVENT_MOVE_2;
+DES_EVENT_MOVE_1;
+}
+else if (s0_s == 15) {
+DES_EVENT_FIT_BOX;
+DES_EVENT_MOVE_0;
+DES_EVENT_MOVE_3;
+DES_EVENT_RELEASE_BOX;
 DES_EVENT_MOVE_2;
 DES_EVENT_MOVE_1;
 }
@@ -812,7 +879,31 @@ DES_EVENT_MOVE_3;
 DES_EVENT_RELEASE_BOX;
 DES_EVENT_MOVE_1;
 }
+else if (s0_s == 20) {
+DES_EVENT_FIT_BOX;
+DES_EVENT_MOVE_0;
+DES_EVENT_MOVE_3;
+DES_EVENT_RELEASE_BOX;
+DES_EVENT_MOVE_2;
+DES_EVENT_MOVE_1;
+}
 else if (s0_s == 21) {
+DES_EVENT_MOVE_0;
+DES_EVENT_MOVE_3;
+DES_EVENT_RELEASE_BOX;
+DES_EVENT_MOVE_2;
+DES_EVENT_MOVE_1;
+}
+else if (s0_s == 22) {
+DES_EVENT_FIT_BOX;
+DES_EVENT_MOVE_0;
+DES_EVENT_MOVE_3;
+DES_EVENT_RELEASE_BOX;
+DES_EVENT_MOVE_2;
+DES_EVENT_MOVE_1;
+}
+else if (s0_s == 23) {
+DES_EVENT_FIT_BOX;
 DES_EVENT_MOVE_0;
 DES_EVENT_MOVE_3;
 DES_EVENT_RELEASE_BOX;
@@ -823,6 +914,14 @@ else if (s0_s == 24) {
 DES_EVENT_FIT_BOX;
 DES_EVENT_MOVE_0;
 DES_EVENT_MOVE_3;
+DES_EVENT_MOVE_2;
+DES_EVENT_MOVE_1;
+}
+else if (s0_s == 25) {
+DES_EVENT_FIT_BOX;
+DES_EVENT_MOVE_0;
+DES_EVENT_MOVE_3;
+DES_EVENT_RELEASE_BOX;
 DES_EVENT_MOVE_2;
 DES_EVENT_MOVE_1;
 }
@@ -853,7 +952,31 @@ DES_EVENT_MOVE_3;
 DES_EVENT_RELEASE_BOX;
 DES_EVENT_MOVE_2;
 }
+else if (s0_s == 30) {
+DES_EVENT_FIT_BOX;
+DES_EVENT_MOVE_0;
+DES_EVENT_MOVE_3;
+DES_EVENT_RELEASE_BOX;
+DES_EVENT_MOVE_2;
+DES_EVENT_MOVE_1;
+}
 else if (s0_s == 31) {
+DES_EVENT_MOVE_0;
+DES_EVENT_MOVE_3;
+DES_EVENT_RELEASE_BOX;
+DES_EVENT_MOVE_2;
+DES_EVENT_MOVE_1;
+}
+else if (s0_s == 32) {
+DES_EVENT_FIT_BOX;
+DES_EVENT_MOVE_0;
+DES_EVENT_MOVE_3;
+DES_EVENT_RELEASE_BOX;
+DES_EVENT_MOVE_2;
+DES_EVENT_MOVE_1;
+}
+else if (s0_s == 33) {
+DES_EVENT_FIT_BOX;
 DES_EVENT_MOVE_0;
 DES_EVENT_MOVE_3;
 DES_EVENT_RELEASE_BOX;
@@ -864,6 +987,14 @@ else if (s0_s == 34) {
 DES_EVENT_FIT_BOX;
 DES_EVENT_MOVE_0;
 DES_EVENT_MOVE_3;
+DES_EVENT_MOVE_2;
+DES_EVENT_MOVE_1;
+}
+else if (s0_s == 35) {
+DES_EVENT_FIT_BOX;
+DES_EVENT_MOVE_0;
+DES_EVENT_MOVE_3;
+DES_EVENT_RELEASE_BOX;
 DES_EVENT_MOVE_2;
 DES_EVENT_MOVE_1;
 }
@@ -894,7 +1025,29 @@ DES_EVENT_RELEASE_BOX;
 DES_EVENT_MOVE_2;
 DES_EVENT_MOVE_1;
 }
+else if (s0_s == 40) {
+DES_EVENT_FIT_BOX;
+DES_EVENT_MOVE_0;
+DES_EVENT_MOVE_3;
+DES_EVENT_RELEASE_BOX;
+DES_EVENT_MOVE_2;
+DES_EVENT_MOVE_1;
+}
+else if (s0_s == 41) {
+DES_EVENT_FIT_BOX;
+DES_EVENT_MOVE_0;
+DES_EVENT_MOVE_3;
+DES_EVENT_RELEASE_BOX;
+DES_EVENT_MOVE_2;
+DES_EVENT_MOVE_1;
+}
 if (s1_s == 0) {
+DES_EVENT_FIT_BOX;
+DES_EVENT_OPEN_FLOOR;
+DES_EVENT_RELEASE_BOX;
+}
+else if (s1_s == 1) {
+DES_EVENT_CLOSE_FLOOR;
 DES_EVENT_FIT_BOX;
 DES_EVENT_OPEN_FLOOR;
 DES_EVENT_RELEASE_BOX;
@@ -904,9 +1057,21 @@ DES_EVENT_CLOSE_FLOOR;
 DES_EVENT_OPEN_FLOOR;
 DES_EVENT_RELEASE_BOX;
 }
+else if (s1_s == 3) {
+DES_EVENT_CLOSE_FLOOR;
+DES_EVENT_FIT_BOX;
+DES_EVENT_OPEN_FLOOR;
+DES_EVENT_RELEASE_BOX;
+}
 else if (s1_s == 4) {
 DES_EVENT_CLOSE_FLOOR;
 DES_EVENT_FIT_BOX;
+DES_EVENT_RELEASE_BOX;
+}
+else if (s1_s == 5) {
+DES_EVENT_CLOSE_FLOOR;
+DES_EVENT_FIT_BOX;
+DES_EVENT_OPEN_FLOOR;
 DES_EVENT_RELEASE_BOX;
 }
 else if (s1_s == 6) {
@@ -914,12 +1079,28 @@ DES_EVENT_CLOSE_FLOOR;
 DES_EVENT_FIT_BOX;
 DES_EVENT_OPEN_FLOOR;
 }
+else if (s1_s == 7) {
+DES_EVENT_CLOSE_FLOOR;
+DES_EVENT_FIT_BOX;
+DES_EVENT_OPEN_FLOOR;
+DES_EVENT_RELEASE_BOX;
+}
 if (s2_s == 0) {
+DES_EVENT_CLOSE_FLOOR;
+DES_EVENT_OPEN_FLOOR;
+}
+else if (s2_s == 1) {
+DES_EVENT_INPUT_BOX;
 DES_EVENT_CLOSE_FLOOR;
 DES_EVENT_OPEN_FLOOR;
 }
 else if (s2_s == 2) {
 DES_EVENT_INPUT_BOX;
+DES_EVENT_OPEN_FLOOR;
+}
+else if (s2_s == 3) {
+DES_EVENT_INPUT_BOX;
+DES_EVENT_CLOSE_FLOOR;
 DES_EVENT_OPEN_FLOOR;
 }
 else if (s2_s == 4) {
@@ -937,7 +1118,38 @@ else if (s2_s == 7) {
 DES_EVENT_INPUT_BOX;
 DES_EVENT_CLOSE_FLOOR;
 }
+else if (s2_s == 8) {
+DES_EVENT_INPUT_BOX;
+DES_EVENT_CLOSE_FLOOR;
+DES_EVENT_OPEN_FLOOR;
+}
+else if (s2_s == 9) {
+DES_EVENT_INPUT_BOX;
+DES_EVENT_CLOSE_FLOOR;
+DES_EVENT_OPEN_FLOOR;
+}
 if (s3_s == 0) {
+DES_EVENT_INPUT_PALLET;
+DES_EVENT_MOVE_3;
+}
+else if (s3_s == 1) {
+DES_EVENT_MOVE_0;
+DES_EVENT_MOVE_1;
+DES_EVENT_MOVE_2;
+DES_EVENT_INPUT_PALLET;
+DES_EVENT_MOVE_3;
+}
+else if (s3_s == 2) {
+DES_EVENT_MOVE_0;
+DES_EVENT_MOVE_1;
+DES_EVENT_MOVE_2;
+DES_EVENT_INPUT_PALLET;
+DES_EVENT_MOVE_3;
+}
+else if (s3_s == 3) {
+DES_EVENT_MOVE_0;
+DES_EVENT_MOVE_1;
+DES_EVENT_MOVE_2;
 DES_EVENT_INPUT_PALLET;
 DES_EVENT_MOVE_3;
 }
@@ -957,11 +1169,25 @@ DES_EVENT_MOVE_2;
 DES_EVENT_INPUT_PALLET;
 DES_EVENT_MOVE_3;
 }
+else if (s3_s == 7) {
+DES_EVENT_MOVE_0;
+DES_EVENT_MOVE_1;
+DES_EVENT_MOVE_2;
+DES_EVENT_INPUT_PALLET;
+DES_EVENT_MOVE_3;
+}
 else if (s3_s == 8) {
 DES_EVENT_MOVE_0;
 DES_EVENT_MOVE_1;
 DES_EVENT_MOVE_2;
 DES_EVENT_INPUT_PALLET;
+}
+else if (s3_s == 9) {
+DES_EVENT_MOVE_0;
+DES_EVENT_MOVE_1;
+DES_EVENT_MOVE_2;
+DES_EVENT_INPUT_PALLET;
+DES_EVENT_MOVE_3;
 }
 else if (s3_s == 10) {
 DES_EVENT_INPUT_PALLET;
@@ -1008,217 +1234,319 @@ decided_action = decisions[rand() % decisions_count];
 }
 
 void sup_advance_step() {
+unsigned char s0_b = s0_s;
+unsigned char s1_b = s1_s;
+unsigned char s2_b = s2_s;
+unsigned char s3_b = s3_s;
 if (decided_action == EVENT_C_MOVE_0) {
 if (s0_s == 0) {
 s0_s = 2;
+tmembank.bits.b1 = 1;
 }
 else if (s0_s == 1) {
 s0_s = 5;
+tmembank.bits.b1 = 1;
 }
 else if (s0_s == 4) {
 s0_s = 9;
+tmembank.bits.b1 = 1;
 }
 else if (s0_s == 36) {
 s0_s = 38;
+tmembank.bits.b1 = 1;
 }
 else if (s0_s == 37) {
 s0_s = 40;
+tmembank.bits.b1 = 1;
 }
 else if (s0_s == 39) {
 s0_s = 41;
+tmembank.bits.b1 = 1;
 }
 if (s3_s == 0) {
 s3_s = 1;
+tmembank.bits.b1 = 1;
 }
 else if (s3_s == 5) {
 s3_s = 1;
+tmembank.bits.b1 = 1;
 }
 else if (s3_s == 6) {
 s3_s = 1;
+tmembank.bits.b1 = 1;
 }
 else if (s3_s == 10) {
 s3_s = 1;
+tmembank.bits.b1 = 1;
 }
+if (tmembank.bits.b1 == 1){
 move_0();
+}
 }
 
 else if (decided_action == EVENT_C_MOVE_1) {
+tmembank.bits.b1 = 0;
 if (s0_s == 26) {
 s0_s = 28;
+tmembank.bits.b1 = 1;
 }
 else if (s0_s == 27) {
 s0_s = 30;
+tmembank.bits.b1 = 1;
 }
 else if (s0_s == 29) {
 s0_s = 32;
+tmembank.bits.b1 = 1;
 }
 if (s3_s == 0) {
 s3_s = 2;
+tmembank.bits.b1 = 1;
 }
 else if (s3_s == 6) {
 s3_s = 2;
+tmembank.bits.b1 = 1;
 }
 else if (s3_s == 10) {
 s3_s = 2;
+tmembank.bits.b1 = 1;
 }
+if (tmembank.bits.b1 == 1){
 move_1();
+}
 }
 
 else if (decided_action == EVENT_C_MOVE_2) {
+tmembank.bits.b1 = 0;
 if (s0_s == 16) {
 s0_s = 18;
+tmembank.bits.b1 = 1;
 }
 else if (s0_s == 17) {
 s0_s = 20;
+tmembank.bits.b1 = 1;
 }
 else if (s0_s == 19) {
 s0_s = 22;
+tmembank.bits.b1 = 1;
 }
 if (s3_s == 0) {
 s3_s = 3;
+tmembank.bits.b1 = 1;
 }
 else if (s3_s == 5) {
 s3_s = 3;
+tmembank.bits.b1 = 1;
 }
 else if (s3_s == 10) {
 s3_s = 3;
+tmembank.bits.b1 = 1;
 }
+if (tmembank.bits.b1 == 1){
 move_2();
+}
 }
 
 else if (decided_action == EVENT_C_MOVE_3) {
+tmembank.bits.b1 = 0;
 if (s0_s == 0) {
 s0_s = 3;
+tmembank.bits.b1 = 1;
 }
 else if (s0_s == 1) {
 s0_s = 6;
+tmembank.bits.b1 = 1;
 }
 else if (s0_s == 4) {
 s0_s = 10;
+tmembank.bits.b1 = 1;
 }
 else if (s0_s == 7) {
 s0_s = 3;
+tmembank.bits.b1 = 1;
 }
 else if (s0_s == 11) {
 s0_s = 6;
+tmembank.bits.b1 = 1;
 }
 else if (s0_s == 13) {
 s0_s = 10;
+tmembank.bits.b1 = 1;
 }
 if (s3_s == 8) {
 s3_s = 9;
+tmembank.bits.b1 = 1;
 }
+if (tmembank.bits.b1 == 1){
 move_3();
+}
 }
 
 else if (decided_action == EVENT_C_CLOSE_FLOOR) {
+tmembank.bits.b1 = 0;
 if (s1_s == 0) {
 s1_s = 1;
+tmembank.bits.b1 = 1;
 }
 if (s2_s == 2) {
 s2_s = 3;
+tmembank.bits.b1 = 1;
 }
+if (tmembank.bits.b1 == 1){
 close_floor();
+}
 }
 
 else if (decided_action == EVENT_C_INPUT_PALLET) {
+tmembank.bits.b1 = 0;
 if (s3_s == 4) {
 s3_s = 7;
+tmembank.bits.b1 = 1;
 }
+if (tmembank.bits.b1 == 1){
 input_pallet();
+}
 }
 
 else if (decided_action == EVENT_C_INPUT_BOX) {
+tmembank.bits.b1 = 0;
 if (s2_s == 0) {
 s2_s = 1;
+tmembank.bits.b1 = 1;
 }
 else if (s2_s == 4) {
 s2_s = 5;
+tmembank.bits.b1 = 1;
 }
 else if (s2_s == 6) {
 s2_s = 8;
+tmembank.bits.b1 = 1;
 }
+if (tmembank.bits.b1 == 1){
 input_box();
+}
 }
 
 else if (decided_action == EVENT_C_FIT_BOX) {
+tmembank.bits.b1 = 0;
 if (s0_s == 0) {
 s0_s = 1;
+tmembank.bits.b1 = 1;
 }
 else if (s0_s == 2) {
 s0_s = 5;
+tmembank.bits.b1 = 1;
 }
 else if (s0_s == 3) {
 s0_s = 6;
+tmembank.bits.b1 = 1;
 }
 else if (s0_s == 7) {
 s0_s = 11;
+tmembank.bits.b1 = 1;
 }
 else if (s0_s == 8) {
 s0_s = 12;
+tmembank.bits.b1 = 1;
 }
 else if (s0_s == 16) {
 s0_s = 17;
+tmembank.bits.b1 = 1;
 }
 else if (s0_s == 18) {
 s0_s = 20;
+tmembank.bits.b1 = 1;
 }
 else if (s0_s == 21) {
 s0_s = 23;
+tmembank.bits.b1 = 1;
 }
 else if (s0_s == 26) {
 s0_s = 27;
+tmembank.bits.b1 = 1;
 }
 else if (s0_s == 28) {
 s0_s = 30;
+tmembank.bits.b1 = 1;
 }
 else if (s0_s == 31) {
 s0_s = 33;
+tmembank.bits.b1 = 1;
 }
 else if (s0_s == 36) {
 s0_s = 37;
+tmembank.bits.b1 = 1;
 }
 else if (s0_s == 38) {
 s0_s = 40;
+tmembank.bits.b1 = 1;
 }
 if (s1_s == 2) {
 s1_s = 3;
+tmembank.bits.b1 = 1;
 }
+if (tmembank.bits.b1 == 1){
 fit_box();
+}
 }
 
 else if (decided_action == EVENT_C_OPEN_FLOOR) {
+tmembank.bits.b1 = 0;
 if (s1_s == 4) {
 s1_s = 5;
+tmembank.bits.b1 = 1;
 }
 if (s2_s == 4) {
 s2_s = 6;
+tmembank.bits.b1 = 1;
 }
 else if (s2_s == 5) {
 s2_s = 8;
+tmembank.bits.b1 = 1;
 }
 else if (s2_s == 7) {
 s2_s = 9;
+tmembank.bits.b1 = 1;
 }
+if (tmembank.bits.b1 == 1){
 open_floor();
+}
 }
 
 else if (decided_action == EVENT_C_RELEASE_BOX) {
+tmembank.bits.b1 = 0;
 if (s0_s == 14) {
 s0_s = 15;
+tmembank.bits.b1 = 1;
 }
 else if (s0_s == 24) {
 s0_s = 25;
+tmembank.bits.b1 = 1;
 }
 else if (s0_s == 34) {
 s0_s = 35;
+tmembank.bits.b1 = 1;
 }
 if (s1_s == 6) {
 s1_s = 7;
+tmembank.bits.b1 = 1;
 }
+if (tmembank.bits.b1 == 1){
 release_box();
 }
+}
 
+if (s0_b != s0_s) {
+SERIAL_TX(s0_s+200);
+}
+if (s1_b != s1_s) {
+SERIAL_TX(s1_s);
+}
+if (s2_b != s2_s) {
+SERIAL_TX(s2_s+10);
+}
+if (s3_b != s3_s) {
+SERIAL_TX(s3_s+50);
+}
 }
 /************************/
 /***** INTERRUPT ********/

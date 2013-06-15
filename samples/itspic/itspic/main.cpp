@@ -24,19 +24,19 @@ struct TI : public ipgm::IPGMCallbacks {
 
 	void sensorON(const uint8_t ID) {
 		std::lock_guard<std::mutex> _lock(mutex_serial_);
-		ipgm::Log::instance()->rprintf("SENSOR ON %u\n", ID);
+		//ipgm::Log::instance()->rprintf("SENSOR ON %u\n", ID);
 		buffer_sensors_[buffer_sensors_count_++] = (char)(ID + 110);
 	}
 	void sensorOFF(const uint8_t ID) {
 		std::lock_guard<std::mutex> _lock(mutex_serial_);
-		ipgm::Log::instance()->rprintf("SENSOR OFF %u\n", ID);
+		//ipgm::Log::instance()->rprintf("SENSOR OFF %u\n", ID);
 		buffer_sensors_[buffer_sensors_count_++] = (char)(ID + 10);
 	}
 	void actuatorON(const uint8_t ID) {
-		ipgm::Log::instance()->rprintf("ACT ON %u\n", ID);
+		//ipgm::Log::instance()->rprintf("ACT ON %u\n", ID);
 	}
 	void actuatorOFF(const uint8_t ID) {
-		ipgm::Log::instance()->rprintf("ACT OFF %u\n", ID);
+		//ipgm::Log::instance()->rprintf("ACT OFF %u\n", ID);
 	}
 
 	void update() {
@@ -96,20 +96,34 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		int n_read = serial->read(&buffer_actuators[0],1000);
 
 		if (n_read > 0) {
-			Log::instance()->dprintf("N: %d\n", n_read);
+			//Log::instance()->dprintf("N: %d\n", n_read);
 			for (int i = 0; i < n_read; i++) {
 				unsigned char c = (unsigned char)buffer_actuators[i];
-				if (c < 30 || c > 137 || (c > 37 && c < 130)) {
+				if ((c >= 30 && c < 38) || (c >= 130 && c < 138)) {
+					// Actuators;
+				} else if (c >= 200 && c < 242) {
+					c -= 200;
+					Log::instance()->rprintf("SUP 0 [ %d ]\n", c);
+				} else if (c >= 0 && c < 8) {
+					Log::instance()->rprintf("SUP 1 [ %d ]\n", c);
+				} else if (c >= 10 && c < 20) {
+					c -= 10;
+					Log::instance()->rprintf("SUP 2 [ %d ]\n", c);
+				} else if (c >= 50 && c < 61) {
+					c -= 50;
+					Log::instance()->rprintf("SUP 1 [ %d ]\n", c);
+				} else {
+					Log::instance()->rprintf("Not understood: %d\n", c);
 					continue;
 				}
-				Log::instance()->dprintf("C: %d\n", c);
+				//Log::instance()->dprintf("C: %d\n", c);
 				bool turn_on = c > 100;
 				if (turn_on) {
 					c -= 130;
 					bool state = ipgm.getActuatorsInfo()[c];
 					if (!state) {
 						try {
-							Log::instance()->dprintf("Activating %d\n", c);
+							Log::instance()->rprintf("Activating %d\n", c);
 							ipgm.activeActuator(c);
 						} catch (std::exception& e) {
 							Log::instance()->rprintf("ERROR: %s\n", e.what());
@@ -120,7 +134,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 					bool state = ipgm.getActuatorsInfo()[c];
 					if (state) {
 						try {
-							Log::instance()->dprintf("DE-Activating %d\n", c);
+							Log::instance()->rprintf("DE-Activating %d\n", c);
 							ipgm.activeActuator(c);
 						} catch (std::exception& e) {
 							Log::instance()->rprintf("ERROR: %s\n", e.what());
