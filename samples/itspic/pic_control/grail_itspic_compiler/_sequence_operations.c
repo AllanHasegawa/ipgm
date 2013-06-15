@@ -42,6 +42,7 @@ void update_input_pallet(void) {
 #define ELEVATOR_IS_P2 IS_S8
 #define ELEVATOR_IS_P3 IS_S7
 
+unsigned int elevator_tmr;
 void move_0(void) {
     if (!bMOVE_0_ACTIVE) {
         ELEVATOR_DOWN;
@@ -70,6 +71,7 @@ void move_1(void) {
             ELEVATOR_UP;
         } else {
             ELEVATOR_DOWN;
+	    elevator_tmr = seconds;
         }
         bMOVE_1_ACTIVE = 1;
     }
@@ -90,7 +92,27 @@ void update_move_1(void) {
             bELEVATOR_P1 = 1;
             bMOVE_1_ACTIVE = 0;
             RAISE_EVENT_N_END_MOVE_1;
-        }
+        } else {
+		if (bELEVATOR_P2){
+		if (elevator_tmr > seconds) {
+			elevator_tmr = seconds;
+		}
+		if ((elevator_tmr + 2) < seconds) {
+			// end_move_1
+            if (bELEVATOR_P0) {
+                ELEVATOR_UP_STOP;
+                bELEVATOR_P0 = 0;
+            } else {
+                ELEVATOR_DOWN_STOP;
+                bELEVATOR_P2 = 0;
+                bELEVATOR_P3 = 0;
+            }
+            bELEVATOR_P1 = 1;
+            bMOVE_1_ACTIVE = 0;
+            RAISE_EVENT_N_END_MOVE_1;
+		}
+		}
+	}
     }
 }
 
@@ -100,6 +122,7 @@ void move_2(void) {
                 || bELEVATOR_P1) {
             ELEVATOR_UP;
         } else {
+		elevator_tmr = seconds;
             ELEVATOR_DOWN;
         }
         bMOVE_2_ACTIVE = 1;
@@ -108,7 +131,7 @@ void move_2(void) {
 
 void update_move_2(void) {
     if (bMOVE_2_ACTIVE) {
-        if (ELEVATOR_IS_P2) {
+        if (ELEVATOR_IS_P2 || ELEVATOR_IS_P1) {
             // end_move_2
             if (bELEVATOR_P0
                     || bELEVATOR_P1) {
@@ -122,7 +145,28 @@ void update_move_2(void) {
             bELEVATOR_P2 = 1;
             bMOVE_2_ACTIVE = 0;
             RAISE_EVENT_N_END_MOVE_2;
-        }
+        } else {
+		if (bELEVATOR_P3) {
+		if (elevator_tmr > seconds) {
+			elevator_tmr = seconds;
+		}
+		if ((elevator_tmr + 2) < seconds) {
+			// end_move_2
+            if (bELEVATOR_P0
+                    || bELEVATOR_P1) {
+                ELEVATOR_UP_STOP;
+                bELEVATOR_P0 = 0;
+                bELEVATOR_P1 = 0;
+            } else {
+                ELEVATOR_DOWN_STOP;
+                bELEVATOR_P3 = 0;
+            }
+            bELEVATOR_P2 = 1;
+            bMOVE_2_ACTIVE = 0;
+            RAISE_EVENT_N_END_MOVE_2;
+		}
+		}
+	}
     }
 }
 
@@ -246,11 +290,20 @@ void update_close_floor(void) {
     if (bCLOSE_FLOOR_ACTIVE) {
 	if (!bCLOSE_FLOOR_BOX_FREE) {
 		if (close_floor_tmr > seconds) {
-			close_floor_tmr = 0;
+			close_floor_tmr = seconds;
 		}
-		if ((close_floor_tmr + 2) < seconds) {
+		if ((close_floor_tmr + 1) < seconds) {
 			FREE_BOX;
 			bCLOSE_FLOOR_BOX_FREE = 1;
+			close_floor_tmr = seconds;
+		}
+	} else {
+		if (close_floor_tmr > seconds) {
+			close_floor_tmr = seconds;
+		}
+		if ((close_floor_tmr + 5) < seconds) {
+			BLOCK_BOX;
+			RAISE_EVENT_N_END_MID_CLOSE_FLOOR;	
 		}
 	}
         if (IS_FLOOR_CLOSED) {
