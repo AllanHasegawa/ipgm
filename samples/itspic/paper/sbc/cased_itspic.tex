@@ -2,10 +2,12 @@
 
 \usepackage{sbc-template}
 
+\usepackage{hyperref}
 \usepackage{graphicx,url}
-
+\usepackage{multirow}
 %\usepackage[brazil]{babel}   
 \usepackage[latin1]{inputenc}  
+
 
      
 \sloppy
@@ -43,113 +45,252 @@ Joinville -- SC -- Brasil
 %\end{resumo}
 
 
-\section{General Information}
+\section{Planta}
 
-All full papers and posters (short papers) submitted to some SBC conference,
-including any supporting documents, should be written in English or in
-Portuguese. The format paper should be A4 with single column, 3.5 cm for upper
-margin, 2.5 cm for bottom margin and 3.0 cm for lateral margins, without
-headers or footers. The main font must be Times, 12 point nominal size, with 6
-points of space before each paragraph. Page numbers must be suppressed.
+Este trabalho automatizou uma planta virtual do software ITS PLC\footnote{Disponível em: \url{http://www.realgames.pt/index.php/en/products}. Acesso (16/06/2013).} da Real Games. ITS PLC é uma ferramenta didática que oferece cinco ambientes industriais emulados. Essas plantas virtuais simulam operações geralmente encontradas na indústria, e são executadas em tempo real usando gráficos 3D, som, simulações físicas e totalmente interativas. ITS PLC é um software privado e suporta, oficialmente, a automação por meio de CLP's.
 
-Full papers must respect the page limits defined by the conference.
-Conferences that publish just abstracts ask for \textbf{one}-page texts.
-
-\section{First Page} \label{sec:firstpage}
-
-The first page must display the paper title, the name and address of the
-authors, the abstract in English and ``resumo'' in Portuguese (``resumos'' are
-required only for papers written in Portuguese). The title must be centered
-over the whole page, in 16 point boldface font and with 12 points of space
-before itself. Author names must be centered in 12 point font, bold, all of
-them disposed in the same line, separated by commas and with 12 points of
-space after the title. Addresses must be centered in 12 point font, also with
-12 points of space after the authors' names. E-mail addresses should be
-written using font Courier New, 10 point nominal size, with 6 points of space
-before and 6 points of space after.
-
-The abstract and ``resumo'' (if is the case) must be in 12 point Times font,
-indented 0.8cm on both sides. The word \textbf{Abstract} and \textbf{Resumo},
-should be written in boldface and must precede the text.
-
-\section{CD-ROMs and Printed Proceedings}
-
-In some conferences, the papers are published on CD-ROM while only the
-abstract is published in the printed Proceedings. In this case, authors are
-invited to prepare two final versions of the paper. One, complete, to be
-published on the CD and the other, containing only the first page, with
-abstract and ``resumo'' (for papers in Portuguese).
-
-\section{Sections and Paragraphs}
-
-Section titles must be in boldface, 13pt, flush left. There should be an extra
-12 pt of space before each title. Section numbering is optional. The first
-paragraph of each section should not be indented, while the first lines of
-subsequent paragraphs should be indented by 1.27 cm.
-
-\subsection{Subsections}
-
-The subsection titles must be in boldface, 12pt, flush left.
-
-\section{Figures and Captions}\label{sec:figs}
-
-
-Figure and table captions should be centered if less than one line
-(Figure~\ref{fig:exampleFig1}), otherwise justified and indented by 0.8cm on
-both margins, as shown in Figure~\ref{fig:exampleFig2}. The caption font must
-be Helvetica, 10 point, boldface, with 6 points of space before and after each
-caption.
+A planta automatizada por este trabalho foi a \textit{Palletizer}, que tem como objetivo principal o empilhamento de caixas em cima de um palete. A Figura \ref{fig:plant} apresenta uma visão geral dos equipamentos dessa planta. As próximas subseções irão detalhar cada equipamento da planta.
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=.5\textwidth]{fig1.jpg}
-\caption{A typical figure}
-\label{fig:exampleFig1}
+\includegraphics[scale=1]{images/s_plant.png}
+\caption{Visão geral da planta \textit{Palletizer}.}
+\label{fig:plant}
+\end{figure}
+
+\subsection{ENTRADA1 e M1}
+
+Usando a Figura \ref{fig:plant} como referência, os objetos \textbf{ENTRADA1} e \textbf{M1} têm como função:
+
+\begin{itemize}
+\item \textbf{ENTRADA1}: Entrada de caixas no sistema. Possui um atuador (\textbf{A0}) que liga e desliga um elevador que transporta as caixas. Quando uma caixa está em posição de retirada, o sensor (\textbf{S0}) é ativado.
+\item \textbf{M1}: Transfere a caixa da \textbf{ENTRADA1} para a esteira transportadora. Ela possui um atuador (\textbf{A1}) que ao ligar empurra a caixa, acionando o sensor (\textbf{S1}), e ao desligar volta a posição original.
+\end{itemize}
+
+Esses dois objetos são responsáveis pela entrada de caixas no sistema, e estão ilustrados na Figura \ref{fig:p_0} usando a planta virtual.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=1]{images/P_shot0_m.png}
+\caption{\textbf{ENTRADA1} e \textbf{M1} no ambiente virtual.}
+\label{fig:p_0}
+\end{figure}
+
+\subsection{B1, M2, M3 e M4}
+\label{sec:b1}
+
+A segunda parte da planta ajusta as caixas para serem empilhadas em cima de um palete. Essa parte é caracterizada pelos objetos:
+
+\begin{itemize}
+\item \textbf{B1}: Buffer com capacidade para duas caixas. Possui um sensor (\textbf{S2}) que indica a presença de uma caixa na sua entrada, ou seja, quando uma caixa entra no sistema, tal sensor é ativado e desativado. Ele permanecerá ligado apenas quando uma segunda caixa entrar no sistema (pois ela ficará na frente do sensor).
+\item \textbf{M2}: Máquina que bloqueia o avanço das caixas. Ela possui apenas um atuador (\textbf{A2}) que determina o bloqueio(ou desbloqueio) da caixa.
+\item \textbf{M3}: Chão retrátil. Tem como função transportar a caixa da \textbf{M2} até a \textbf{M4}. Possui um atuador (\textbf{A3}) que abre/fecha o chão, além de dois sensores (\textbf{S3} e \textbf{S4}) e indicam quando o chão está: totalmente aberto (\textbf{S3} ligado), totalmente fechado (\textbf{S4} ligado), ou em andamento (nenhum sensor ligado). \textbf{M3} precisa trabalhar em conjunto com \textbf{M2}, pois caso \textbf{M2} libere uma caixa com \textbf{M3} aberto, essas irão cair na parte inferior da planta. Caso \textbf{M2} libere as caixas quando \textbf{M3} estiver fechado, essas caixas irão cair em uma região errada da \textbf{M3}, e problemas irão aparecer na próxima vez que \textbf{M3} se fechar, danificando as caixas. Essas duas máquinas precisam operar com um sincronismo correto.
+\item \textbf{M4}: Ajustador de caixas. Além de ajustar as caixas, essa máquina segura elas no lugar, evitando que elas caiam quando o chão retrátil (\textbf{M3}) abrir. Possui um atuador (\textbf{A4}) para ligar/desligar e um sensor (\textbf{S5}) que indica quando o ajusta está pronto.
+\end{itemize}
+
+A Figura \ref{fig:p_1} apresenta os objetos \textbf{B1}, \textbf{M2}, \textbf{M3} e \textbf{M4}.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=1]{images/P_shot1_m.png}
+\caption{B1, M2, M3 e M4 no ambiente virtual.}
+\label{fig:p_1}
+\end{figure}
+
+\subsection{ENTRADA2 e E1}
+
+A \textbf{ENTRADA2} possui apenas um atuador (\textbf{A7}) que liga a esteira que faz o transporte de novos paletes. O sensor (\textbf{S10}) indica quando um palete está na posição do elevador (\textbf{E1}). A Figura \ref{fig:p_2} mostra a \textbf{ENTRADA1} na planta virtual.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=1]{images/P_shot2_m.png}
+\caption{ENTRADA1 no ambiente virtual.}
+\label{fig:p_2}
+\end{figure}
+
+A planta possui um elevador \textbf{E1} que transporta caixas entre os buffers \textbf{B2}, \textbf{B3}, \textbf{B4} e \textbf{B5}. A disposição desses buffers pode ser visualizada na Figura \ref{fig:p_3}. Usando o elevador em conjunto com os buffers, a planta consegue fazer o empilhamento de até três níveis de caixa. Inicialmente é colocada um nível de caixa no buffer \textbf{B2}. Esse nível é transferido para o buffer \textbf{B3} e um novo nível é adicionado no buffer \textbf{B2}. Esse processo é repetido para o próximo nível, assim criando os três níveis de caixas.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=1]{images/P_shot3_m.png}
+\caption{E1 e os buffers \textbf{B2}, \textbf{B3}, \textbf{B4} e \textbf{B5} no ambiente virtual.}
+\label{fig:p_3}
+\end{figure}
+
+O elevador \textbf{E1} é controlado por meio dos atuadores (\textbf{A5}) e (\textbf{A6}) que comandam a subida e descida do elevador, respectivamente. Os sensores (\textbf{S7}), (\textbf{S8}), (\textbf{S9}) e (\textbf{S6}) informam a posição do elevador, essas sendo os buffers \textbf{B2}, \textbf{B3}, \textbf{B4} e \textbf{B5}, respectivamente.
+
+\section{Controle Supervisório de Sistemas a Eventos Discretos}
+
+O controle supervisório deste trabalho fez uso de supervisores modulares locais da teoria de sistemas a eventos discretos. O primeiro passo na modelagem desses supervisores foi a abstração da planta para um modelo mais simples. Esse processo está descrito na Seção \ref{sec:abstracao}. O segundo passo foi o desenvolvimento das especificações, que está detalhado na Seção \ref{sec:especificacoes}. Em seguida foi gerado um supervisor monolítico para fazer testes manuais de funcionalidade. Este está presente na Seção \ref{sec:monolitico}. Após testado o supervisor monolítico, o supervisor modular local foi gerado, e o teste de modularidade executado. Esses últimos passos da teoria de controle supervisório estão presente na Seção \ref{sec:modularlocal}.
+
+\subsection{Abstração da Planta}
+\label{sec:abstracao}
+
+A abstração da planta física apresenta dois objetivos. O primeiro é a própria modelagem na planta para a teoria de SED. O segundo objetivo é a simplificação que esses modelos proporcionam. A manutenção manual dos modelos é facilitada usando eventos mais intuitivos, como pode ser visto no primeiro modelo de planta \textbf{P\_INPUT\_BOX}, Figura \ref{fig:pinputbox}. Informações que são desnecessárias para o modelo do supervisor são descartadas. Por exemplo, como a \textbf{ENTRADA1} e a \textbf{M1} trabalham em conjunto, e sem sequência, a introdução dessas informações no supervisor não trará nenhum benefício ao sistema, pois elas vão continuar funcionando da mesma forma.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=1]{images/AP_INPUT_BOX.png}
+\caption{a) Parte original da planta. b) Modelo de planta P\_INPUT\_BOX.}
+\label{fig:pinputbox}
+\end{figure}
+
+O segundo modelo de planta, \textbf{P\_RETRACTABLE\_FLOOR}, Figura \ref{fig:pretfloor} apresenta o funcionamento da \textbf{M2} e \textbf{M3} em conjunto. Como visto na Seção \ref{sec:b1}, essas máquinas precisam trabalhar em sincronismo. A teoria de SED não oferece recursos de temporização, e a criação de especificações que impõem uma certa sequência enquanto bloqueia todas as outras operações (assim evitando que \textbf{M2} seja acionada fora de tempo), impedem uma solução elegante para este problema. A solução adotada neste trabalho foi a abstração do funcionamento dessas duas máquinas com os mesmos eventos controláveis/não controláveis. O evento não controlável \textit{end\_mid\_close\_floor} foi inserido ao modelo após a realização de testes práticos. Essa novo evento permite que novas caixas possam entrar no sistema enquanto a porta estiver se fechando, otimizando o funcionamento da planta.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=1]{images/AP_RETRACTABLE_FLOOR.png}
+\caption{a) Parte original da planta. b) Modelo de planta P\_RETRACTABLE\_FLOOR.}
+\label{fig:pretfloor}
+\end{figure}
+
+A Figura \ref{fig:pelevator} apresenta o modelo de planta \textbf{P\_ELEVATOR}. Ele permite que o elevador \textbf{E1} se mova para qualquer um dos quatro buffers \textbf{B2-5}. O próprio modelo de planta impede que o elevador vá para a posição que ele já esta. Paradas em lugares que não sejam os buffers não são possíveis no modelo, mas sim na planta, porém sem utilidade.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=1]{images/AP_ELEVATOR.png}
+\caption{a) Parte original da planta. b) Modelo de planta P\_ELEVATOR.}
+\label{fig:pelevator}
+\end{figure}
+
+A \textbf{M4} esta modelada no modelo de planta \textbf{P\_BOX\_FITTER}, Figura \ref{fig:pboxfitter}. Esse modelo já informa a sequencia serial de operações que ela pode efetuar. Por último, o modelo de planta \textit{P\_INPUT\_PALLET} é apresentado, Figure \ref{fig:pinputpallet}.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=1]{images/AP_BOX_FITTER.png}
+\caption{a) Parte original da planta. b) Modelo de planta P\_BOX\_FITTER.}
+\label{fig:pboxfitter}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=.3\textwidth]{fig2.jpg}
-\caption{This figure is an example of a figure caption taking more than one
-  line and justified considering margins mentioned in Section~\ref{sec:figs}.}
-\label{fig:exampleFig2}
+\includegraphics[scale=1]{images/AP_INPUT_PALLET.png}
+\caption{a) Parte original da planta. b) Modelo de planta P\_INPUT\_PALLET.}
+\label{fig:pinputpallet}
 \end{figure}
 
-In tables, try to avoid the use of colored or shaded backgrounds, and avoid
-thick, doubled, or unnecessary framing lines. When reporting empirical data,
-do not use more decimal digits than warranted by their precision and
-reproducibility. Table caption must be placed before the table (see Table 1)
-and the font used must also be Helvetica, 10 point, boldface, with 6 points of
-space before and after each caption.
+\subsection{Especificações}
+\label{sec:especificacoes}
+
+Segue uma lista com as especificações:
+
+\begin{enumerate}
+\item \textbf{E\_IPALLET\_ELEVATOR} (Figura \ref{fig:eipalletelevator})
+	\begin{enumerate}
+    	\item Evitar a entrada de um palete com o elevador fora da posição \textbf{B5};
+    	\item Evitar movimentos do elevador sem um palete.
+	\end{enumerate}
+\item \textbf{E\_FITTER\_FLOOR} (Figura \ref{fig:efitterfloor})
+	\begin{enumerate}
+    	\item Evitar abrir a porta retrátil sem fixar a caixa;
+    	\item Evitar fechar a porta com o fixador ativado;
+		\item Evitar fixar acionar \textbf{M4} sem uma caixa.
+	\end{enumerate}
+\item \textbf{E\_ELEVATOR\_FITTER} (Figura \ref{fig:eelevatorfitter})
+	\begin{enumerate}
+    	\item Evitar que o elevador desça um andar sem que a caixa esteja ajustada em cima dele, no andar adequado.
+	\end{enumerate}
+\item \textbf{E\_IBOX\_FLOOR} (Figura \ref{fig:eiboxfloor})
+	\begin{enumerate}
+    	\item Evitar abrir o chão sem uma caixa no buffer de entrada;
+		\item Evitar iniciar entrada de caixa com a porta aberta.
+	\end{enumerate}
+\end{enumerate}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=1]{images/E_IPALLET_ELEVATOR.png}
+\caption{Especificação E\_IPALLET\_ELEVATOR.}
+\label{fig:eipalletelevator}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=1]{images/E_FITTER_FLOOR.png}
+\caption{Especificação E\_FITTER\_FLOOR.}
+\label{fig:efitterfloor}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=1]{images/E_ELEVATOR_FITTER.png}
+\caption{Especificação E\_ELEVATOR\_FITTER.}
+\label{fig:eelevatorfitter}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=1]{images/E_IBOX_FLOOR.png}
+\caption{Especificação E\_IBOX\_FLOOR.}
+\label{fig:eiboxfloor}
+\end{figure}
+
+\subsection{Supervisor Monolítico}
+\label{sec:monolitico}
+
+Etapas usadas para geração do supervisor monolítico:
+
+\begin{enumerate}
+\item $PlantTotal \gets \textbf{P\_INPUT\_BOX} \parallel \textbf{P\_INPUT\_PALLET} \parallel \textbf{P\_ELEVATOR} \parallel \textbf{P\_BOX\_FITTER} \parallel \textbf{P\_RETRACTABLE\_FLOOR}$
+\item $SpecsTotal \gets \textbf{E\_IPALLET\_ELEVATOR} \parallel \textbf{E\_FITTER\_FLOOR} \parallel \textbf{E\_ELEVATOR\_FITTER} \parallel \textbf{E\_IBOX\_FLOOR}$
+\item $K \gets PlantTotal \parallel SpecsTotal$
+\item Supervisor Monolítico $\gets supcon(PlantTotal,K)$
+\end{enumerate}
+
+A função \textit{supcon} é implementada pelo software IDES\footnote{Disponível em: \url{https://qshare.queensu.ca/Users01/rudie/www/software.html}. Acesso (16/06/2013).}. A Tabela \ref{tab:monolitico} apresenta os números de estados e transições dos modelos resultantes.
 
 \begin{table}[ht]
 \centering
-\caption{Variables to be considered on the evaluation of interaction
-  techniques}
-\label{tab:exTable1}
-\includegraphics[width=.7\textwidth]{table.jpg}
+\caption{Mono}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Modelo} & \textbf{Número Estados} & \textbf{Número Transições} \\\hline
+$PlantTotal$ & 720 & 4480 \\\hline
+$SpecsTotal$ & 72 & 188 \\\hline
+$K$ & 5920 & 20984 \\\hline
+Supervisor Monolítico & 339 & 753 \\\hline
+\end{tabular}
+\label{tab:monolitico}
 \end{table}
 
-\section{Images}
+\subsection{Supervisor Modular Local}
+\label{sec:modularlocal}
 
-All images and illustrations should be in black-and-white, or gray tones,
-excepting for the papers that will be electronically available (on CD-ROMs,
-internet, etc.). The image resolution on paper should be about 600 dpi for
-black-and-white images, and 150-300 dpi for grayscale images.  Do not include
-images with excessive resolution, as they may take hours to print, without any
-visible difference in the result. 
+A primeira etapa para a modelagem dos supervisores modulares locais é a determinação dos sistema produto. A Tabela \ref{tab:sp} apresenta os sistemas produtos gerados nesse trabalho.
 
-\section{References}
+\begin{table}[ht]\scriptsize
+\centering
+\caption{Tabela de Sistema Produto.}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\multirow{2}{*}{Plantas} & \multicolumn{4}{|c|}{Especificações} \\
+ & \textbf{IPALLET\_ELEVATOR} & \textbf{FITTER\_FLOOR} & \textbf{ELEVATOR\_FITTER} & \textbf{IBOX\_FLOOR}\\\hline
+\textbf{INPUT\_BOX} &  &  &  & X \\\hline
+\textbf{INPUT\_PALLET} & X &  &  &  \\\hline
+\textbf{ELEVATOR} & X &  & X &  \\\hline
+\textbf{BOX\_FITTER} &  & X & X &  \\\hline
+\textbf{RETRACTABLE\_FLOOR} &  & X &  & X \\\hline
+Sistema Produto & \textbf{S\_IPALLET\_ELEVATOR} & \textbf{S\_FITTER\_FLOOR} & \textbf{S\_ELEVATOR\_FITTER} & \textbf{S\_IBOX\_FLOOR} \\\hline
+\end{tabular}
+\label{tab:sp}
+\end{table}
 
-Bibliographic references must be unambiguous and uniform.  We recommend giving
-the author names references in brackets, e.g. \cite{knuth:84},
-\cite{boulic:91}, and \cite{smith:99}.
+Após criação dos sistemas produtos foi realizado os seguintes passos:
 
-The references must be listed using 12 point font size, with 6 points of space
-before each reference. The first line of each reference should not be
-indented, while the subsequent should be indented by 0.5 cm.
+\begin{itemize}\footnotesize
+\item $K\_IPALLET\_ELEVATOR \gets \textbf{S\_IPALLET\_ELEVATOR} \parallel \textbf{E\_IPALLET\_ELEVATOR}$
+\item $K\_FITTER\_FLOOR \gets \textbf{S\_FITTER\_FLOOR} \parallel \textbf{E\_FITTER\_FLOOR}$
+\item $K\_ELEVATOR\_FITTER \gets \textbf{S\_ELEVATOR\_FITTER} \parallel \textbf{E\_ELEVATOR\_FITTER}$
+\item $K\_IBOX\_FLOOR \gets \textbf{S\_IBOX\_FLOOR} \parallel \textbf{E\_IBOX\_FLOOR}$
+\item $SUP\_IPALLET\_ELEVATOR \gets supcon(\textbf{S\_IPALLET\_ELEVATOR},K\_IPALLET\_ELEVATOR)$
+\item $SUP\_FITTER\_FLOOR \gets supcon(\textbf{S\_FITTER\_FLOOR},K\_FITTER\_FLOOR)$
+\item $SUP\_ELEVATOR\_FITTER \gets supcon(\textbf{S\_ELEVATOR\_FITTER},K\_ELEVATOR\_FITTER)$
+\item $SUP\_IBOX\_FLOOR \gets supcon(\textbf{S\_IBOX\_FLOOR},K\_IBOX\_FLOOR)$
+\end{itemize}
 
-\bibliographystyle{sbc}
-\bibliography{bibdb}
+As operações acima geram os quatro supervisores modulares. O teste de modularidade foi feito sincronizando todos os supervisores, o que resultou no mesmo modelo do supervisor monolítico.
+
+%\bibliographystyle{sbc}
+%\bibliography{bibdb}
 
 \end{document}
