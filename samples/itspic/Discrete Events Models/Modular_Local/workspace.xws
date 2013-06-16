@@ -12,7 +12,7 @@
 	<model file="PlantTotal.xmd" position="9"/>
 	<model file="SpecsTotal.xmd" position="10"/>
 	<model file="K.xmd" position="11"/>
-	<model file="MonoSupCon.xmd" position="12"/>
+	<model file="MonoSupCon.xmd" position="12" selected="true"/>
 	<model file="S_IPALLET_ELEVATOR.xmd" position="13"/>
 	<model file="S_FITTER_FLOOR.xmd" position="14"/>
 	<model file="S_ELEVATOR_FITTER.xmd" position="15"/>
@@ -24,5 +24,7 @@
 	<model file="SUP_ELEVATOR_FITTER.xmd" position="21"/>
 	<model file="SUP_FITTER_FLOOR.xmd" position="22"/>
 	<model file="SUP_IBOX_FLOOR.xmd" position="23"/>
-	<model file="SUP_IPALLET_ELEVATOR.xmd" position="24" selected="true"/>
+	<model file="SUP_IPALLET_ELEVATOR.xmd" position="24"/>
+	<model file="TesteModularidade.xmd" position="25"/>
+	<model file="trim(TesteModularidade).xmd" position="26"/>
 </workspace>
