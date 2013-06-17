@@ -64,7 +64,7 @@ Usando a Figura \ref{fig:plant} como referência, os objetos \textbf{ENTRADA1} e 
 
 \begin{itemize}
 \item \textbf{ENTRADA1}: Entrada de caixas no sistema. Possui um atuador (\textbf{A0}) que liga e desliga um elevador que transporta as caixas. Quando uma caixa está em posição de retirada, o sensor (\textbf{S0}) é ativado.
-\item \textbf{M1}: Transfere a caixa da \textbf{ENTRADA1} para a esteira transportadora. Ela possui um atuador (\textbf{A1}) que ao ligar empurra a caixa, acionando o sensor (\textbf{S1}), e ao desligar volta a posição original.
+\item \textbf{M1}: Transfere a caixa da \textbf{ENTRADA1} para a esteira transportadora. Ela possui um atuador (\textbf{A1}) que ao ligar empurra a caixa, acionando o sensor (\textbf{S1}), e ao desligar, volta a posição original.
 \end{itemize}
 
 Esses dois objetos são responsáveis pela entrada de caixas no sistema, e estão ilustrados na Figura \ref{fig:p_0} usando a planta virtual.
@@ -85,7 +85,7 @@ A segunda parte da planta ajusta as caixas para serem empilhadas em cima de um p
 \item \textbf{B1}: Buffer com capacidade para duas caixas. Possui um sensor (\textbf{S2}) que indica a presença de uma caixa na sua entrada, ou seja, quando uma caixa entra no sistema, tal sensor é ativado e desativado. Ele permanecerá ligado apenas quando uma segunda caixa entrar no sistema (pois ela ficará na frente do sensor).
 \item \textbf{M2}: Máquina que bloqueia o avanço das caixas. Ela possui apenas um atuador (\textbf{A2}) que determina o bloqueio(ou desbloqueio) da caixa.
 \item \textbf{M3}: Chão retrátil. Tem como função transportar a caixa da \textbf{M2} até a \textbf{M4}. Possui um atuador (\textbf{A3}) que abre/fecha o chão, além de dois sensores (\textbf{S3} e \textbf{S4}) e indicam quando o chão está: totalmente aberto (\textbf{S3} ligado), totalmente fechado (\textbf{S4} ligado), ou em andamento (nenhum sensor ligado). \textbf{M3} precisa trabalhar em conjunto com \textbf{M2}, pois caso \textbf{M2} libere uma caixa com \textbf{M3} aberto, essas irão cair na parte inferior da planta. Caso \textbf{M2} libere as caixas quando \textbf{M3} estiver fechado, essas caixas irão cair em uma região errada da \textbf{M3}, e problemas irão aparecer na próxima vez que \textbf{M3} se fechar, danificando as caixas. Essas duas máquinas precisam operar com um sincronismo correto.
-\item \textbf{M4}: Ajustador de caixas. Além de ajustar as caixas, essa máquina segura elas no lugar, evitando que elas caiam quando o chão retrátil (\textbf{M3}) abrir. Possui um atuador (\textbf{A4}) para ligar/desligar e um sensor (\textbf{S5}) que indica quando o ajusta está pronto.
+\item \textbf{M4}: Ajustador de caixas. Além de ajustar as caixas, essa máquina segura elas no lugar, evitando que elas caiam quando o chão retrátil (\textbf{M3}) abrir. Possui um atuador (\textbf{A4}) para ligar/desligar e um sensor (\textbf{S5}) que indica quando o ajuste está pronto.
 \end{itemize}
 
 A Figura \ref{fig:p_1} apresenta os objetos \textbf{B1}, \textbf{M2}, \textbf{M3} e \textbf{M4}.
@@ -108,7 +108,7 @@ A \textbf{ENTRADA2} possui apenas um atuador (\textbf{A7}) que liga a esteira qu
 \label{fig:p_2}
 \end{figure}
 
-A planta possui um elevador \textbf{E1} que transporta caixas entre os buffers \textbf{B2}, \textbf{B3}, \textbf{B4} e \textbf{B5}. A disposição desses buffers pode ser visualizada na Figura \ref{fig:p_3}. Usando o elevador em conjunto com os buffers, a planta consegue fazer o empilhamento de até três níveis de caixa. Inicialmente é colocada um nível de caixa no buffer \textbf{B2}. Esse nível é transferido para o buffer \textbf{B3} e um novo nível é adicionado no buffer \textbf{B2}. Esse processo é repetido para o próximo nível, assim criando os três níveis de caixas.
+A planta possui um elevador \textbf{E1} que transporta caixas entre os buffers \textbf{B2}, \textbf{B3}, \textbf{B4} e \textbf{B5}. A disposição desses buffers pode ser visualizada na Figura \ref{fig:p_3}. Usando o elevador em conjunto com os buffers, a planta consegue fazer o empilhamento de até três níveis de caixas. Inicialmente é colocado um nível de caixa no buffer \textbf{B2}. Esse nível é transferido para o buffer \textbf{B3} pelo elevador e um novo nível é adicionado no buffer \textbf{B2}. Esse processo é repetido para o próximo nível.
 
 \begin{figure}[ht]
 \centering
@@ -117,16 +117,16 @@ A planta possui um elevador \textbf{E1} que transporta caixas entre os buffers \
 \label{fig:p_3}
 \end{figure}
 
-O elevador \textbf{E1} é controlado por meio dos atuadores (\textbf{A5}) e (\textbf{A6}) que comandam a subida e descida do elevador, respectivamente. Os sensores (\textbf{S7}), (\textbf{S8}), (\textbf{S9}) e (\textbf{S6}) informam a posição do elevador, essas sendo os buffers \textbf{B2}, \textbf{B3}, \textbf{B4} e \textbf{B5}, respectivamente.
+O elevador \textbf{E1} é controlado por meio dos atuadores (\textbf{A5}) e (\textbf{A6}) que comandam a subida e descida do elevador, respectivamente. Os sensores (\textbf{S7}), (\textbf{S8}), (\textbf{S9}) e (\textbf{S6}) informam as posições do elevador, essas sendo os buffers \textbf{B2}, \textbf{B3}, \textbf{B4} e \textbf{B5}, respectivamente.
 
 \section{Controle Supervisório de Sistemas a Eventos Discretos}
 
-O controle supervisório deste trabalho fez uso de supervisores modulares locais da teoria de sistemas a eventos discretos. O primeiro passo na modelagem desses supervisores foi a abstração da planta para um modelo mais simples. Esse processo está descrito na Seção \ref{sec:abstracao}. O segundo passo foi o desenvolvimento das especificações, que está detalhado na Seção \ref{sec:especificacoes}. Em seguida foi gerado um supervisor monolítico para fazer testes manuais de funcionalidade. Este está presente na Seção \ref{sec:monolitico}. Após testado o supervisor monolítico, o supervisor modular local foi gerado, e o teste de modularidade executado. Esses últimos passos da teoria de controle supervisório estão presente na Seção \ref{sec:modularlocal}.
+O controle supervisório deste trabalho fez uso de supervisores modulares locais da teoria de Sistemas a Eventos Discretos (SED). O primeiro passo na modelagem desses supervisores foi a abstração da planta para um modelo mais simples. Esse processo está descrito na Seção \ref{sec:abstracao}. O segundo passo foi o desenvolvimento das especificações, que está detalhado na Seção \ref{sec:especificacoes}. Em seguida foi gerado um supervisor monolítico para fazer testes manuais de funcionalidade. Este está presente na Seção \ref{sec:monolitico}. Após testado o supervisor monolítico, o supervisor modular local foi gerado, e o teste de modularidade executado. Esses últimos passos da teoria de controle supervisório estão presente na Seção \ref{sec:modularlocal}.
 
 \subsection{Abstração da Planta}
 \label{sec:abstracao}
 
-A abstração da planta física apresenta dois objetivos. O primeiro é a própria modelagem na planta para a teoria de SED. O segundo objetivo é a simplificação que esses modelos proporcionam. A manutenção manual dos modelos é facilitada usando eventos mais intuitivos, como pode ser visto no primeiro modelo de planta \textbf{P\_INPUT\_BOX}, Figura \ref{fig:pinputbox}. Informações que são desnecessárias para o modelo do supervisor são descartadas. Por exemplo, como a \textbf{ENTRADA1} e a \textbf{M1} trabalham em conjunto, e sem sequência, a introdução dessas informações no supervisor não trará nenhum benefício ao sistema, pois elas vão continuar funcionando da mesma forma.
+A abstração da planta física apresenta dois objetivos. O primeiro é a própria modelagem da planta para a teoria de SED. O segundo objetivo é a simplificação que esses modelos proporcionam. A manutenção manual dos modelos é facilitada usando eventos mais intuitivos, como pode ser visto no primeiro modelo de planta \textbf{P\_INPUT\_BOX}, Figura \ref{fig:pinputbox}. Informações que são desnecessárias para o modelo do supervisor são descartadas.
 
 \begin{figure}[ht]
 \centering
@@ -135,7 +135,7 @@ A abstração da planta física apresenta dois objetivos. O primeiro é a própria mo
 \label{fig:pinputbox}
 \end{figure}
 
-O segundo modelo de planta, \textbf{P\_RETRACTABLE\_FLOOR}, Figura \ref{fig:pretfloor} apresenta o funcionamento da \textbf{M2} e \textbf{M3} em conjunto. Como visto na Seção \ref{sec:b1}, essas máquinas precisam trabalhar em sincronismo. A teoria de SED não oferece recursos de temporização, e a criação de especificações que impõem uma certa sequência enquanto bloqueia todas as outras operações (assim evitando que \textbf{M2} seja acionada fora de tempo), impedem uma solução elegante para este problema. A solução adotada neste trabalho foi a abstração do funcionamento dessas duas máquinas com os mesmos eventos controláveis/não controláveis. O evento não controlável \textit{end\_mid\_close\_floor} foi inserido ao modelo após a realização de testes práticos. Essa novo evento permite que novas caixas possam entrar no sistema enquanto a porta estiver se fechando, otimizando o funcionamento da planta.
+O segundo modelo de planta, \textbf{P\_RETRACTABLE\_FLOOR}, Figura \ref{fig:pretfloor}, apresenta o funcionamento da \textbf{M2} e \textbf{M3} em conjunto. Como visto na Seção \ref{sec:b1}, essas máquinas precisam trabalhar em sincronismo. A teoria de SED não oferece recursos de temporização, e a criação de especificações que impõem uma certa sequência enquanto bloqueia todas as outras operações (assim evitando que \textbf{M2} seja acionada fora de tempo), impedem uma solução elegante para este problema. A solução adotada neste trabalho foi a abstração do funcionamento dessas duas máquinas com os mesmos eventos controláveis/não controláveis. O evento não controlável \textit{end\_mid\_close\_floor} foi inserido ao modelo após a realização de testes práticos. Essa novo evento permite que novas caixas possam entrar no sistema enquanto a porta estiver se fechando, otimizando o funcionamento da planta.
 
 \begin{figure}[ht]
 \centering
@@ -172,7 +172,7 @@ A \textbf{M4} esta modelada no modelo de planta \textbf{P\_BOX\_FITTER}, Figura 
 \subsection{Especificações}
 \label{sec:especificacoes}
 
-Segue uma lista com as especificações:
+Segue a lista das especificações implementadas neste trabalho:
 
 \begin{enumerate}
 \item \textbf{E\_IPALLET\_ELEVATOR} (Figura \ref{fig:eipalletelevator})
@@ -184,7 +184,7 @@ Segue uma lista com as especificações:
 	\begin{enumerate}
     	\item Evitar abrir a porta retrátil sem fixar a caixa;
     	\item Evitar fechar a porta com o fixador ativado;
-		\item Evitar fixar acionar \textbf{M4} sem uma caixa.
+		\item Evitar acionar \textbf{M4} sem uma caixa.
 	\end{enumerate}
 \item \textbf{E\_ELEVATOR\_FITTER} (Figura \ref{fig:eelevatorfitter})
 	\begin{enumerate}
@@ -256,7 +256,7 @@ Supervisor Monolítico & 339 & 753 \\\hline
 \subsection{Supervisor Modular Local}
 \label{sec:modularlocal}
 
-A primeira etapa para a modelagem dos supervisores modulares locais é a determinação dos sistema produto. A Tabela \ref{tab:sp} apresenta os sistemas produtos gerados nesse trabalho.
+A primeira etapa para a modelagem dos supervisores modulares locais é a determinação dos sistemas produtos. A Tabela \ref{tab:sp} apresenta os sistemas produtos gerados nesse trabalho.
 
 \begin{table}[ht]\scriptsize
 \centering
@@ -277,7 +277,7 @@ Sistema Produto & \textbf{S\_IPALLET\_ELEVATOR} & \textbf{S\_FITTER\_FLOOR} & \t
 
 Após criação dos sistemas produtos foi realizado os seguintes passos:
 
-\begin{itemize}\footnotesize
+\begin{enumerate}\footnotesize
 \item $K\_IPALLET\_ELEVATOR \gets \textbf{S\_IPALLET\_ELEVATOR} \parallel \textbf{E\_IPALLET\_ELEVATOR}$
 \item $K\_FITTER\_FLOOR \gets \textbf{S\_FITTER\_FLOOR} \parallel \textbf{E\_FITTER\_FLOOR}$
 \item $K\_ELEVATOR\_FITTER \gets \textbf{S\_ELEVATOR\_FITTER} \parallel \textbf{E\_ELEVATOR\_FITTER}$
@@ -286,7 +286,7 @@ Após criação dos sistemas produtos foi realizado os seguintes passos:
 \item $SUP\_FITTER\_FLOOR \gets supcon(\textbf{S\_FITTER\_FLOOR},K\_FITTER\_FLOOR)$
 \item $SUP\_ELEVATOR\_FITTER \gets supcon(\textbf{S\_ELEVATOR\_FITTER},K\_ELEVATOR\_FITTER)$
 \item $SUP\_IBOX\_FLOOR \gets supcon(\textbf{S\_IBOX\_FLOOR},K\_IBOX\_FLOOR)$
-\end{itemize}
+\end{enumerate}
 
 As operações acima geram os quatro supervisores modulares. O teste de modularidade foi feito sincronizando todos os supervisores, o que resultou no mesmo modelo do supervisor monolítico. A Tabela \ref{tab:modular} apresenta o tamanho dos modelos obtidos. O número total de estados, somando todos supervisores, foi de 75, que é em torno de 4,5 vezes menos estados que o monolítico. Já em números de transições, o total foi de 110  no modular local, sendo em torno de 7 vezes mais eficiente que o monolítico.
 
@@ -307,7 +307,7 @@ $SUP\_IBOX\_FLOOR$ & 11 & 17 \\\hline
 \section{Implementação}
 \label{sec:implementacao}
 
-Diversos desafios que apareceram durante o desenvolvimento deste trabalho fizeram com que quatro sistemas fossem desenvolvidos. O primeiro desafio é a comunicação com o software ITS PLC, que é proprietário e só se comunica com CLP's. A solução para este problema está na Seção \ref{sec:ipgm}. O segundo desafio foi a virtualização de um microcontrolador PIC e a comunicação com outros softwares. Esse está discutido na Seção \ref{sec:itspic}. Para facilitar a geração do programa PIC para os supervisores modulares locais, e assim evitar erros humanos, um compilador foi desenvolvido para converter modelos no formato GRAIL+ para instruções C. Esse compilador é detalhado na Seção \ref{sec:compiler}. Por último é feita uma análise do programa embarcado no PIC na Seção \ref{sec:main}.
+Diversos desafios que apareceram durante o desenvolvimento deste trabalho fizeram com que quatro sistemas fossem desenvolvidos. O primeiro desafio é a comunicação com o software ITS PLC, que é proprietário e só se comunica com CLP's. A solução para este problema está na Seção \ref{sec:ipgm}. O segundo desafio foi a virtualização de um microcontrolador PIC e a comunicação com outros softwares. Esse está discutido na Seção \ref{sec:itspic}. Uma análise do programa embarcado no PIC é feita na Seção \ref{sec:main}. Para facilitar a geração do programa PIC para os supervisores modulares locais, e assim evitar erros humanos, um compilador foi desenvolvido para converter modelos no formato GRAIL+ para instruções C. Esse compilador é detalhado na Seção \ref{sec:compiler}.
 
 A Figura \ref{fig:visaogeral} mostra uma visão geral do sistema, e como as várias componentes se comunicam.
 
@@ -323,7 +323,7 @@ A Figura \ref{fig:visaogeral} mostra uma visão geral do sistema, e como as vária
 
 O software ITS PLC não suporta comunicação com microcontroladores PIC. Por causa disso, esse trabalho desenvolveu uma biblioteca capaz de se comunicar com o software ITS PLC e oferecer uma interface genérica para qualquer aplicação, assim funcionando como um \textit{middleware}. Essa característica da biblioteca dá o nome a ela: ITS PLC Generic Middleware, ou, ipgm. O código fonte da ipgm está disponível no endereço \url{https://github.com/AranHase/ipgm}.
 
-A ipgm faz usa técnicas de processamento de imagem para detectar o estado atual da planta virtual, assim pegando informações como sensores e atuadores ativos. Além de coletar informações em tempo real, a biblioteca também e capaz de manipular a planta (ativando/desativando atuadores) simulando o uso de um teclado. Todas essas operações são feitas sem alterar qualquer parte do software ITS PLC. Todas elas foram feitas sem interferir com o processo do software ITS PLC.
+A ipgm usa técnicas de processamento de imagem para detectar o estado atual da planta virtual, assim capturando informações como sensores e atuadores ativos. Além de coletar informações em tempo real, a biblioteca também é capaz de manipular a planta (ativando/desativando atuadores) simulando o uso de um teclado. Todas essas operações são feitas sem alterar qualquer parte do software ITS PLC. Todas elas foram feitas sem interferir com o processo do software ITS PLC.
 
 A Figure \ref{fig:cd1} apresenta o diagrama de classe da arquitetura usada para o desenvolvimento da ipgm. Destaque para as funções de \textit{callback}, pois uma aplicação precisa apenas implementá-las para se comunicar com o ITS PLC.
 
@@ -356,7 +356,7 @@ As operações no meio da Figura \ref{fig:main} representam o \textit{loop} princi
 \item \textit{sup\_advance\_step}: Executa todas as transições de estados, de todos os supervisores, de acordo com a decisão tomada no passo anterior.
 \end{itemize}
 
-O último passo do \textit{loop} antes de sua repetição é executar as sequencias operacionais. As sequencias operacionais são implementações em baixo nível de todos os eventos controláveis. Por exemplo, o evento \textit{input\_box}, da Figura \ref{fig:p_0}, é implementado usando como base o objeto \textit{EventoControlavel} da Figura \ref{fig:main}. Toda vez que houver uma transição de estado com o evento controlável \textit{input\_box}, o método \textit{start()} desse objeto será chamado, e enquanto ele estar ativo, o método \textit{update()} irá ser executado. O método \textit{update()} tem como função executar as operações necessárias para realização do evento controlável, e ao concluir, criar um evento não controlável indicando o seu fim, nesse exemplo sendo \textit{end\_input\_box}.
+O último passo do \textit{loop} antes de sua repetição é executar as sequencias operacionais. As sequencias operacionais são implementações em baixo nível de todos os eventos controláveis. Por exemplo, o evento \textit{input\_box}, da Figura \ref{fig:p_0}, é implementado usando como base o objeto \textit{EventoControlavel} da Figura \ref{fig:main}. Para toda transição de estado com o evento controlável \textit{input\_box}, o método \textit{start()} desse objeto será chamado, e enquanto ele estar ativo, o método \textit{update()} irá ser executado. O método \textit{update()} tem como função executar as operações necessárias para realização do evento controlável, e ao concluir, criar um evento não controlável indicando o seu fim, nesse exemplo sendo \textit{end\_input\_box}.
 
 \begin{figure}[ht]
 \centering
@@ -368,7 +368,7 @@ O último passo do \textit{loop} antes de sua repetição é executar as sequencias 
 \subsection{grail\_itspic\_compiler}
 \label{sec:compiler}
 
-Um compilador, chamado grail\_itspic\_compiler, foi desenvolvido para converter os modelos dos supervisores em instruções C, assim automatizando parcialmente o programa que é embarcado no PIC. O compilador recebe como entrada diversos supervisores modulares locais, em formato GRAIL+, além de arquivos implementados manualmente. A saída deste compilador é um arquivo \textit{main.c} que é então compilado pelo XC8, assim gerando um arquivo \textit{.hex} que é então carregado pelo PIC. Esse fluxo de trabalho é visto na Figura \ref{fig:piccontrol}.
+Um compilador, chamado grail\_itspic\_compiler, foi desenvolvido para converter os modelos dos supervisores em instruções C, assim automatizando parcialmente o programa que é embarcado no PIC. O compilador recebe como entrada diversos supervisores modulares locais, em formato GRAIL+, além de arquivos implementados manualmente. A saída deste compilador é um arquivo \textit{main.c} que é então compilado pelo XC8\footnote{Disponível em: \url{http://www.microchip.com/pagehandler/en_us/devtools/mplabxc/}. Acesso (16/06/2013).}, assim gerando um arquivo \textit{.hex} que é então carregado pelo PIC. Esse fluxo de trabalho é visto na Figura \ref{fig:piccontrol}.
 \begin{figure}[ht]
 \centering
 \includegraphics[scale=1]{images/pic_control.png}
@@ -376,21 +376,22 @@ Um compilador, chamado grail\_itspic\_compiler, foi desenvolvido para converter 
 \label{fig:piccontrol}
 \end{figure}
 
-As funções \textit{sup\_response\_step}, \textit{sup\_des\_step}, \textit{sup\_decisions\_step} e \textit{sup\_advance\_step} da Figura \ref{fig:piccontrol} são geradas automaticamente, enquanto o resto, como sequencias operacionais, são geradas manualmente. Isso dá a flexibilidade de alterar o modelo dos supervisores de forma eficiente, portanto que novos eventos controláveis não sejam introduzidos no sistema. Outra vantagem no uso deste compilador é a redução de falhas humanas, pois o processo de implementação dos supervisores pode ser extenso e tedioso.
+As funções \textit{sup\_response\_step}, \textit{sup\_des\_step}, \textit{sup\_decisions\_step} e \textit{sup\_advance\_step} da Figura \ref{fig:main} são geradas automaticamente, enquanto o resto, como sequencias operacionais, são geradas manualmente. Isso dá a flexibilidade para alterações no modelo dos supervisores de forma eficiente, portanto que novos eventos controláveis não sejam introduzidos no sistema. Outra vantagem no uso deste compilador é a redução de falhas humanas, pois o processo de implementação dos supervisores pode ser extenso e tedioso.
 
 \section{Resultados}
 \label{sec:resultados}
 
-Este trabalho conseguiu fazer a automação da planta virtual \textit{Palletizer} da ITS PLC, porém, apenas quando a planta se comporta bem. Um dos pontos interessantes do software ITS PLC é que ele executa simulações físicas na planta, assim reduzindo a diferente entre realidade e virtual. Essa característica na simulação implica que ao entrar uma caixa no sistema, por exemplo, ela pode vir em uma posição errada, ou cair de forma errada na esteira transportadora, com isso, gerando uma infinidade de estados da planta.
+Este trabalho conseguiu fazer a automação da planta virtual \textit{Palletizer} da ITS PLC, porém, apenas quando a planta se comporta bem. Um dos pontos interessantes do software ITS PLC é que ele executa simulações físicas, assim reduzindo a diferente entre realidade e virtual. Essa característica na simulação implica que ao entrar uma caixa no sistema, por exemplo, ela pode vir em uma posição errada, ou cair de forma errada na esteira transportadora, com isso, gerando uma infinidade de estados da planta.
 
 Um vídeo demonstrando o funcionamento deste conjunto de software, em uma planta bem comportada, pode ser visto no endereço \url{https://www.youtube.com/watch?v=Hh3ZN3VIYo4}. A introdução de eventos inesperados na planta leva o sistema a funcionar de forma indefinida.
 
 \section{Conclusões}
 \label{sec:conclusoes}
 
-Este trabalho fez a implementação de um sistema capaz de se possibilitar a comunicação entre a planta virtual \textit{Palletizer} do software ITS PLC e um microcontrolador PIC simulado. O controle supervisório foi modelado usando a teoria de SED, e um compilador foi desenvolvido para gerar automaticamente instruções C seguindo os modelos dos supervisores.
+Este trabalho fez a implementação da integração de um ambiente virtual para práticas de técnicas de controle supervisório, usando apenas software gratuitos e acessíveis a estudantes. O sistema possibilita a comunicação entre qualquer planta virtual do software ITS PLC com softwares externos usando a linguagem C++.
 
-Este trabalho conseguiu automatizar com sucesso a planta virtual, porém apenas quando ela é bem comportada. A introdução de elementos externos, ou instabilidade na planta, gera resultados indefinidos.
+A planta \textit{Palletizer} do ITS PLC foi automatizada usando a teoria de controle supervisório de SED. Modelos de supervisores modulares locais foram desenvolvidos, e uma implementação em um microcontrolador foi feita. Este trabalho conseguiu automatizar com sucesso a planta virtual, porém apenas quando ela é bem comportada. A introdução de elementos externos, ou instabilidade na planta, geram resultados indefinidos.
+
 
 
 %\bibliographystyle{sbc}

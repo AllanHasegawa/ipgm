@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.4.17)  16 JUN 2013 19:52
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.4.17)  16 JUN 2013 22:36
 entering extended mode
 **cased_itspic.tex
 (D:\libs\ipgm\samples\itspic\paper\sbc\cased_itspic.tex
@@ -337,7 +337,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 50--50
 games . pt / index . php / en / products$[]\OT1/ptm/m/n/10 . Acesso
  []
 
-<images/s_plant.png, id=42, 434.13622pt x 228.16672pt>
+<images/s_plant.png, id=70, 434.13622pt x 228.16672pt>
 File: images/s_plant.png Graphic file (type png)
 
 <use images/s_plant.png>
@@ -368,7 +368,7 @@ LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <12> not available
  [1
 
 {C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map} <D:/libs/ipgm/samples/itsp
-ic/paper/sbc/images/s_plant.png>] <images/P_shot0_m.png, id=61, 179.92218pt x 3
+ic/paper/sbc/images/s_plant.png>] <images/P_shot0_m.png, id=90, 179.92218pt x 3
 38.76563pt>
 File: images/P_shot0_m.png Graphic file (type png)
 
@@ -376,36 +376,35 @@ File: images/P_shot0_m.png Graphic file (type png)
 Package pdftex.def Info: images/P_shot0_m.png used on input line 74.
 (pdftex.def)             Requested size: 179.92174pt x 338.76479pt.
  [2 <D:/libs/ipgm/samples/itspic/paper/sbc/images/P_shot0_m.png>] <images/P_sho
-t1_m.png, id=70, 227.34938pt x 237.88875pt>
+t1_m.png, id=98, 227.34938pt x 237.88875pt>
 File: images/P_shot1_m.png Graphic file (type png)
 
 <use images/P_shot1_m.png>
 Package pdftex.def Info: images/P_shot1_m.png used on input line 95.
 (pdftex.def)             Requested size: 227.34882pt x 237.88815pt.
 
-<images/P_shot2_m.png, id=72, 216.81pt x 326.72063pt>
+<images/P_shot2_m.png, id=100, 216.81pt x 326.72063pt>
 File: images/P_shot2_m.png Graphic file (type png)
 
 <use images/P_shot2_m.png>
 Package pdftex.def Info: images/P_shot2_m.png used on input line 106.
 (pdftex.def)             Requested size: 216.80946pt x 326.71982pt.
 
-<images/P_shot3_m.png, id=74, 143.78719pt x 209.28188pt>
+<images/P_shot3_m.png, id=102, 143.78719pt x 209.28188pt>
 File: images/P_shot3_m.png Graphic file (type png)
 
 <use images/P_shot3_m.png>
 Package pdftex.def Info: images/P_shot3_m.png used on input line 115.
 (pdftex.def)             Requested size: 143.78683pt x 209.28134pt.
- [3 <D:/libs/ipgm/samples/itspic/paper/sbc/images/P_shot1_m.png>] [4 <D:/libs/i
-pgm/samples/itspic/paper/sbc/images/P_shot2_m.png>]
-<images/AP_INPUT_BOX.png, id=94, 332.03293pt x 197.71982pt>
+ [3 <D:/libs/ipgm/samples/itspic/paper/sbc/images/P_shot1_m.png>] <images/AP_IN
+PUT_BOX.png, id=116, 332.03293pt x 197.71982pt>
 File: images/AP_INPUT_BOX.png Graphic file (type png)
 
 <use images/AP_INPUT_BOX.png>
 Package pdftex.def Info: images/AP_INPUT_BOX.png used on input line 133.
 (pdftex.def)             Requested size: 332.0321pt x 197.71931pt.
-
-<images/AP_RETRACTABLE_FLOOR.png, id=97, 270.6716pt x 342.9416pt>
+ [4 <D:/libs/ipgm/samples/itspic/paper/sbc/images/P_shot2_m.png>]
+<images/AP_RETRACTABLE_FLOOR.png, id=126, 270.6716pt x 342.9416pt>
 File: images/AP_RETRACTABLE_FLOOR.png Graphic file (type png)
 
 <use images/AP_RETRACTABLE_FLOOR.png>
@@ -418,9 +417,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 143--143
 a 
  []
 
-[5 <D:/libs/ipgm/samples/itspic/paper/sbc/images/P_shot3_m.png> <D:/libs/ipgm/s
-amples/itspic/paper/sbc/images/AP_INPUT_BOX.png>]
-<images/AP_ELEVATOR.png, id=106, 440.63127pt x 313.34978pt>
+<images/AP_ELEVATOR.png, id=128, 440.63127pt x 313.34978pt>
 File: images/AP_ELEVATOR.png Graphic file (type png)
 
 <use images/AP_ELEVATOR.png>
@@ -431,48 +428,48 @@ Overfull \hbox (13.83884pt too wide) in paragraph at lines 151--152
  [][] 
  []
 
-<images/AP_BOX_FITTER.png, id=109, 265.21727pt x 272.03519pt>
+<images/AP_BOX_FITTER.png, id=131, 265.21727pt x 272.03519pt>
 File: images/AP_BOX_FITTER.png Graphic file (type png)
 
 <use images/AP_BOX_FITTER.png>
 Package pdftex.def Info: images/AP_BOX_FITTER.png used on input line 160.
 (pdftex.def)             Requested size: 265.21661pt x 272.03452pt.
 
-<images/AP_INPUT_PALLET.png, id=110, 265.21727pt x 169.08453pt>
+<images/AP_INPUT_PALLET.png, id=132, 265.21727pt x 169.08453pt>
 File: images/AP_INPUT_PALLET.png Graphic file (type png)
 
 <use images/AP_INPUT_PALLET.png>
 Package pdftex.def Info: images/AP_INPUT_PALLET.png used on input line 167.
 (pdftex.def)             Requested size: 265.21661pt x 169.0841pt.
- [6 <D:/libs/ipgm/samples/itspic/paper/sbc/images/AP_RETRACTABLE_FLOOR.png>]
-<images/E_IPALLET_ELEVATOR.png, id=134, 280.79906pt x 202.50656pt>
+
+<images/E_IPALLET_ELEVATOR.png, id=137, 280.79906pt x 202.50656pt>
 File: images/E_IPALLET_ELEVATOR.png Graphic file (type png)
 
 <use images/E_IPALLET_ELEVATOR.png>
 Package pdftex.def Info: images/E_IPALLET_ELEVATOR.png used on input line 202.
 (pdftex.def)             Requested size: 280.79837pt x 202.50604pt.
 
-<images/E_FITTER_FLOOR.png, id=135, 258.9675pt x 182.18062pt>
+<images/E_FITTER_FLOOR.png, id=138, 258.9675pt x 182.18062pt>
 File: images/E_FITTER_FLOOR.png Graphic file (type png)
 
 <use images/E_FITTER_FLOOR.png>
 Package pdftex.def Info: images/E_FITTER_FLOOR.png used on input line 209.
 (pdftex.def)             Requested size: 258.96684pt x 182.18016pt.
 
-<images/E_ELEVATOR_FITTER.png, id=136, 345.54094pt x 258.9675pt>
+<images/E_ELEVATOR_FITTER.png, id=139, 345.54094pt x 258.9675pt>
 File: images/E_ELEVATOR_FITTER.png Graphic file (type png)
 
 <use images/E_ELEVATOR_FITTER.png>
 Package pdftex.def Info: images/E_ELEVATOR_FITTER.png used on input line 216.
 (pdftex.def)             Requested size: 345.54008pt x 258.96684pt.
 
-<images/E_IBOX_FLOOR.png, id=137, 254.45062pt x 67.75313pt>
+<images/E_IBOX_FLOOR.png, id=140, 254.45062pt x 67.75313pt>
 File: images/E_IBOX_FLOOR.png Graphic file (type png)
 
 <use images/E_IBOX_FLOOR.png>
 Package pdftex.def Info: images/E_IBOX_FLOOR.png used on input line 223.
 (pdftex.def)             Requested size: 254.45pt x 67.75294pt.
-
+ [5 <D:/libs/ipgm/samples/itspic/paper/sbc/images/P_shot3_m.png>]
 Underfull \hbox (badness 3590) in paragraph at lines 235--236
 []$\OML/cmm/m/it/12 SpecsTotal \OMS/cmsy/m/n/12   [] k [] k$
  []
@@ -484,9 +481,6 @@ Overfull \hbox (22.04553pt too wide) in paragraph at lines 264--276
  [][] 
  []
 
-[7 <D:/libs/ipgm/samples/itspic/paper/sbc/images/AP_ELEVATOR.png>]
-LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 281.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 281.
 
@@ -503,28 +497,94 @@ upcon\OT1/cmr/m/n/10 ([]\OML/cmm/m/it/10 ; K[]ELEVATOR[]FITTER\OT1/cmr/m/n/10 )
 $ 
  []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 296.
-[8 <D:/libs/ipgm/samples/itspic/paper/sbc/images/AP_BOX_FITTER.png>] [9 <D:/lib
-s/ipgm/samples/itspic/paper/sbc/images/AP_INPUT_PALLET.png> <D:/libs/ipgm/sampl
-es/itspic/paper/sbc/images/E_IPALLET_ELEVATOR.png> <D:/libs/ipgm/samples/itspic
-/paper/sbc/images/E_FITTER_FLOOR.png>] [10 <D:/libs/ipgm/samples/itspic/paper/s
-bc/images/E_ELEVATOR_FITTER.png> <D:/libs/ipgm/samples/itspic/paper/sbc/images/
-E_IBOX_FLOOR.png>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 296.
- (D:\libs\ipgm\samples\itspic\paper\sbc\cased_itspic.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 296.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 296.
+[6 <D:/libs/ipgm/samples/itspic/paper/sbc/images/AP_INPUT_BOX.png>] [7 <D:/libs
+/ipgm/samples/itspic/paper/sbc/images/AP_RETRACTABLE_FLOOR.png>]
+<images/Diagram1.png, id=206, 257.11443pt x 266.14818pt>
+File: images/Diagram1.png Graphic file (type png)
+
+<use images/Diagram1.png>
+Package pdftex.def Info: images/Diagram1.png used on input line 316.
+(pdftex.def)             Requested size: 257.11378pt x 266.14752pt.
+ [8 <D:/libs/ipgm/samples/itspic/paper/sbc/images/AP_ELEVATOR.png>] <images/CD0
+1.png, id=216, 467.21028pt x 445.83464pt>
+File: images/CD01.png Graphic file (type png)
+
+<use images/CD01.png>
+Package pdftex.def Info: images/CD01.png used on input line 332.
+(pdftex.def)             Requested size: 467.20914pt x 445.83354pt.
+
+Overfull \hbox (40.41779pt too wide) in paragraph at lines 332--333
+ [][] 
+ []
+
+[9 <D:/libs/ipgm/samples/itspic/paper/sbc/images/AP_BOX_FITTER.png>] [10 <D:/li
+bs/ipgm/samples/itspic/paper/sbc/images/AP_INPUT_PALLET.png> <D:/libs/ipgm/samp
+les/itspic/paper/sbc/images/E_IPALLET_ELEVATOR.png>]
+<images/pic_main_flow.png, id=237, 464.19577pt x 279.35135pt>
+File: images/pic_main_flow.png Graphic file (type png)
+
+<use images/pic_main_flow.png>
+Package pdftex.def Info: images/pic_main_flow.png used on input line 363.
+(pdftex.def)             Requested size: 464.19464pt x 279.35065pt.
+
+Overfull \hbox (37.40329pt too wide) in paragraph at lines 363--364
+ [][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 371--371
+[][][]\OT1/ptm/m/n/10 Dispon[]vel em: []$\OT1/pcr/m/n/10 http : / / www . micr
+ochip . com / pagehandler / en _ us / devtools /$
+ []
+
+<images/pic_control.png, id=241, 464.19577pt x 304.36789pt>
+File: images/pic_control.png Graphic file (type png)
+
+<use images/pic_control.png>
+Package pdftex.def Info: images/pic_control.png used on input line 374.
+(pdftex.def)             Requested size: 464.19464pt x 304.36713pt.
+
+Overfull \hbox (37.40329pt too wide) in paragraph at lines 374--375
+ [][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 379--380
+[]\OT1/ptm/m/n/12 As fun[][]oes \OT1/ptm/m/it/12 sup[]response[]step\OT1/ptm/m/
+n/12 , \OT1/ptm/m/it/12 sup[]des[]step\OT1/ptm/m/n/12 , \OT1/ptm/m/it/12 sup[]d
+ecisions[]step \OT1/ptm/m/n/12 e
+ []
+
+
+Underfull \hbox (badness 2181) in paragraph at lines 379--380
+\OT1/ptm/m/it/12 sup[]advance[]step \OT1/ptm/m/n/12 da Figura []17[] s[]ao ger-
+adas au-to-mati-ca-mente, en-quanto o resto,
+ []
+
+[11 <D:/libs/ipgm/samples/itspic/paper/sbc/images/E_FITTER_FLOOR.png>] [12 <D:/
+libs/ipgm/samples/itspic/paper/sbc/images/E_ELEVATOR_FITTER.png> <D:/libs/ipgm/
+samples/itspic/paper/sbc/images/E_IBOX_FLOOR.png>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 400.
+ [13 <D:/libs/ipgm/samples/itspic/paper/sbc/images/Diagram1.png>] [14 <D:/libs/
+ipgm/samples/itspic/paper/sbc/images/CD01.png>] [15 <D:/libs/ipgm/samples/itspi
+c/paper/sbc/images/pic_main_flow.png> <D:/libs/ipgm/samples/itspic/paper/sbc/im
+ages/pic_control.png>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 400.
+
+(D:\libs\ipgm\samples\itspic\paper\sbc\cased_itspic.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 400.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 400.
 Package rerunfilecheck Info: File `cased_itspic.out' has not changed.
-(rerunfilecheck)             Checksum: 152EE5316D22A6E8F3B44700E4B9B281;618.
+(rerunfilecheck)             Checksum: 4BF7A68C1BEACE2DE9D87C8D7066A7FA;1033.
  ) 
 Here is how much of TeX's memory you used:
- 6040 strings out of 494045
- 89005 string characters out of 3148781
- 182133 words of memory out of 3000000
- 9204 multiletter control sequences out of 15000+200000
- 28663 words of font info for 53 fonts, out of 3000000 for 9000
+ 6107 strings out of 494045
+ 89956 string characters out of 3148781
+ 186678 words of memory out of 3000000
+ 9239 multiletter control sequences out of 15000+200000
+ 29178 words of font info for 55 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
- 30i,11n,31p,947b,402s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 30i,11n,31p,948b,422s stack positions out of 5000i,500n,10000p,200000b,50000s
 {D:/ProgramFiles/MikTex 2.9/fonts/enc/dvips/fontname/8r.enc}<D:/ProgramFiles/
 MikTex 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><D:/ProgramFiles/MikTex 2.
 9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><D:/ProgramFiles/MikTex 2.9/fonts/t
@@ -536,9 +596,9 @@ iles/MikTex 2.9/fonts/type1/urw/helvetic/uhvb8a.pfb><D:/ProgramFiles/MikTex 2.9
 /fonts/type1/urw/helvetic/uhvbo8a.pfb><D:/ProgramFiles/MikTex 2.9/fonts/type1/u
 rw/times/utmb8a.pfb><D:/ProgramFiles/MikTex 2.9/fonts/type1/urw/times/utmr8a.pf
 b><D:/ProgramFiles/MikTex 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on cased_itspic.pdf (10 pages, 1119374 bytes).
+Output written on cased_itspic.pdf (15 pages, 1206701 bytes).
 PDF statistics:
- 235 PDF objects out of 1000 (max. 8388607)
- 54 named destinations out of 1000 (max. 500000)
- 143 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 335 PDF objects out of 1000 (max. 8388607)
+ 81 named destinations out of 1000 (max. 500000)
+ 219 words of extra memory for PDF output out of 10000 (max. 10000000)
 
