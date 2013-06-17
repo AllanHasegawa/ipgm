@@ -12,7 +12,7 @@
      
 \sloppy
 
-\title{Instructions for Authors of SBC Conferences\\ Papers and Abstracts}
+\title{Ambiente Virtual para Treinamento de Controle Supervisório}
 
 \author{Allan Yoshio Hasegawa\inst{1} }
 
@@ -288,7 +288,110 @@ Após criação dos sistemas produtos foi realizado os seguintes passos:
 \item $SUP\_IBOX\_FLOOR \gets supcon(\textbf{S\_IBOX\_FLOOR},K\_IBOX\_FLOOR)$
 \end{itemize}
 
-As operações acima geram os quatro supervisores modulares. O teste de modularidade foi feito sincronizando todos os supervisores, o que resultou no mesmo modelo do supervisor monolítico.
+As operações acima geram os quatro supervisores modulares. O teste de modularidade foi feito sincronizando todos os supervisores, o que resultou no mesmo modelo do supervisor monolítico. A Tabela \ref{tab:modular} apresenta o tamanho dos modelos obtidos. O número total de estados, somando todos supervisores, foi de 75, que é em torno de 4,5 vezes menos estados que o monolítico. Já em números de transições, o total foi de 110  no modular local, sendo em torno de 7 vezes mais eficiente que o monolítico.
+
+\begin{table}[ht]
+\centering
+\caption{Resultado Supervisores Modular Local.}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Modelo} & \textbf{Número Estados} & \textbf{Número Transições} \\\hline
+$SUP\_IPALLET\_ELEVATOR$ & 42 & 65 \\\hline
+$SUP\_FITTER\_FLOOR$ & 9 & 9 \\\hline
+$SUP\_ELEVATOR\_FITTER$ & 13 & 19 \\\hline
+$SUP\_IBOX\_FLOOR$ & 11 & 17 \\\hline
+\end{tabular}
+\label{tab:modular}
+\end{table}
+
+\section{Implementação}
+\label{sec:implementacao}
+
+Diversos desafios que apareceram durante o desenvolvimento deste trabalho fizeram com que quatro sistemas fossem desenvolvidos. O primeiro desafio é a comunicação com o software ITS PLC, que é proprietário e só se comunica com CLP's. A solução para este problema está na Seção \ref{sec:ipgm}. O segundo desafio foi a virtualização de um microcontrolador PIC e a comunicação com outros softwares. Esse está discutido na Seção \ref{sec:itspic}. Para facilitar a geração do programa PIC para os supervisores modulares locais, e assim evitar erros humanos, um compilador foi desenvolvido para converter modelos no formato GRAIL+ para instruções C. Esse compilador é detalhado na Seção \ref{sec:compiler}. Por último é feita uma análise do programa embarcado no PIC na Seção \ref{sec:main}.
+
+A Figura \ref{fig:visaogeral} mostra uma visão geral do sistema, e como as várias componentes se comunicam.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=1]{images/Diagram1.png}
+\caption{Visão geral do sistema.}
+\label{fig:visaogeral}
+\end{figure}
+
+\subsection{ipgm}
+\label{sec:ipgm}
+
+O software ITS PLC não suporta comunicação com microcontroladores PIC. Por causa disso, esse trabalho desenvolveu uma biblioteca capaz de se comunicar com o software ITS PLC e oferecer uma interface genérica para qualquer aplicação, assim funcionando como um \textit{middleware}. Essa característica da biblioteca dá o nome a ela: ITS PLC Generic Middleware, ou, ipgm. O código fonte da ipgm está disponível no endereço \url{https://github.com/AranHase/ipgm}.
+
+A ipgm faz usa técnicas de processamento de imagem para detectar o estado atual da planta virtual, assim pegando informações como sensores e atuadores ativos. Além de coletar informações em tempo real, a biblioteca também e capaz de manipular a planta (ativando/desativando atuadores) simulando o uso de um teclado. Todas essas operações são feitas sem alterar qualquer parte do software ITS PLC. Todas elas foram feitas sem interferir com o processo do software ITS PLC.
+
+A Figure \ref{fig:cd1} apresenta o diagrama de classe da arquitetura usada para o desenvolvimento da ipgm. Destaque para as funções de \textit{callback}, pois uma aplicação precisa apenas implementá-las para se comunicar com o ITS PLC.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=1]{images/CD01.png}
+\caption{Arquitetura da biblioteca ipgm.}
+\label{fig:cd1}
+\end{figure}
+
+\subsection{itspic e PICsim}
+\label{sec:itspic}
+
+PICsim\footnote{Disponível em: \url{http://sourceforge.net/projects/picsim/}. Acesso (16/06/2013).} foi o simulador de microcontroladores PIC usado neste trabalho. Ele oferece kits de desenvolvimento/testes completos, incluindo funcionalidades como LEDs, teclados, botões, LCD e principalmente porta serial. A comunicação serial foi o meio escolhido para enviar e receber informações do PIC. Assim, a aplicação itspic é criada, onde ela tem como principal função captar os \textit{callbacks} da ipgm e enviar as informações para o microcontrolador PIC, além de monitorar a porta serial e ativar atuadores quando requisitado.
+
+O protocolo de comunicação implementado faz uso de apenas 1 byte por mensagem. Isso é possível por causa do número limitado de informações (sensores/atuadores). Um byte consegue armazenar números inteiros de 0 a 255. A planta oferece 11 sensores. Cada sensor apresenta dois estados, ligado/desligado, assim, cada sensor recebe dois números únicos entre 0 e 255. Esse número então é transmitido para indicar se o sensor foi apagado ou ligado. O mesmo é feito para os 8 atuadores. Outros valores foram usados para mensagens diversas, como reportagem de erro no sistema, por exemplo.
+
+
+\subsection{Programa PIC}
+\label{sec:main}
+
+O fluxo de operação do programa PIC implementado neste trabalho pode ser visto na Figura \ref{fig:main}. Na parte da direita da imagem estão três atividades executando de modo assíncrono, essas são: Serial RX (recebimento de mensagens pela porta serial), Serial TX (envio de mensagens pela porta serial) e TMR0 (\textit{timer}).
+
+As operações no meio da Figura \ref{fig:main} representam o \textit{loop} principal do programa. Segue uma lista descritiva dessas funções:
+
+\begin{itemize}
+\item \textit{sup\_response\_step}: Executa todas as transições de estados, de todos os supervisores, que fazem uso de eventos não controláveis.
+\item \textit{sup\_des\_step}: Executa todas as desabilitações de eventos controláveis de todos os supervisores.
+\item \textit{sup\_decisions\_step}: Esse passo decide qual o próximo evento controlável a ser executado. A decisão implementada neste trabalho é de escolha aleatória de eventos.
+\item \textit{sup\_advance\_step}: Executa todas as transições de estados, de todos os supervisores, de acordo com a decisão tomada no passo anterior.
+\end{itemize}
+
+O último passo do \textit{loop} antes de sua repetição é executar as sequencias operacionais. As sequencias operacionais são implementações em baixo nível de todos os eventos controláveis. Por exemplo, o evento \textit{input\_box}, da Figura \ref{fig:p_0}, é implementado usando como base o objeto \textit{EventoControlavel} da Figura \ref{fig:main}. Toda vez que houver uma transição de estado com o evento controlável \textit{input\_box}, o método \textit{start()} desse objeto será chamado, e enquanto ele estar ativo, o método \textit{update()} irá ser executado. O método \textit{update()} tem como função executar as operações necessárias para realização do evento controlável, e ao concluir, criar um evento não controlável indicando o seu fim, nesse exemplo sendo \textit{end\_input\_box}.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=1]{images/pic_main_flow.png}
+\caption{Fluxo do Programa PIC.}
+\label{fig:main}
+\end{figure}
+
+\subsection{grail\_itspic\_compiler}
+\label{sec:compiler}
+
+Um compilador, chamado grail\_itspic\_compiler, foi desenvolvido para converter os modelos dos supervisores em instruções C, assim automatizando parcialmente o programa que é embarcado no PIC. O compilador recebe como entrada diversos supervisores modulares locais, em formato GRAIL+, além de arquivos implementados manualmente. A saída deste compilador é um arquivo \textit{main.c} que é então compilado pelo XC8, assim gerando um arquivo \textit{.hex} que é então carregado pelo PIC. Esse fluxo de trabalho é visto na Figura \ref{fig:piccontrol}.
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=1]{images/pic_control.png}
+\caption{Fluxo de trabalho da compilação.}
+\label{fig:piccontrol}
+\end{figure}
+
+As funções \textit{sup\_response\_step}, \textit{sup\_des\_step}, \textit{sup\_decisions\_step} e \textit{sup\_advance\_step} da Figura \ref{fig:piccontrol} são geradas automaticamente, enquanto o resto, como sequencias operacionais, são geradas manualmente. Isso dá a flexibilidade de alterar o modelo dos supervisores de forma eficiente, portanto que novos eventos controláveis não sejam introduzidos no sistema. Outra vantagem no uso deste compilador é a redução de falhas humanas, pois o processo de implementação dos supervisores pode ser extenso e tedioso.
+
+\section{Resultados}
+\label{sec:resultados}
+
+Este trabalho conseguiu fazer a automação da planta virtual \textit{Palletizer} da ITS PLC, porém, apenas quando a planta se comporta bem. Um dos pontos interessantes do software ITS PLC é que ele executa simulações físicas na planta, assim reduzindo a diferente entre realidade e virtual. Essa característica na simulação implica que ao entrar uma caixa no sistema, por exemplo, ela pode vir em uma posição errada, ou cair de forma errada na esteira transportadora, com isso, gerando uma infinidade de estados da planta.
+
+Um vídeo demonstrando o funcionamento deste conjunto de software, em uma planta bem comportada, pode ser visto no endereço \url{https://www.youtube.com/watch?v=Hh3ZN3VIYo4}. A introdução de eventos inesperados na planta leva o sistema a funcionar de forma indefinida.
+
+\section{Conclusões}
+\label{sec:conclusoes}
+
+Este trabalho fez a implementação de um sistema capaz de se possibilitar a comunicação entre a planta virtual \textit{Palletizer} do software ITS PLC e um microcontrolador PIC simulado. O controle supervisório foi modelado usando a teoria de SED, e um compilador foi desenvolvido para gerar automaticamente instruções C seguindo os modelos dos supervisores.
+
+Este trabalho conseguiu automatizar com sucesso a planta virtual, porém apenas quando ela é bem comportada. A introdução de elementos externos, ou instabilidade na planta, gera resultados indefinidos.
+
 
 %\bibliographystyle{sbc}
 %\bibliography{bibdb}
