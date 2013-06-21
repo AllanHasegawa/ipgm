@@ -1,6 +1,9 @@
 Tested software versions:
-SDCC : #8604 (May 11 2013) (MINGW64)
-gpsim : Release 0.26.1
+MPLAB XC8 V1.12
+PICsimLab 0.5 (Board 4)
+ipython notebook 0.13.2
+python 2 with Anaconda
+
 
 Tested On:
 Windows 7 64bits
